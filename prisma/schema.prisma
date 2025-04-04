@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int                   @id @default(autoincrement())
+  name        String
+  email       String                @unique
+  password    String
+  CPFCNPJ     String?
+  CRM         String?
+  nationalID  String?
+
+  // Relações inversas
+  inscricoesEvento    InscricaoEvento[]
+  inscricoesAtividade InscricaoAtividade[]
+}
+
+model Evento {
+  id                  Int               @id @default(autoincrement())
+  nome                String
+  organizadorId       Int
+  descricao           String
+  formato             Formato
+  local               String?
+  documentoUser       Boolean
+  banner              String?
+  tipoEvento          TipoEvento
+  dataInicio          DateTime
+  dataFinal           DateTime
+  capacidadeMaxima    Int?
+  horasComplementares Int?
+
+  // Relações inversas
+  atividades          Atividade[]
+  inscricoesEvento    InscricaoEvento[]
+  campos              EventoCampo[]
+  eventoTags          EventoTag[]
+}
+
+model Atividade {
+  id                  Int       @id @default(autoincrement())
+  nome                String
+  organizadorId       Int
+  descricao           String
+  formato             Formato
+  local               String?
+  documentoUser       Boolean
+  banner              String?
+  dataInicio          DateTime
+  horaInicio          String
+  tipoAtividade       TipoAtividade
+  capacidadeMaxima    Int
+  horasComplementares Int
+  eventoId            Int
+
+  // Relação com Evento e inversa
+  evento              Evento    @relation(fields: [eventoId], references: [id])
+  inscricoesAtividade InscricaoAtividade[]
+}
+
+model InscricaoEvento {
+  id         Int      @id @default(autoincrement())
+  eventoId   Int
+  userId     Int
+  status     StatusInscricao
+  dataHora   DateTime @default(now())
+
+  evento     Evento   @relation(fields: [eventoId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+  
+  // Relação inversa para respostas
+  respostas  RespostaEventoCampo[]
+}
+
+model InscricaoAtividade {
+  id           Int      @id @default(autoincrement())
+  atividadeId  Int
+  userId       Int
+  status       StatusInscricao
+  dataHora     DateTime @default(now())
+
+  atividade    Atividade @relation(fields: [atividadeId], references: [id])
+  user         User      @relation(fields: [userId], references: [id])
+}
+
+model EventoCampo {
+  id          Int       @id @default(autoincrement())
+  eventoId    Int
+  nome        String    // Ex: "ocupação", "renda", "grau escolar"
+  tipo        CampoTipo // Ex: STRING, NUMBER, DATE, BOOLEAN
+  obrigatorio Boolean   @default(false)
+
+  evento      Evento    @relation(fields: [eventoId], references: [id])
+  
+  // Relação inversa para respostas
+  respostas   RespostaEventoCampo[]
+}
+
+model RespostaEventoCampo {
+  id                Int      @id @default(autoincrement())
+  inscricaoEventoId Int
+  eventoCampoId     Int
+  valor             String   // Valor armazenado como texto; conversão realizada na aplicação
+
+  inscricaoEvento   InscricaoEvento @relation(fields: [inscricaoEventoId], references: [id])
+  eventoCampo       EventoCampo     @relation(fields: [eventoCampoId], references: [id])
+}
+
+model Tag {
+  id   Int    @id @default(autoincrement())
+  nome String @unique
+
+  // Relação inversa com EventoTag
+  eventoTags EventoTag[]
+}
+
+model EventoTag {
+  eventoId  Int
+  tagId     Int
+
+  evento    Evento @relation(fields: [eventoId], references: [id])
+  tag       Tag    @relation(fields: [tagId], references: [id])
+
+  @@id([eventoId, tagId])
+}
+
+enum Formato {
+  PRESENCIAL
+  ONLINE
+  HIBRIDO
+}
+
+enum TipoEvento {
+  SIMPLES
+  GRANDE
+}
+
+enum TipoAtividade {
+  PALESTRA
+  MINICURSO
+  OFICINA
+  WORKSHOP
+}
+
+enum StatusInscricao {
+  PENDENTE
+  CONFIRMADO
+  CANCELADO
+}
+
+enum CampoTipo {
+  STRING
+  NUMBER
+  DATE
+  BOOLEAN
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+  output   = "./prisma/dbml"
+}

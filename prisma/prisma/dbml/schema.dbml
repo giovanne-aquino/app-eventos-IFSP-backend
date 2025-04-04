@@ -1,0 +1,162 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id Int [pk, increment]
+  name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  CPFCNPJ String
+  CRM String
+  nationalID String
+  inscricoesEvento InscricaoEvento [not null]
+  inscricoesAtividade InscricaoAtividade [not null]
+}
+
+Table Evento {
+  id Int [pk, increment]
+  nome String [not null]
+  organizadorId Int [not null]
+  descricao String [not null]
+  formato Formato [not null]
+  local String
+  documentoUser Boolean [not null]
+  banner String
+  tipoEvento TipoEvento [not null]
+  dataInicio DateTime [not null]
+  dataFinal DateTime [not null]
+  capacidadeMaxima Int
+  horasComplementares Int
+  atividades Atividade [not null]
+  inscricoesEvento InscricaoEvento [not null]
+  campos EventoCampo [not null]
+  eventoTags EventoTag [not null]
+}
+
+Table Atividade {
+  id Int [pk, increment]
+  nome String [not null]
+  organizadorId Int [not null]
+  descricao String [not null]
+  formato Formato [not null]
+  local String
+  documentoUser Boolean [not null]
+  banner String
+  dataInicio DateTime [not null]
+  horaInicio String [not null]
+  tipoAtividade TipoAtividade [not null]
+  capacidadeMaxima Int [not null]
+  horasComplementares Int [not null]
+  eventoId Int [not null]
+  evento Evento [not null]
+  inscricoesAtividade InscricaoAtividade [not null]
+}
+
+Table InscricaoEvento {
+  id Int [pk, increment]
+  eventoId Int [not null]
+  userId Int [not null]
+  status StatusInscricao [not null]
+  dataHora DateTime [default: `now()`, not null]
+  evento Evento [not null]
+  user User [not null]
+  respostas RespostaEventoCampo [not null]
+}
+
+Table InscricaoAtividade {
+  id Int [pk, increment]
+  atividadeId Int [not null]
+  userId Int [not null]
+  status StatusInscricao [not null]
+  dataHora DateTime [default: `now()`, not null]
+  atividade Atividade [not null]
+  user User [not null]
+}
+
+Table EventoCampo {
+  id Int [pk, increment]
+  eventoId Int [not null]
+  nome String [not null]
+  tipo CampoTipo [not null]
+  obrigatorio Boolean [not null, default: false]
+  evento Evento [not null]
+  respostas RespostaEventoCampo [not null]
+}
+
+Table RespostaEventoCampo {
+  id Int [pk, increment]
+  inscricaoEventoId Int [not null]
+  eventoCampoId Int [not null]
+  valor String [not null]
+  inscricaoEvento InscricaoEvento [not null]
+  eventoCampo EventoCampo [not null]
+}
+
+Table Tag {
+  id Int [pk, increment]
+  nome String [unique, not null]
+  eventoTags EventoTag [not null]
+}
+
+Table EventoTag {
+  eventoId Int [not null]
+  tagId Int [not null]
+  evento Evento [not null]
+  tag Tag [not null]
+
+  indexes {
+    (eventoId, tagId) [pk]
+  }
+}
+
+Enum Formato {
+  PRESENCIAL
+  ONLINE
+  HIBRIDO
+}
+
+Enum TipoEvento {
+  SIMPLES
+  GRANDE
+}
+
+Enum TipoAtividade {
+  PALESTRA
+  MINICURSO
+  OFICINA
+  WORKSHOP
+}
+
+Enum StatusInscricao {
+  PENDENTE
+  CONFIRMADO
+  CANCELADO
+}
+
+Enum CampoTipo {
+  STRING
+  NUMBER
+  DATE
+  BOOLEAN
+}
+
+Ref: Atividade.eventoId > Evento.id
+
+Ref: InscricaoEvento.eventoId > Evento.id
+
+Ref: InscricaoEvento.userId > User.id
+
+Ref: InscricaoAtividade.atividadeId > Atividade.id
+
+Ref: InscricaoAtividade.userId > User.id
+
+Ref: EventoCampo.eventoId > Evento.id
+
+Ref: RespostaEventoCampo.inscricaoEventoId > InscricaoEvento.id
+
+Ref: RespostaEventoCampo.eventoCampoId > EventoCampo.id
+
+Ref: EventoTag.eventoId > Evento.id
+
+Ref: EventoTag.tagId > Tag.id
