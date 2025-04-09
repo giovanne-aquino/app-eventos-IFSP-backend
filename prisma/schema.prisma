@@ -43,7 +43,6 @@ model Event {
   // Reverse relations
   activities          Activity[]
   eventRegistrations  EventRegistration[]
-  fields              EventField[]
   eventTags           EventTag[]
   userOrganizer           User    @relation(fields: [organizerId], references: [id])
 }
@@ -79,8 +78,6 @@ model EventRegistration {
   event      Event    @relation(fields: [eventId], references: [id])
   user       User     @relation(fields: [userId], references: [id])
   
-  // Reverse relation for responses
-  responses  EventFieldResponse[]
 }
 
 model ActivityRegistration {
@@ -95,29 +92,28 @@ model ActivityRegistration {
 
 }
 
-
-
-model EventField {
+model Field {
   id          Int       @id @default(autoincrement())
-  eventId     Int
   name        String    // Ex: "occupation", "income", "education level"
-  type        FieldType // Ex: STRING, NUMBER, DATE, BOOLEAN
+  type        EventFieldType // Ex: STRING, NUMBER, DATE, BOOLEAN
   required    Boolean   @default(false)
+  refId       Int
+  refType     FieldType    // Ex: "Event", "Activity"
 
-  event       Event     @relation(fields: [eventId], references: [id])
-  
-  // Reverse relation for responses
-  responses   EventFieldResponse[]
+  fieldResponses FieldResponse[] // Reverse relation
+
 }
 
-model EventFieldResponse {
-  id                Int      @id @default(autoincrement())
-  eventRegistrationId Int
-  eventFieldId      Int
-  value             String   // Value stored as text; conversion performed in the application
 
-  eventRegistration EventRegistration @relation(fields: [eventRegistrationId], references: [id])
-  eventField        EventField        @relation(fields: [eventFieldId], references: [id])
+model FieldResponse {
+  id                  Int      @id @default(autoincrement())
+  RegistrationId      Int
+  FieldId             Int
+  value               String   // Value stored as text; conversion performed in the application
+  type                FieldType // Ex: STRING, NUMBER, DATE, BOOLEAN
+  createdAt           DateTime @default(now())
+
+  Field        Field        @relation(fields: [FieldId], references: [id])
 }
 
 model Tag {
@@ -162,7 +158,7 @@ enum RegistrationStatus {
   CANCELED
 }
 
-enum FieldType {
+enum EventFieldType {
   STRING
   NUMBER
   DATE
@@ -180,6 +176,11 @@ enum UserRole {
   ADMIN
   ORGANIZER
   PARTICIPANT
+}
+
+enum FieldType {
+  EVENT
+  ACTIVITY
 }
 
 
