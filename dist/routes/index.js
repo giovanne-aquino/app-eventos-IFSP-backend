@@ -1,8 +1,9 @@
 "use strict";
-var express = require('express');
-var router = express.Router();
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Express' });
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const router = (0, express_1.Router)();
+// Rota GET /
+router.get('/', (req, res) => {
+    res.json({ message: 'Bem-vindo à API Eventos IFSP 👋' });
 });
-module.exports = router;
+exports.default = router;
