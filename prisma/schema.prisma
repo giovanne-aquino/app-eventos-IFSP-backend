@@ -50,8 +50,7 @@ model Event {
 
 model Activity {
   id                  Int       @id @default(autoincrement())
-  name                String
-  organizerId         Int
+  name                String 
   description         String
   format              Format
   location            String?
@@ -67,6 +66,9 @@ model Activity {
   // Relation with Event and reverse
   event               Event    @relation(fields: [eventId], references: [id])
   activityRegistrations ActivityRegistration[]
+  fields              ActivityField[]
+
+  
 }
 
 model EventRegistration {
@@ -93,6 +95,8 @@ model ActivityRegistration {
   activity     Activity @relation(fields: [activityId], references: [id])
   user         User     @relation(fields: [userId], references: [id])
 
+  responses ActivityFieldResponse[]
+
 }
 
 
@@ -118,6 +122,28 @@ model EventFieldResponse {
 
   eventRegistration EventRegistration @relation(fields: [eventRegistrationId], references: [id])
   eventField        EventField        @relation(fields: [eventFieldId], references: [id])
+}
+
+model ActivityField {
+  id          Int       @id @default(autoincrement())
+  activityId  Int
+  name        String    // Ex: "occupation", "income", "education level"
+  type        FieldType // Ex: STRING, NUMBER, DATE, BOOLEAN
+  required    Boolean   @default(false)
+
+  activity    Activity  @relation(fields: [activityId], references: [id])
+  
+  // Reverse relation for responses
+  responses   ActivityFieldResponse[]
+}
+model ActivityFieldResponse {
+  id                Int      @id @default(autoincrement())
+  activityRegistrationId Int
+  activityFieldId   Int
+  value             String   // Value stored as text; conversion performed in the application
+
+  activityRegistration ActivityRegistration @relation(fields: [activityRegistrationId], references: [id])
+  activityField        ActivityField        @relation(fields: [activityFieldId], references: [id])
 }
 
 model Tag {
