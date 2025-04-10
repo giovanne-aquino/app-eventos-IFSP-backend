@@ -20,7 +20,7 @@ const models: TsoaRoute.Models = {
             "email": {"dataType":"string","required":true},
             "CPFCNPJ": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
             "CRM": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
-            "nationalID": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
+            "nationalId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
         },
         "additionalProperties": false,
     },
@@ -31,16 +31,18 @@ const models: TsoaRoute.Models = {
             "name": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
             "password": {"dataType":"string","required":true},
-            "CPFCNPJ": {"dataType":"string"},
-            "CRM": {"dataType":"string"},
-            "nationalID": {"dataType":"string"},
+            "cpf": {"dataType":"string"},
+            "cnpj": {"dataType":"string"},
+            "crm": {"dataType":"string"},
+            "nationalId": {"dataType":"string"},
+            "userRole": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["ADMIN"]},{"dataType":"enum","enums":["ORGANIZER"]},{"dataType":"enum","enums":["PARTICIPANT"]}],"required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Partial_CreateUserDto_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"email":{"dataType":"string"},"password":{"dataType":"string"},"CPFCNPJ":{"dataType":"string"},"CRM":{"dataType":"string"},"nationalID":{"dataType":"string"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"email":{"dataType":"string"},"password":{"dataType":"string"},"cpf":{"dataType":"string"},"cnpj":{"dataType":"string"},"crm":{"dataType":"string"},"nationalId":{"dataType":"string"},"userRole":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["ADMIN"]},{"dataType":"enum","enums":["ORGANIZER"]},{"dataType":"enum","enums":["PARTICIPANT"]}]}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };

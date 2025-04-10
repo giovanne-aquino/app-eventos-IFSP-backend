@@ -2,7 +2,9 @@ export class CreateUserDto {
   name!: string;
   email!: string;
   password!: string;
-  CPFCNPJ?: string;
-  CRM?: string;
-  nationalID?: string;
+  cpf?: string;
+  cnpj?: string;
+  crm?: string;
+  nationalId?: string;
+  userRole!: 'ADMIN' | 'ORGANIZER' | 'PARTICIPANT'; 
 }

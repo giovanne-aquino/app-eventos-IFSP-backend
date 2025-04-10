@@ -27,7 +27,7 @@
 						"type": "string",
 						"nullable": true
 					},
-					"nationalID": {
+					"nationalId": {
 						"type": "string",
 						"nullable": true
 					}
@@ -51,20 +51,32 @@
 					"password": {
 						"type": "string"
 					},
-					"CPFCNPJ": {
+					"cpf": {
 						"type": "string"
 					},
-					"CRM": {
+					"cnpj": {
 						"type": "string"
 					},
-					"nationalID": {
+					"crm": {
 						"type": "string"
+					},
+					"nationalId": {
+						"type": "string"
+					},
+					"userRole": {
+						"type": "string",
+						"enum": [
+							"ADMIN",
+							"ORGANIZER",
+							"PARTICIPANT"
+						]
 					}
 				},
 				"required": [
 					"name",
 					"email",
-					"password"
+					"password",
+					"userRole"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -80,14 +92,25 @@
 					"password": {
 						"type": "string"
 					},
-					"CPFCNPJ": {
+					"cpf": {
 						"type": "string"
 					},
-					"CRM": {
+					"cnpj": {
 						"type": "string"
 					},
-					"nationalID": {
+					"crm": {
 						"type": "string"
+					},
+					"nationalId": {
+						"type": "string"
+					},
+					"userRole": {
+						"type": "string",
+						"enum": [
+							"ADMIN",
+							"ORGANIZER",
+							"PARTICIPANT"
+						]
 					}
 				},
 				"type": "object",

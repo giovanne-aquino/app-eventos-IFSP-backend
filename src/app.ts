@@ -70,14 +70,6 @@ setupSwagger(app)
 RegisterRoutes(app)
 
 
-app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-  console.error("🔥 ERRO GLOBAL:", err);
-  res.status(err.status || 500).json({
-    message: err.message,
-    details: err?.body || err,
-  });
-});
-
 // Rota raiz ("/") será tratada pelo indexRouter
 // app.use('/', indexRouter)
 
@@ -96,25 +88,17 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // -------- TRATAMENTO DE ERROS GERAIS --------
 
-// Middleware para lidar com qualquer erro que acontecer
-const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
-  const isDev = req.app.get('env') === 'development';
+/* 
+  Middleware para lidar com qualquer erro que acontecer. Como estamos usando o Zod e o TSOA
+  (que tem os seus erros proprios) precisamos capturar esses erros e tambem conveter de zod 
+  para ValidatorError do TSOA em alguns casos.)
 
-  if (err instanceof ValidateError) {
-    return void res.status(err.status || 422).json({
-      success: false,
-      message: err.message,
-      details: err.fields,
-    });
-  }
+*/
+import { ErrorHandlerMiddleware } from './middlewares/ErrorHandlerMiddleware'
 
-  return void  res.status(err.status || 500).json({
-    success: false,
-    message: 'Erro interno no servidor',
-    ...(isDev && { stack: err.stack }),
-  });
-};
-app.use(errorHandler);
+app.use(ErrorHandlerMiddleware.handle)
+
+
 
 // Exporta o app para ser usado por outro arquivo (ex: server.ts)
 export default app

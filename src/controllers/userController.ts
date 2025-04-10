@@ -29,7 +29,6 @@ import { zodToTsoaErrors } from '../utilis/zodToTsoaErrors'
         const parsed = createUserSchema.safeParse(body)
         if (!parsed.success) {
             const issues = parsed.error.issues;
-      
             throw new ValidateError(zodToTsoaErrors(issues), "Validation failed");
           }
         return this.userService.createUser(body);
@@ -37,6 +36,7 @@ import { zodToTsoaErrors } from '../utilis/zodToTsoaErrors'
   
     @Get()
     public async getUsers(): Promise<UserResponseDto[]> {
+      console.log("chegou no getUsers");
       return this.userService.getUsers();
     }
   

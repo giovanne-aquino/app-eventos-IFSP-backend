@@ -4,5 +4,5 @@ export class UserResponseDto {
     email!: string;
     CPFCNPJ?: string | null;
     CRM?: string | null;
-    nationalID?: string | null;
+    nationalId?: string | null;
   }

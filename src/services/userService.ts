@@ -7,6 +7,7 @@ export class UserService {
   }
 
   async getUsers() {
+    console.log("chegou no findall");
     return userRepository.findAll()
   }
 

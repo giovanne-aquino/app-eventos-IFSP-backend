@@ -12,154 +12,202 @@ model User {
   name        String
   email       String                @unique
   password    String
-  CPFCNPJ     String?
-  CRM         String?
-  nationalID  String?
+  cpf         String?               @unique
+  cnpj        String?               @unique
+  crm         String?               @unique
+  nationalId  String?               @unique
+  userRole   UserRole               @default(PARTICIPANT)        
 
-  // Relações inversas
-  inscricoesEvento    InscricaoEvento[]
-  inscricoesAtividade InscricaoAtividade[]
+  // Reverse relations
+  eventRegistrations    EventRegistration[]
+  activityRegistrations ActivityRegistration[]
+  eventsOrganized       Event[]
 }
 
-model Evento {
+model Event {
   id                  Int               @id @default(autoincrement())
-  nome                String
-  organizadorId       Int
-  descricao           String
-  formato             Formato
-  local               String?
-  documentoUser       Boolean
+  name                String
+  organizerId         Int
+  description         String
+  format              Format
+  location            String?
+  userDocument        Boolean
   banner              String?
-  tipoEvento          TipoEvento
-  dataInicio          DateTime
-  dataFinal           DateTime
-  capacidadeMaxima    Int?
-  horasComplementares Int?
+  eventType           EventType
+  startDate           DateTime
+  endDate             DateTime
+  maxCapacity         Int?
+  complementaryHours  Int?
+  status              RegistrationStatus
 
-  // Relações inversas
-  atividades          Atividade[]
-  inscricoesEvento    InscricaoEvento[]
-  campos              EventoCampo[]
-  eventoTags          EventoTag[]
+  // Reverse relations
+  activities          Activity[]
+  eventRegistrations  EventRegistration[]
+  fields              EventField[]
+  eventTags           EventTag[]
+  userOrganizer           User    @relation(fields: [organizerId], references: [id])
 }
 
-model Atividade {
+model Activity {
   id                  Int       @id @default(autoincrement())
-  nome                String
-  organizadorId       Int
-  descricao           String
-  formato             Formato
-  local               String?
-  documentoUser       Boolean
+  name                String 
+  description         String
+  format              Format
+  location            String?
+  userDocument        Boolean
   banner              String?
-  dataInicio          DateTime
-  horaInicio          String
-  tipoAtividade       TipoAtividade
-  capacidadeMaxima    Int
-  horasComplementares Int
-  eventoId            Int
+  startDate           DateTime
+  startTime           String
+  activityType        ActivityType
+  maxCapacity         Int
+  complementaryHours  Int
+  eventId             Int
 
-  // Relação com Evento e inversa
-  evento              Evento    @relation(fields: [eventoId], references: [id])
-  inscricoesAtividade InscricaoAtividade[]
+  // Relation with Event and reverse
+  event               Event    @relation(fields: [eventId], references: [id])
+  activityRegistrations ActivityRegistration[]
+  fields              ActivityField[]
+
+  
 }
 
-model InscricaoEvento {
+model EventRegistration {
   id         Int      @id @default(autoincrement())
-  eventoId   Int
+  eventId    Int
   userId     Int
-  status     StatusInscricao
-  dataHora   DateTime @default(now())
+  status     RegistrationStatus
+  timestamp  DateTime @default(now())
 
-  evento     Evento   @relation(fields: [eventoId], references: [id])
+  event      Event    @relation(fields: [eventId], references: [id])
   user       User     @relation(fields: [userId], references: [id])
   
-  // Relação inversa para respostas
-  respostas  RespostaEventoCampo[]
+  // Reverse relation for responses
+  responses  EventFieldResponse[]
 }
 
-model InscricaoAtividade {
+model ActivityRegistration {
   id           Int      @id @default(autoincrement())
-  atividadeId  Int
+  activityId   Int
   userId       Int
-  status       StatusInscricao
-  dataHora     DateTime @default(now())
+  status       RegistrationStatus
+  timestamp    DateTime @default(now())
 
-  atividade    Atividade @relation(fields: [atividadeId], references: [id])
-  user         User      @relation(fields: [userId], references: [id])
+  activity     Activity @relation(fields: [activityId], references: [id])
+  user         User     @relation(fields: [userId], references: [id])
+
+  responses ActivityFieldResponse[]
+
 }
 
-model EventoCampo {
+
+
+model EventField {
   id          Int       @id @default(autoincrement())
-  eventoId    Int
-  nome        String    // Ex: "ocupação", "renda", "grau escolar"
-  tipo        CampoTipo // Ex: STRING, NUMBER, DATE, BOOLEAN
-  obrigatorio Boolean   @default(false)
+  eventId     Int
+  name        String    // Ex: "occupation", "income", "education level"
+  type        FieldType // Ex: STRING, NUMBER, DATE, BOOLEAN
+  required    Boolean   @default(false)
 
-  evento      Evento    @relation(fields: [eventoId], references: [id])
+  event       Event     @relation(fields: [eventId], references: [id])
   
-  // Relação inversa para respostas
-  respostas   RespostaEventoCampo[]
+  // Reverse relation for responses
+  responses   EventFieldResponse[]
 }
 
-model RespostaEventoCampo {
+model EventFieldResponse {
   id                Int      @id @default(autoincrement())
-  inscricaoEventoId Int
-  eventoCampoId     Int
-  valor             String   // Valor armazenado como texto; conversão realizada na aplicação
+  eventRegistrationId Int
+  eventFieldId      Int
+  value             String   // Value stored as text; conversion performed in the application
 
-  inscricaoEvento   InscricaoEvento @relation(fields: [inscricaoEventoId], references: [id])
-  eventoCampo       EventoCampo     @relation(fields: [eventoCampoId], references: [id])
+  eventRegistration EventRegistration @relation(fields: [eventRegistrationId], references: [id])
+  eventField        EventField        @relation(fields: [eventFieldId], references: [id])
+}
+
+model ActivityField {
+  id          Int       @id @default(autoincrement())
+  activityId  Int
+  name        String    // Ex: "occupation", "income", "education level"
+  type        FieldType // Ex: STRING, NUMBER, DATE, BOOLEAN
+  required    Boolean   @default(false)
+
+  activity    Activity  @relation(fields: [activityId], references: [id])
+  
+  // Reverse relation for responses
+  responses   ActivityFieldResponse[]
+}
+model ActivityFieldResponse {
+  id                Int      @id @default(autoincrement())
+  activityRegistrationId Int
+  activityFieldId   Int
+  value             String   // Value stored as text; conversion performed in the application
+
+  activityRegistration ActivityRegistration @relation(fields: [activityRegistrationId], references: [id])
+  activityField        ActivityField        @relation(fields: [activityFieldId], references: [id])
 }
 
 model Tag {
   id   Int    @id @default(autoincrement())
-  nome String @unique
+  name String @unique
 
-  // Relação inversa com EventoTag
-  eventoTags EventoTag[]
+  // Reverse relation with EventTag
+  eventTags EventTag[]
 }
 
-model EventoTag {
-  eventoId  Int
-  tagId     Int
+model EventTag {
+  eventId  Int
+  tagId    Int
 
-  evento    Evento @relation(fields: [eventoId], references: [id])
-  tag       Tag    @relation(fields: [tagId], references: [id])
+  event    Event @relation(fields: [eventId], references: [id])
+  tag      Tag   @relation(fields: [tagId], references: [id])
 
-  @@id([eventoId, tagId])
+  @@id([eventId, tagId])
 }
 
-enum Formato {
-  PRESENCIAL
+enum Format {
+  PRESENTIAL
   ONLINE
-  HIBRIDO
+  HYBRID
 }
 
-enum TipoEvento {
-  SIMPLES
-  GRANDE
+enum EventType {
+  SIMPLE
+  LARGE
 }
 
-enum TipoAtividade {
-  PALESTRA
-  MINICURSO
-  OFICINA
+enum ActivityType {
+  LECTURE
+  SHORT_COURSE
   WORKSHOP
+  SEMINAR
 }
 
-enum StatusInscricao {
-  PENDENTE
-  CONFIRMADO
-  CANCELADO
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELED
 }
 
-enum CampoTipo {
+enum FieldType {
   STRING
   NUMBER
   DATE
   BOOLEAN
 }
+
+enum RegistrationState {
+  ACTIVE 
+  CLOSED 
+  CANCELED
+  DRAFT
+}
+
+enum UserRole {
+  ADMIN
+  ORGANIZER
+  PARTICIPANT
+}
+
 
 generator dbml {
   provider = "prisma-dbml-generator"
