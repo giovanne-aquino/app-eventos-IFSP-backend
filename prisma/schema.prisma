@@ -18,6 +18,7 @@ model User {
   nationalId  String?               @unique
   userRole   UserRole               @default(PARTICIPANT)        
 
+
   // Reverse relations
   eventRegistrations    EventRegistration[]
   activityRegistrations ActivityRegistration[]
