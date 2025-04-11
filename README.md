@@ -39,14 +39,14 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
     npx prisma migrate dev
     ```
 
-5. **Inicie o servidor**:
+5. **Inicie o servidor**
     Para rodar o servidor em modo de desenvolvimento, use o script abaixo:
     ```bash
     npm run dev
     ```
 
 6. **Acesse a aplicação**:
-    O servidor estará disponível em [http://localhost:3000](http://localhost:3000).
+    O servidor estará disponível em [http://localhost:3000](http://localhost:3000) ou a "PORT" que foi definida no arquivo .env.
 
 ---
 
@@ -57,18 +57,18 @@ Caso seja necessário realizar alterações no schema do Prisma (`prisma/schema.
 1. **Edite o arquivo `prisma/schema.prisma`**:
     Faça as alterações necessárias no modelo.
 
-2. **Gere as migrações**:
+2. **Gere as migrações**
     ```bash
     npx prisma migrate dev --name <nome-da-migracao>
     ```
 
-3. **Atualize o cliente Prisma**:
+3. **Atualize o cliente Prisma**
     Após realizar as migrações, gere novamente o cliente Prisma para refletir as mudanças:
     ```bash
     npx prisma generate
     ```
 
-4. **Atualize o DBML (opcional)**:
+4. **Atualize o DBML (opcional)**
     Caso esteja utilizando o gerador DBML para diagramas, o arquivo será atualizado automaticamente ao rodar o comando `prisma generate`.
 
 ---
@@ -87,13 +87,13 @@ Caso seja necessário realizar alterações no schema do Prisma (`prisma/schema.
     npm run build
   ```     
 
-- **Rodar o servidor em produção:**
+- **Rodar o servidor em produção**
   Após realizar o build, para rodar a versão compilada em produção, use o comando:
   ```bash
     npm start
   ```     
-- **Abrir o Prisma Studio (interface gráfica para gerenciar o banco de dados):**
-  Após realizar o build, para rodar a versão compilada em produção, use o comando:
+- **Abrir o Prisma Studio (interface gráfica para gerenciar o banco de dados)**
+  Abre uma interface gráfica no browser para visualização do Banco de Dados:
   ```bash
     npx prisma studio
   ```     
@@ -109,4 +109,4 @@ Caso seja necessário realizar alterações no schema do Prisma (`prisma/schema.
 ---
 
 ## Contribuição 
-    Sinta-se à vontade para abrir issues ou enviar pull requests para melhorias no projeto.
+Sinta-se à vontade para abrir issues ou enviar pull requests para melhorias no projeto.
