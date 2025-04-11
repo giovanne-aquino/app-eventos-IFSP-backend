@@ -16,7 +16,7 @@ import {
   import { UserResponseDto } from '../dtos/users/UserResponseDTO'
   import { updateUserSchema } from '../zod/schemas/user/userSchema'
   import { numericIdParamSchema } from '../zod/schemas/common/validateParmsId';
-  import { validateParams } from '../utilis/validateParams';
+  import { validateParams } from '../utilis/validateIdParams';
   import { createUserSchema } from '../zod/schemas/user/userSchema';
 import { zodToTsoaErrors } from '../utilis/zodToTsoaErrors'
   @Route('users')
