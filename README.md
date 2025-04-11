@@ -40,8 +40,9 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
     ```
 
 5. **Inicie o servidor**:
+    Para rodar o servidor em modo de desenvolvimento, use o script abaixo:
     ```bash
-    npm start
+    npm run dev
     ```
 
 6. **Acesse a aplicação**:
@@ -74,18 +75,38 @@ Caso seja necessário realizar alterações no schema do Prisma (`prisma/schema.
 
 ## Scripts Úteis
 
-- **Rodar o servidor em modo de desenvolvimento**:
+- **Rodar o servidor em modo de desenvolvimento**
+  O comando abaixo roda o servidor em modo de desenvolvimento com hot-reloading, e também observa mudanças nas rotas e esquemas do TSOA:
   ```bash
-  npx nodemon
+  npm run dev
   ```
 
-- **Abrir o Prisma Studio (interface gráfica para gerenciar o banco de dados)**:
+- **Rodar o build**
+  Para rodar a aplicação após compilar os arquivos TypeScript, use o comando:
   ```bash
-  npx prisma studio
-  ```
+    npm run build
+  ```     
+
+- **Rodar o servidor em produção:**
+  Após realizar o build, para rodar a versão compilada em produção, use o comando:
+  ```bash
+    npm start
+  ```     
+- **Abrir o Prisma Studio (interface gráfica para gerenciar o banco de dados):**
+  Após realizar o build, para rodar a versão compilada em produção, use o comando:
+  ```bash
+    npx prisma studio
+  ```     
 
 ---
 
-## Contribuição
+## DOC Reference:
+- **TSOA:** https://tsoa-community.github.io/docs/introduction.html
+- **Swagger:** https://swagger.io/docs/
+- **Zod:** https://zod.dev/
+- **Prisma:** https://www.prisma.io/docs
 
-Sinta-se à vontade para abrir issues ou enviar pull requests para melhorias no projeto.
+---
+
+## Contribuição 
+    Sinta-se à vontade para abrir issues ou enviar pull requests para melhorias no projeto.

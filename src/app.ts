@@ -1,3 +1,6 @@
+//Importa as váriaveis ambiente
+import 'dotenv/config'
+
 // Importa o módulo que facilita a criação de erros HTTP (como 404, 500, etc)
 import createError from 'http-errors'
 
