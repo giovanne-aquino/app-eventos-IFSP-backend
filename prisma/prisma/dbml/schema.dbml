@@ -12,7 +12,6 @@ Table User {
   crm String [unique]
   nationalId String [unique]
   userRole UserRole [not null, default: 'PARTICIPANT']
-
   eventRegistrations EventRegistration [not null]
   activityRegistrations ActivityRegistration [not null]
   eventsOrganized Event [not null]
