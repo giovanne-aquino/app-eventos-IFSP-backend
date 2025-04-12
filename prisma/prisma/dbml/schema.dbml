@@ -7,156 +7,202 @@ Table User {
   name String [not null]
   email String [unique, not null]
   password String [not null]
-  CPFCNPJ String
-  CRM String
-  nationalID String
-  inscricoesEvento InscricaoEvento [not null]
-  inscricoesAtividade InscricaoAtividade [not null]
+  cpf String [unique]
+  cnpj String [unique]
+  crm String [unique]
+  nationalId String [unique]
+  userRole UserRole [not null, default: 'PARTICIPANT']
+  eventRegistrations EventRegistration [not null]
+  activityRegistrations ActivityRegistration [not null]
+  eventsOrganized Event [not null]
 }
 
-Table Evento {
+Table Event {
   id Int [pk, increment]
-  nome String [not null]
-  organizadorId Int [not null]
-  descricao String [not null]
-  formato Formato [not null]
-  local String
-  documentoUser Boolean [not null]
+  name String [not null]
+  organizerId Int [not null]
+  description String [not null]
+  format Format [not null]
+  location String
+  userDocument Boolean [not null]
   banner String
-  tipoEvento TipoEvento [not null]
-  dataInicio DateTime [not null]
-  dataFinal DateTime [not null]
-  capacidadeMaxima Int
-  horasComplementares Int
-  atividades Atividade [not null]
-  inscricoesEvento InscricaoEvento [not null]
-  campos EventoCampo [not null]
-  eventoTags EventoTag [not null]
+  eventType EventType [not null]
+  startDate DateTime [not null]
+  endDate DateTime [not null]
+  maxCapacity Int
+  complementaryHours Int
+  status RegistrationStatus [not null]
+  activities Activity [not null]
+  eventRegistrations EventRegistration [not null]
+  fields EventField [not null]
+  eventTags EventTag [not null]
+  userOrganizer User [not null]
 }
 
-Table Atividade {
+Table Activity {
   id Int [pk, increment]
-  nome String [not null]
-  organizadorId Int [not null]
-  descricao String [not null]
-  formato Formato [not null]
-  local String
-  documentoUser Boolean [not null]
+  name String [not null]
+  description String [not null]
+  format Format [not null]
+  location String
+  userDocument Boolean [not null]
   banner String
-  dataInicio DateTime [not null]
-  horaInicio String [not null]
-  tipoAtividade TipoAtividade [not null]
-  capacidadeMaxima Int [not null]
-  horasComplementares Int [not null]
-  eventoId Int [not null]
-  evento Evento [not null]
-  inscricoesAtividade InscricaoAtividade [not null]
+  startDate DateTime [not null]
+  startTime String [not null]
+  activityType ActivityType [not null]
+  maxCapacity Int [not null]
+  complementaryHours Int [not null]
+  eventId Int [not null]
+  event Event [not null]
+  activityRegistrations ActivityRegistration [not null]
+  fields ActivityField [not null]
 }
 
-Table InscricaoEvento {
+Table EventRegistration {
   id Int [pk, increment]
-  eventoId Int [not null]
+  eventId Int [not null]
   userId Int [not null]
-  status StatusInscricao [not null]
-  dataHora DateTime [default: `now()`, not null]
-  evento Evento [not null]
+  status RegistrationStatus [not null]
+  timestamp DateTime [default: `now()`, not null]
+  event Event [not null]
   user User [not null]
-  respostas RespostaEventoCampo [not null]
+  responses EventFieldResponse [not null]
 }
 
-Table InscricaoAtividade {
+Table ActivityRegistration {
   id Int [pk, increment]
-  atividadeId Int [not null]
+  activityId Int [not null]
   userId Int [not null]
-  status StatusInscricao [not null]
-  dataHora DateTime [default: `now()`, not null]
-  atividade Atividade [not null]
+  status RegistrationStatus [not null]
+  timestamp DateTime [default: `now()`, not null]
+  activity Activity [not null]
   user User [not null]
+  responses ActivityFieldResponse [not null]
 }
 
-Table EventoCampo {
+Table EventField {
   id Int [pk, increment]
-  eventoId Int [not null]
-  nome String [not null]
-  tipo CampoTipo [not null]
-  obrigatorio Boolean [not null, default: false]
-  evento Evento [not null]
-  respostas RespostaEventoCampo [not null]
+  eventId Int [not null]
+  name String [not null]
+  type FieldType [not null]
+  required Boolean [not null, default: false]
+  event Event [not null]
+  responses EventFieldResponse [not null]
 }
 
-Table RespostaEventoCampo {
+Table EventFieldResponse {
   id Int [pk, increment]
-  inscricaoEventoId Int [not null]
-  eventoCampoId Int [not null]
-  valor String [not null]
-  inscricaoEvento InscricaoEvento [not null]
-  eventoCampo EventoCampo [not null]
+  eventRegistrationId Int [not null]
+  eventFieldId Int [not null]
+  value String [not null]
+  eventRegistration EventRegistration [not null]
+  eventField EventField [not null]
+}
+
+Table ActivityField {
+  id Int [pk, increment]
+  activityId Int [not null]
+  name String [not null]
+  type FieldType [not null]
+  required Boolean [not null, default: false]
+  activity Activity [not null]
+  responses ActivityFieldResponse [not null]
+}
+
+Table ActivityFieldResponse {
+  id Int [pk, increment]
+  activityRegistrationId Int [not null]
+  activityFieldId Int [not null]
+  value String [not null]
+  activityRegistration ActivityRegistration [not null]
+  activityField ActivityField [not null]
 }
 
 Table Tag {
   id Int [pk, increment]
-  nome String [unique, not null]
-  eventoTags EventoTag [not null]
+  name String [unique, not null]
+  eventTags EventTag [not null]
 }
 
-Table EventoTag {
-  eventoId Int [not null]
+Table EventTag {
+  eventId Int [not null]
   tagId Int [not null]
-  evento Evento [not null]
+  event Event [not null]
   tag Tag [not null]
 
   indexes {
-    (eventoId, tagId) [pk]
+    (eventId, tagId) [pk]
   }
 }
 
-Enum Formato {
-  PRESENCIAL
+Enum Format {
+  PRESENTIAL
   ONLINE
-  HIBRIDO
+  HYBRID
 }
 
-Enum TipoEvento {
-  SIMPLES
-  GRANDE
+Enum EventType {
+  SIMPLE
+  LARGE
 }
 
-Enum TipoAtividade {
-  PALESTRA
-  MINICURSO
-  OFICINA
+Enum ActivityType {
+  LECTURE
+  SHORT_COURSE
   WORKSHOP
+  SEMINAR
 }
 
-Enum StatusInscricao {
-  PENDENTE
-  CONFIRMADO
-  CANCELADO
+Enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELED
 }
 
-Enum CampoTipo {
+Enum FieldType {
   STRING
   NUMBER
   DATE
   BOOLEAN
 }
 
-Ref: Atividade.eventoId > Evento.id
+Enum RegistrationState {
+  ACTIVE
+  CLOSED
+  CANCELED
+  DRAFT
+}
 
-Ref: InscricaoEvento.eventoId > Evento.id
+Enum UserRole {
+  ADMIN
+  ORGANIZER
+  PARTICIPANT
+}
 
-Ref: InscricaoEvento.userId > User.id
+Ref: Event.organizerId > User.id
 
-Ref: InscricaoAtividade.atividadeId > Atividade.id
+Ref: Activity.eventId > Event.id
 
-Ref: InscricaoAtividade.userId > User.id
+Ref: EventRegistration.eventId > Event.id
 
-Ref: EventoCampo.eventoId > Evento.id
+Ref: EventRegistration.userId > User.id
 
-Ref: RespostaEventoCampo.inscricaoEventoId > InscricaoEvento.id
+Ref: ActivityRegistration.activityId > Activity.id
 
-Ref: RespostaEventoCampo.eventoCampoId > EventoCampo.id
+Ref: ActivityRegistration.userId > User.id
 
-Ref: EventoTag.eventoId > Evento.id
+Ref: EventField.eventId > Event.id
 
-Ref: EventoTag.tagId > Tag.id
+Ref: EventFieldResponse.eventRegistrationId > EventRegistration.id
+
+Ref: EventFieldResponse.eventFieldId > EventField.id
+
+Ref: ActivityField.activityId > Activity.id
+
+Ref: ActivityFieldResponse.activityRegistrationId > ActivityRegistration.id
+
+Ref: ActivityFieldResponse.activityFieldId > ActivityField.id
+
+Ref: EventTag.eventId > Event.id
+
+Ref: EventTag.tagId > Tag.id
