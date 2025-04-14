@@ -6,27 +6,10 @@ export class CreateActivityDto {
     userDocument!: boolean;
     banner?: string;
     startDate!: Date;
+    startTime!: string;
+    activityType!: 'LECTURE' | 'SHORT_COURSE' | 'WORKSHOP' | 'SEMINAR';
+    maxCapacity!: number;
+    complementaryHours!: number;
+    eventId!: number;
 }
 
-// model Activity {
-//     id                  Int       @id @default(autoincrement())
-//     name                String 
-//     description         String
-//     format              Format
-//     location            String?
-//     userDocument        Boolean
-//     banner              String?
-//     startDate           DateTime
-//     startTime           String
-//     activityType        ActivityType
-//     maxCapacity         Int
-//     complementaryHours  Int
-//     eventId             Int
-  
-//     // Relation with Event and reverse
-//     event               Event    @relation(fields: [eventId], references: [id])
-//     activityRegistrations ActivityRegistration[]
-//     fields              ActivityField[]
-  
-    
-//   }
