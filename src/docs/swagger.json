@@ -115,6 +115,142 @@
 				},
 				"type": "object",
 				"description": "Make all properties in T optional"
+			},
+			"ActivityResponseDTO": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"activityType": {
+						"type": "string",
+						"enum": [
+							"LECTURE",
+							"SHORT_COURSE",
+							"WORKSHOP",
+							"SEMINAR"
+						]
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double"
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"description",
+					"format",
+					"userDocument",
+					"startDate",
+					"startTime",
+					"activityType",
+					"maxCapacity",
+					"complementaryHours"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateActivityDTO": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string"
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"activityType": {
+						"type": "string",
+						"enum": [
+							"LECTURE",
+							"SHORT_COURSE",
+							"WORKSHOP",
+							"SEMINAR"
+						]
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double"
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"format",
+					"userDocument",
+					"startDate",
+					"startTime",
+					"activityType",
+					"maxCapacity",
+					"complementaryHours",
+					"eventId"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -275,6 +411,38 @@
 						}
 					}
 				]
+			}
+		},
+		"/activities": {
+			"post": {
+				"operationId": "CreateActivity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ActivityResponseDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateActivityDTO"
+							}
+						}
+					}
+				}
 			}
 		}
 	},
