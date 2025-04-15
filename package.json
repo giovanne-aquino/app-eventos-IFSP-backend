@@ -2,13 +2,13 @@
   "name": "app-eventos-ifsp-backend",
   "version": "0.0.0",
   "private": true,
-"scripts": {
-  "tsoa": "tsoa routes && tsoa spec",
-  "tsoa:watch": "nodemon --watch src/controllers --watch src/dtos --ext ts --exec \"npm run tsoa\"",
-  "build": "npm run tsoa && tsc",
-  "start": "node dist/server.js",
-  "dev": "concurrently -k \"npm run tsoa:watch\" \"ts-node-dev --respawn --transpile-only src/server.ts\""
-},
+  "scripts": {
+    "tsoa": "tsoa routes && tsoa spec",
+    "tsoa:watch": "nodemon --watch src/controllers --watch src/dtos --ext ts --exec \"npm run tsoa\"",
+    "build": "npm run tsoa && tsc",
+    "start": "node dist/server.js",
+    "dev": "concurrently -k \"npm run tsoa:watch\" \"ts-node-dev --respawn --transpile-only src/server.ts\""
+  },
   "dependencies": {
     "@prisma/client": "^6.6.0",
     "cookie-parser": "~1.4.4",
@@ -16,43 +16,31 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-<<<<<<< HEAD
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "swagger-ui-express": "^5.0.1",
+    "tsoa": "^6.6.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/assert": "^1.5.11",
     "@types/body-parser": "^1.19.5",
     "@types/connect": "^3.4.38",
+    "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.1",
     "@types/express-serve-static-core": "^5.0.6",
     "@types/geojson": "^7946.0.16",
     "@types/http-errors": "^2.0.4",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^22.14.0",
     "@types/qs": "^6.9.18",
     "@types/range-parser": "^1.2.7",
     "@types/retry": "^0.12.5",
     "@types/send": "^0.17.4",
     "@types/serve-static": "^1.15.7",
+    "@types/swagger-ui-express": "^4.1.8",
     "@types/trusted-types": "^2.0.7",
     "@types/yauzl": "^2.10.3",
-=======
-    "morgan": "~1.9.1",
-    "prisma": "^6.6.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1",
-    "tsoa": "^6.6.0",
-    "zod": "^3.24.2"
-  },
-  "devDependencies": {
-    "@types/cookie-parser": "^1.4.8",
-    "@types/express": "^5.0.1",
-    "@types/http-errors": "^2.0.4",
-    "@types/morgan": "^1.9.9",
-    "@types/node": "^22.14.0",
-    "@types/swagger-jsdoc": "^6.0.4",
-    "@types/swagger-ui-express": "^4.1.8",
     "concurrently": "^9.1.2",
->>>>>>> main
     "nodemon": "^3.1.9",
     "prisma": "^6.6.0",
     "prisma-dbml-generator": "^0.12.0",

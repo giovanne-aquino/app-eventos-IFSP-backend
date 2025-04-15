@@ -115,6 +115,213 @@
 				},
 				"type": "object",
 				"description": "Make all properties in T optional"
+			},
+			"EventResponseDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"description",
+					"organizerId",
+					"format",
+					"userDocument",
+					"eventType",
+					"startDate",
+					"endDate",
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FieldErrors": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": {
+					"properties": {
+						"value": {},
+						"message": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"message"
+					],
+					"type": "object"
+				}
+			},
+			"ValidateError": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"stack": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"fields": {
+						"$ref": "#/components/schemas/FieldErrors"
+					}
+				},
+				"required": [
+					"name",
+					"message",
+					"status",
+					"fields"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateEventDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"organizerId",
+					"format",
+					"userDocument",
+					"eventType",
+					"startDate",
+					"endDate",
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -263,6 +470,107 @@
 				},
 				"tags": [
 					"Users"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events": {
+			"get": {
+				"operationId": "GetAllEvents",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventResponseDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateEvent",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateEventDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/events/{id}": {
+			"get": {
+				"operationId": "GetEventById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/EventResponseDto"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
 				],
 				"security": [],
 				"parameters": [
