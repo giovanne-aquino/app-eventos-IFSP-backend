@@ -5,6 +5,8 @@ import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../controllers/userController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { ActivityController } from './../controllers/activityController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -43,6 +45,35 @@ const models: TsoaRoute.Models = {
     "Partial_CreateUserDto_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"email":{"dataType":"string"},"password":{"dataType":"string"},"cpf":{"dataType":"string"},"cnpj":{"dataType":"string"},"crm":{"dataType":"string"},"nationalId":{"dataType":"string"},"userRole":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["ADMIN"]},{"dataType":"enum","enums":["ORGANIZER"]},{"dataType":"enum","enums":["PARTICIPANT"]}]}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "_36_Enums.Format": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PRESENTIAL"]},{"dataType":"enum","enums":["ONLINE"]},{"dataType":"enum","enums":["HYBRID"]}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "_36_Enums.ActivityType": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["SHORT_COURSE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateActivityDto": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string","required":true},
+            "format": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PRESENTIAL"]},{"dataType":"enum","enums":["ONLINE"]},{"dataType":"enum","enums":["HYBRID"]}],"required":true},
+            "location": {"dataType":"string"},
+            "userDocument": {"dataType":"boolean","required":true},
+            "banner": {"dataType":"string"},
+            "startDate": {"dataType":"datetime","required":true},
+            "startTime": {"dataType":"string","required":true},
+            "activityType": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["SHORT_COURSE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]}],"required":true},
+            "maxCapacity": {"dataType":"double","required":true},
+            "complementaryHours": {"dataType":"double","required":true},
+            "eventId": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -201,6 +232,127 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'deleteUser',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsActivityController_createActivity: Record<string, TsoaRoute.ParameterSchema> = {
+                body: {"in":"body","name":"body","required":true,"ref":"CreateActivityDto"},
+        };
+        app.post('/activities',
+            ...(fetchMiddlewares<RequestHandler>(ActivityController)),
+            ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.createActivity)),
+
+            async function ActivityController_createActivity(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_createActivity, request, response });
+
+                const controller = new ActivityController();
+
+              await templateService.apiHandler({
+                methodName: 'createActivity',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsActivityController_getActivity: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"double"},
+        };
+        app.get('/activities/:id',
+            ...(fetchMiddlewares<RequestHandler>(ActivityController)),
+            ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.getActivity)),
+
+            async function ActivityController_getActivity(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_getActivity, request, response });
+
+                const controller = new ActivityController();
+
+              await templateService.apiHandler({
+                methodName: 'getActivity',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsActivityController_updateActivity: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"double"},
+                body: {"in":"body","name":"body","required":true,"ref":"CreateActivityDto"},
+        };
+        app.put('/activities/:id',
+            ...(fetchMiddlewares<RequestHandler>(ActivityController)),
+            ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.updateActivity)),
+
+            async function ActivityController_updateActivity(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_updateActivity, request, response });
+
+                const controller = new ActivityController();
+
+              await templateService.apiHandler({
+                methodName: 'updateActivity',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsActivityController_deleteActivity: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"double"},
+        };
+        app.delete('/activities/:id',
+            ...(fetchMiddlewares<RequestHandler>(ActivityController)),
+            ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.deleteActivity)),
+
+            async function ActivityController_deleteActivity(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_deleteActivity, request, response });
+
+                const controller = new ActivityController();
+
+              await templateService.apiHandler({
+                methodName: 'deleteActivity',
                 controller,
                 response,
                 next,

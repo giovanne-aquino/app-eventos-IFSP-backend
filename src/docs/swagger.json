@@ -115,6 +115,92 @@
 				},
 				"type": "object",
 				"description": "Make all properties in T optional"
+			},
+			"_36_Enums.Format": {
+				"type": "string",
+				"enum": [
+					"PRESENTIAL",
+					"ONLINE",
+					"HYBRID"
+				]
+			},
+			"_36_Enums.ActivityType": {
+				"type": "string",
+				"enum": [
+					"LECTURE",
+					"SHORT_COURSE",
+					"WORKSHOP",
+					"SEMINAR"
+				]
+			},
+			"CreateActivityDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string"
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"activityType": {
+						"type": "string",
+						"enum": [
+							"LECTURE",
+							"SHORT_COURSE",
+							"WORKSHOP",
+							"SEMINAR"
+						]
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double"
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"format",
+					"userDocument",
+					"startDate",
+					"startTime",
+					"activityType",
+					"maxCapacity",
+					"complementaryHours",
+					"eventId"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -272,6 +358,384 @@
 						"required": true,
 						"schema": {
 							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/activities": {
+			"post": {
+				"operationId": "CreateActivity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"eventId": {
+											"type": "number",
+											"format": "double"
+										},
+										"complementaryHours": {
+											"type": "number",
+											"format": "double"
+										},
+										"maxCapacity": {
+											"type": "number",
+											"format": "double"
+										},
+										"activityType": {
+											"$ref": "#/components/schemas/_36_Enums.ActivityType"
+										},
+										"startTime": {
+											"type": "string"
+										},
+										"startDate": {
+											"type": "string",
+											"format": "date-time"
+										},
+										"banner": {
+											"type": "string"
+										},
+										"userDocument": {
+											"type": "boolean"
+										},
+										"location": {
+											"type": "string"
+										},
+										"format": {
+											"$ref": "#/components/schemas/_36_Enums.Format"
+										},
+										"description": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"eventId",
+										"complementaryHours",
+										"maxCapacity",
+										"activityType",
+										"startTime",
+										"startDate",
+										"banner",
+										"userDocument",
+										"location",
+										"format",
+										"description",
+										"id",
+										"name"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateActivityDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/activities/{id}": {
+			"get": {
+				"operationId": "GetActivity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"eventId": {
+											"type": "number",
+											"format": "double"
+										},
+										"complementaryHours": {
+											"type": "number",
+											"format": "double"
+										},
+										"maxCapacity": {
+											"type": "number",
+											"format": "double"
+										},
+										"activityType": {
+											"$ref": "#/components/schemas/_36_Enums.ActivityType"
+										},
+										"startTime": {
+											"type": "string"
+										},
+										"startDate": {
+											"type": "string",
+											"format": "date-time"
+										},
+										"banner": {
+											"type": "string"
+										},
+										"userDocument": {
+											"type": "boolean"
+										},
+										"location": {
+											"type": "string"
+										},
+										"format": {
+											"$ref": "#/components/schemas/_36_Enums.Format"
+										},
+										"description": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"eventId",
+										"complementaryHours",
+										"maxCapacity",
+										"activityType",
+										"startTime",
+										"startDate",
+										"banner",
+										"userDocument",
+										"location",
+										"format",
+										"description",
+										"id",
+										"name"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdateActivity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"eventId": {
+											"type": "number",
+											"format": "double"
+										},
+										"complementaryHours": {
+											"type": "number",
+											"format": "double"
+										},
+										"maxCapacity": {
+											"type": "number",
+											"format": "double"
+										},
+										"activityType": {
+											"$ref": "#/components/schemas/_36_Enums.ActivityType"
+										},
+										"startTime": {
+											"type": "string"
+										},
+										"startDate": {
+											"type": "string",
+											"format": "date-time"
+										},
+										"banner": {
+											"type": "string"
+										},
+										"userDocument": {
+											"type": "boolean"
+										},
+										"location": {
+											"type": "string"
+										},
+										"format": {
+											"$ref": "#/components/schemas/_36_Enums.Format"
+										},
+										"description": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"eventId",
+										"complementaryHours",
+										"maxCapacity",
+										"activityType",
+										"startTime",
+										"startDate",
+										"banner",
+										"userDocument",
+										"location",
+										"format",
+										"description",
+										"id",
+										"name"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateActivityDto"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteActivity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"eventId": {
+											"type": "number",
+											"format": "double"
+										},
+										"complementaryHours": {
+											"type": "number",
+											"format": "double"
+										},
+										"maxCapacity": {
+											"type": "number",
+											"format": "double"
+										},
+										"activityType": {
+											"$ref": "#/components/schemas/_36_Enums.ActivityType"
+										},
+										"startTime": {
+											"type": "string"
+										},
+										"startDate": {
+											"type": "string",
+											"format": "date-time"
+										},
+										"banner": {
+											"type": "string"
+										},
+										"userDocument": {
+											"type": "boolean"
+										},
+										"location": {
+											"type": "string"
+										},
+										"format": {
+											"$ref": "#/components/schemas/_36_Enums.Format"
+										},
+										"description": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"eventId",
+										"complementaryHours",
+										"maxCapacity",
+										"activityType",
+										"startTime",
+										"startDate",
+										"banner",
+										"userDocument",
+										"location",
+										"format",
+										"description",
+										"id",
+										"name"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
 						}
 					}
 				]
