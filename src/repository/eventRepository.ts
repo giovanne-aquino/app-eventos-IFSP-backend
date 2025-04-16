@@ -1,5 +1,5 @@
 import prisma from "../prisma/client";
-import { Event } from "@prisma/client";
+import { Event, Format } from "@prisma/client";
 import { CreateEventDto } from "../dtos/events/CreateEventRequestDTO";
 
 export class EventRepository {
@@ -36,4 +36,16 @@ export class EventRepository {
             where: { id: Number(id) },
         });
     }
+
+    //findByFormat
+    async findByFormat(format: string): Promise<Event[]> {
+        return await prisma.event.findMany({
+            where: {
+                format: format as Format, // Faz o cast de string para enum Format
+            },
+        });
+    }
+    
+    
+    
 }

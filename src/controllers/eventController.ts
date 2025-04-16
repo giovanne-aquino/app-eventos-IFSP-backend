@@ -51,7 +51,7 @@ export class EventController extends Controller {
     @Response<ValidateError>('400', 'Bad Request')
     public async getEventById(@Path() id: string): Promise<EventResponseDto> {
         try {
-            return await this.eventService.getEventById(id); 
+            return await this.eventService.getEventById(id);
         } catch (error) {
             if (error instanceof Error) {
                 throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
@@ -60,4 +60,17 @@ export class EventController extends Controller {
         }
     }
 
+    @Get('/format/:format')
+    @SuccessResponse('200', 'OK')
+    @Response<ValidateError>('400', 'Bad Request')
+    public async getEventsByFormat(@Path() format: string): Promise<EventResponseDto[]> {
+        try {
+            return await this.eventService.getEventsByFormat(format);
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
+            }
+            throw new ValidateError({ general: { message: 'Unknown error fetching events by format' } }, 'Bad Request');
+        }
+    }
 }

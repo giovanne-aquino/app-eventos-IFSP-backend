@@ -25,5 +25,16 @@ export class EventService {
         }
         return event;
     }
+
+    //getEventsByFormat
+    async getEventsByFormat(format: string): Promise<Event[]> {
+        const events = await this.eventRepository.findByFormat(format);
+        
+        if (!events || events.length === 0) {
+            throw new Error(`No events found with format: ${format}`);
+        }
+    
+        return events;
+    }
     
 }
