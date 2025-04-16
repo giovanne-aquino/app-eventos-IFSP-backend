@@ -16,4 +16,14 @@ export class EventService {
     async getAllEvents(): Promise<Event[]> {
         return await this.eventRepository.findAll();
     }
+
+    //getbyid
+    async getEventById(id: string): Promise<Event> {
+        const event = await this.eventRepository.findById(id);
+        if (!event) {
+            throw new Error('Event not found');
+        }
+        return event;
+    }
+    
 }

@@ -1,5 +1,6 @@
 import {
     Body,
+    Path,
     Controller,
     Post,
     Get,
@@ -42,6 +43,20 @@ export class EventController extends Controller {
                 throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
             }
             throw new ValidateError({ general: { message: 'Unknown error while fetching events' } }, 'Bad Request');
+        }
+    }
+
+    @Get('/:id')
+    @SuccessResponse('200', 'OK')
+    @Response<ValidateError>('400', 'Bad Request')
+    public async getEventById(@Path() id: string): Promise<EventResponseDto> {
+        try {
+            return await this.eventService.getEventById(id); 
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
+            }
+            throw new ValidateError({ general: { message: 'Unknown error fetching the event' } }, 'Bad Request');
         }
     }
 
