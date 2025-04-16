@@ -1,5 +1,5 @@
 import prisma from "../prisma/client";
-import { Event, Format } from "@prisma/client";
+import { Event, Format, EventType } from "@prisma/client";
 import { CreateEventDto } from "../dtos/events/CreateEventRequestDTO";
 
 export class EventRepository {
@@ -45,7 +45,14 @@ export class EventRepository {
             },
         });
     }
-    
-    
-    
+
+    //findbyType
+    async findByType(eventType: string): Promise<Event[]> {
+        return await prisma.event.findMany({
+            where: {
+                eventType: eventType as EventType , 
+            },
+        });
+    }
+
 }

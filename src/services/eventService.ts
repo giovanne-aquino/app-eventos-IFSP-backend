@@ -37,4 +37,14 @@ export class EventService {
         return events;
     }
     
+    //getEventsByEventType
+    async getEventsByType(eventType: string): Promise<Event[]> {
+        const events = await this.eventRepository.findByType(eventType);
+        
+        if (!events || events.length === 0) {
+            throw new Error(`No events found with Event Type: ${eventType}`);
+        }
+    
+        return events;
+    }
 }

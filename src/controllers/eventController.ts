@@ -73,4 +73,19 @@ export class EventController extends Controller {
             throw new ValidateError({ general: { message: 'Unknown error fetching events by format' } }, 'Bad Request');
         }
     }
+
+    @Get('/type/:eventType')
+    @SuccessResponse('200', 'OK')
+    @Response<ValidateError>('400', 'Bad Request')
+    public async getEventsByType(@Path() eventType: string): Promise<EventResponseDto[]> {
+        try {
+            return await this.eventService.getEventsByType(eventType); 
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
+            }
+            throw new ValidateError({ general: { message: 'Unknown error fetching events by Event Type' } }, 'Bad Request');
+        }
+    }
+
 }
