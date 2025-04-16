@@ -16,8 +16,8 @@ model User {
   cnpj        String?               @unique
   crm         String?               @unique
   nationalId  String?               @unique
-  userRole   UserRole               @default(PARTICIPANT)        
-
+  userRole    UserRole              @default(PARTICIPANT)
+  refreshToken String?
 
   // Reverse relations
   eventRegistrations    EventRegistration[]
