@@ -2,13 +2,14 @@
   "name": "app-eventos-ifsp-backend",
   "version": "0.0.0",
   "private": true,
-"scripts": {
-  "tsoa": "tsoa routes && tsoa spec",
-  "tsoa:watch": "nodemon --watch src/controllers --watch src/dtos --ext ts --exec \"npm run tsoa\"",
-  "build": "npm run tsoa && tsc",
-  "start": "node dist/server.js",
-  "dev": "concurrently -k \"npm run tsoa:watch\" \"ts-node-dev --respawn --transpile-only src/server.ts\""
-},
+  "scripts": {
+    "tsoa": "tsoa routes && tsoa spec",
+    "tsoa:watch": "nodemon --watch src/controllers --watch src/dtos --ext ts --exec \"npm run tsoa\"",
+    "build": "npm run tsoa && tsc",
+    "start": "node dist/server.js",
+    "dev": "concurrently -k \"npm run tsoa:watch\" \"ts-node-dev --respawn --transpile-only src/server.ts\"",
+    "seed": "ts-node-dev src/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^6.6.0",
     "cookie-parser": "~1.4.4",
