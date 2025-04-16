@@ -24,4 +24,9 @@ export class EventRepository {
       },
     });
   }
+
+  // Buscar todos os eventos
+  async findAll(): Promise<Event[]> {
+    return await prisma.event.findMany();
+  }
 }

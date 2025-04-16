@@ -2,6 +2,7 @@ import {
     Body,
     Controller,
     Post,
+    Get,
     Route,
     Tags,
     Response,
@@ -29,4 +30,19 @@ export class EventController extends Controller {
         });
         return this.eventService.createEvent(parsed); // Usando o parsed, que agora é validado
     }
+
+    @Get('/')
+    @SuccessResponse('200', 'OK')
+    @Response<ValidateError>('400', 'Bad Request')
+    public async getAllEvents(): Promise<EventResponseDto[]> {
+        try {
+            return await this.eventService.getAllEvents();
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
+            }
+            throw new ValidateError({ general: { message: 'Unknown error while fetching events' } }, 'Bad Request');
+        }
+    }
+
 }
