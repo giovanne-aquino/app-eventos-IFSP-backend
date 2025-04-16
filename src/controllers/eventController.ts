@@ -1,11 +1,9 @@
 import {
     Body,
     Controller,
-    Get,
     Post,
     Route,
     Tags,
-    Path,
     Response,
     SuccessResponse,
 } from 'tsoa';
@@ -25,10 +23,10 @@ export class EventController extends Controller {
     @SuccessResponse('201', 'Created')
     @Response<ValidateError>('400', 'Validation failed')
     public async createEvent(@Body() body: CreateEventDto): Promise<EventResponseDto> {
-        const parsed = createEventSchema.safeParse(body);
-        if (!parsed.success) {
-            throw new ValidateError(zodToTsoaErrors(parsed.error.issues), 'Validation failed');
-        }
-        return this.eventService.createEvent(body);
+        // Usando parseAsync para validar com async refinements
+        const parsed = await createEventSchema.parseAsync(body).catch((error) => {
+            throw new ValidateError(zodToTsoaErrors(error.issues), 'Validation failed');
+        });
+        return this.eventService.createEvent(parsed); // Usando o parsed, que agora é validado
     }
 }

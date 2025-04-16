@@ -485,29 +485,6 @@
 			}
 		},
 		"/events": {
-			"get": {
-				"operationId": "GetAllEvents",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/EventResponseDto"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Events"
-				],
-				"security": [],
-				"parameters": []
-			},
 			"post": {
 				"operationId": "CreateEvent",
 				"responses": {
@@ -547,42 +524,6 @@
 						}
 					}
 				}
-			}
-		},
-		"/events/{id}": {
-			"get": {
-				"operationId": "GetEventById",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/EventResponseDto"
-										}
-									],
-									"nullable": true
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Events"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
 			}
 		}
 	},
