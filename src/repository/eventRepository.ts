@@ -1,6 +1,7 @@
 import prisma from "../prisma/client";
 import { Event, Format, EventType } from "@prisma/client";
 import { CreateEventDto } from "../dtos/events/CreateEventRequestDTO";
+import { UpdateEventDto } from "../dtos/events/UpdateEventDto";
 
 export class EventRepository {
 
@@ -52,6 +53,13 @@ export class EventRepository {
             where: {
                 eventType: eventType as EventType , 
             },
+        });
+    }
+
+    async update(id: string, data: Partial<UpdateEventDto>): Promise<Event> {
+        return await prisma.event.update({
+            where: { id: Number(id) },
+            data,
         });
     }
 

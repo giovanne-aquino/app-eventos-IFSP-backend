@@ -4,6 +4,7 @@ import {
     Controller,
     Post,
     Get,
+    Put,
     Route,
     Tags,
     Response,
@@ -12,6 +13,7 @@ import {
 import { EventService } from '../services/eventService';
 import { CreateEventDto } from "../dtos/events/CreateEventRequestDTO";
 import { EventResponseDto } from "../dtos/events/EventResponseDTO";
+import { UpdateEventDto } from "../dtos/events/UpdateEventDto";
 import { createEventSchema } from '../zod/schemas/event/eventSchema';
 import { ValidateError } from 'tsoa';
 import { zodToTsoaErrors } from '../utilis/zodToTsoaErrors';
@@ -85,6 +87,23 @@ export class EventController extends Controller {
                 throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
             }
             throw new ValidateError({ general: { message: 'Unknown error fetching events by Event Type' } }, 'Bad Request');
+        }
+    }
+
+    @Put('/:id')
+    @SuccessResponse('200', 'OK')
+    @Response<ValidateError>('400', 'Bad Request')
+    public async updateEvent(
+        @Path() id: string,
+        @Body() body: UpdateEventDto
+    ): Promise<EventResponseDto> {
+        try {
+            return await this.eventService.updateEvent(id, body);
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
+            }
+            throw new ValidateError({ general: { message: 'Unknown error updating the event' } }, 'Bad Request');
         }
     }
 

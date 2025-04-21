@@ -1,5 +1,6 @@
 import { EventRepository } from '../repository/eventRepository';
 import { CreateEventDto } from '../dtos/events/CreateEventRequestDTO';
+import { UpdateEventDto } from '../dtos/events/UpdateEventDto';
 import { Event } from '@prisma/client';
 
 export class EventService {
@@ -46,5 +47,18 @@ export class EventService {
         }
     
         return events;
+    }
+
+     // Método para atualizar um evento
+     async updateEvent(id: string, data: Partial<UpdateEventDto>): Promise<Event> {
+        // Verifica se o evento existe
+        const event = await this.eventRepository.findById(id);
+        if (!event) {
+            throw new Error('Event not found');
+        }
+
+        // Atualiza o evento no banco de dados
+        const updatedEvent = await this.eventRepository.update(id, data);
+        return updatedEvent;
     }
 }

@@ -322,6 +322,74 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"UpdateEventDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -598,6 +666,55 @@
 						}
 					}
 				]
+			},
+			"put": {
+				"operationId": "UpdateEvent",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateEventDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/events/format/{format}": {
