@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import prisma from "./../../../prisma/client"; // Aponte para onde você está inicializando o Prisma
+import prisma from "./../../../prisma/client";
 
 export const createEventSchema = z.object({
     name: z.string().min(1, "Event name is required"),
@@ -26,7 +26,7 @@ export const createEventSchema = z.object({
     }),
     organizerId: z.number().int().positive("Organizer ID must be a positive integer")
   }).superRefine(async (data, ctx) => {
-    // Verificação de que o organizerId existe no banco de dados
+
     const organizerExists = await prisma.user.findUnique({
       where: { id: data.organizerId },
     });
@@ -39,7 +39,6 @@ export const createEventSchema = z.object({
       });
     }
   
-    // Verificação para garantir que o startDate é no futuro
     if (data.startDate <= new Date()) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -48,7 +47,6 @@ export const createEventSchema = z.object({
       });
     }
   
-    // Verificação para garantir que o endDate é após o startDate
     if (data.endDate <= data.startDate) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
