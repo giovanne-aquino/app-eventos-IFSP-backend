@@ -8,7 +8,9 @@ import {
     Path,
     Put,
     Delete,
-    ValidateError
+    ValidateError,
+    Request,
+    Security
   } from 'tsoa'
   
   import { CreateUserDto } from '../dtos/users/CreateUserRequestDTO'
@@ -19,6 +21,8 @@ import {
   import { validateParams } from '../utils/validateIdParams';
   import { createUserSchema } from '../zod/schemas/user/userSchema';
 import { zodToTsoaErrors } from '../utils/zodToTsoaErrors'
+import { AuthenticatedRequest } from '../auth/middlewares/authMiddleware'
+import { UnauthorizedError } from '../utils/errors/apiErrors'
   @Route('users')
   @Tags('Users')
   export class UserController extends Controller {
@@ -48,15 +52,36 @@ import { zodToTsoaErrors } from '../utils/zodToTsoaErrors'
     }
   
     @Put('{id}')
-    public async updateUser(@Path() id: string, @Body() body: Partial<CreateUserDto>): Promise<UserResponseDto> {
+    @Security('jwt', ['ADMIN', 'PARTICIPANT', 'ORGANIZER'])
+    public async updateUser(
+      @Path() id: string, 
+      @Body() body: Partial<CreateUserDto>,
+      @Request() request: AuthenticatedRequest
+    ): Promise<UserResponseDto> {
       updateUserSchema.parse(body);
       const { id: userId } = validateParams(numericIdParamSchema, { id });
+
+      // Verifica se o usuário é admin ou dono da conta
+      if (request.user?.role !== 'ADMIN' && request.user?.id !== userId) {
+        throw new UnauthorizedError('Você só pode atualizar sua própria conta ou ser um administrador');
+      }
+
       return this.userService.updateUser(userId, body);
     }
   
     @Delete('{id}')
-    public async deleteUser(@Path() id: string): Promise<void> {
+    @Security('jwt', ['ADMIN', 'PARTICIPANT', 'ORGANIZER'])
+    public async deleteUser(
+      @Path() id: string,
+      @Request() request: AuthenticatedRequest
+    ): Promise<void> {
       const { id: userId } = validateParams(numericIdParamSchema, { id });
+      
+      // Verifica se o usuário é admin ou dono da conta
+      if (request.user?.role !== 'ADMIN' && request.user?.id !== userId) {
+        throw new UnauthorizedError('Você só pode deletar sua própria conta ou ser um administrador');
+      }
+
       await this.userService.deleteUser(userId);
     }
   }

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { AuthService } from '../services/AuthService';
 import { UnauthorizedError } from '../../utils/errors/apiErrors';
 import { UserRole } from '@prisma/client';
+import { jwtTokenSchema } from '../../zod/schemas/auth/authSchema';
 
 export interface AuthenticatedRequest extends Request {
   user?: {
@@ -24,13 +25,13 @@ export const authenticate = async (
     }
 
     const [, token] = authHeader.split(' ');
-
-    if (!token) {
-      throw new UnauthorizedError('Token não fornecido');
+    const parsedToken = jwtTokenSchema.safeParse(token);
+    if (!parsedToken.success) {
+      throw new UnauthorizedError('Token inválido');
     }
 
     const authService = new AuthService();
-    const user = await authService.validateToken(token);
+    const user = await authService.validateToken(parsedToken.data);
 
     req.user = {
       id: user.id,
@@ -66,12 +67,13 @@ export function expressAuthentication(
   if (securityName === 'jwt') {
     const token = request.headers.authorization?.split(' ')[1];
     
-    if (!token) {
-      return Promise.reject(new UnauthorizedError('Token não fornecido'));
+    const parsedToken = jwtTokenSchema.safeParse(token);
+    if (!parsedToken.success) {
+      return Promise.reject(new UnauthorizedError('Token inválido'));
     }
 
     const authService = new AuthService();
-    return authService.validateToken(token)
+    return authService.validateToken(parsedToken.data)
       .then(user => {
         if (scopes && !scopes.includes(user.userRole)) {
           return Promise.reject(new UnauthorizedError('Acesso não autorizado'));

@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Path, Post, Route, Security, Request } from 'tsoa';
+import { Body, Controller, Get, Post, Route, Security, Request, ValidateError } from 'tsoa';
 import { AuthService } from '../services/AuthService';
 import { LoginDto, AuthResponseDto } from '../interfaces/IAuthService';
 import { CreateUserDto } from '../../dtos/users/CreateUserRequestDTO';
 import { AuthenticatedRequest } from '../middlewares/authMiddleware';
 import { User } from '@prisma/client';
+import { loginSchema, refreshTokenSchema } from '../../zod/schemas/auth/authSchema';
+import { zodToTsoaErrors } from '../../utils/zodToTsoaErrors';
 
 @Route('auth')
 export class AuthController extends Controller {
@@ -19,7 +21,11 @@ export class AuthController extends Controller {
    */
   @Post('/login')
   public async login(@Body() loginDto: LoginDto): Promise<AuthResponseDto> {
-    return this.authService.login(loginDto);
+    const parsed = loginSchema.safeParse(loginDto);
+    if (!parsed.success) {
+      throw new ValidateError(zodToTsoaErrors(parsed.error.issues), "Validation failed");
+    }
+    return this.authService.login(parsed.data);
   }
 
   /**
@@ -37,7 +43,11 @@ export class AuthController extends Controller {
   public async refreshToken(
     @Body() body: { refreshToken: string }
   ): Promise<AuthResponseDto> {
-    return this.authService.refreshToken(body.refreshToken);
+    const parsed = refreshTokenSchema.safeParse(body);
+    if (!parsed.success) {
+      throw new ValidateError(zodToTsoaErrors(parsed.error.issues), "Validation failed");
+    }
+    return this.authService.refreshToken(parsed.data.token);
   }
 
   /**
@@ -63,6 +73,8 @@ export class AuthController extends Controller {
       this.setStatus(401);
       return {} as Omit<User, 'password' | 'refreshToken'>;
     }
+
+    // O token já foi validado pelo middleware
     const user = await this.authService.validateToken(req.headers.authorization?.split(' ')[1] || '');
     const { password, refreshToken, ...userWithoutSensitiveData } = user;
     return userWithoutSensitiveData;

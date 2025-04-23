@@ -376,7 +376,15 @@
 				"tags": [
 					"Users"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"ADMIN",
+							"PARTICIPANT",
+							"ORGANIZER"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -408,7 +416,15 @@
 				"tags": [
 					"Users"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"ADMIN",
+							"PARTICIPANT",
+							"ORGANIZER"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
