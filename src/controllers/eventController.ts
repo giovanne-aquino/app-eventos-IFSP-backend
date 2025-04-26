@@ -32,7 +32,7 @@ export class EventController extends Controller {
         const parsed = await createEventSchema.parseAsync(body).catch((error) => {
             throw new ValidateError(zodToTsoaErrors(error.issues), 'Validation failed');
         });
-        return this.eventService.createEvent(parsed); // Usando o parsed, que agora é validado
+        return this.eventService.createEvent(parsed);
     }
 
     @Get('/')
@@ -122,6 +122,4 @@ export class EventController extends Controller {
             throw new ValidateError({ general: { message: 'Unknown error deleting the event' } }, 'Bad Request');
         }
     }
-
-
 }

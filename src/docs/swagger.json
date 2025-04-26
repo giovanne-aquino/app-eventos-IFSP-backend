@@ -116,6 +116,102 @@
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
+			"DefaultSelection_Prisma._36_EventFieldResponsePayload_": {
+				"properties": {
+					"value": {
+						"type": "string"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"value",
+					"eventFieldId",
+					"eventRegistrationId",
+					"id"
+				],
+				"type": "object"
+			},
+			"EventFieldResponse": {
+				"$ref": "#/components/schemas/DefaultSelection_Prisma._36_EventFieldResponsePayload_",
+				"description": "Model EventFieldResponse"
+			},
+			"FieldErrors": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": {
+					"properties": {
+						"value": {},
+						"message": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"message"
+					],
+					"type": "object"
+				}
+			},
+			"ValidateError": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"stack": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"fields": {
+						"$ref": "#/components/schemas/FieldErrors"
+					}
+				},
+				"required": [
+					"name",
+					"message",
+					"status",
+					"fields"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateEventFieldResponseDto": {
+				"properties": {
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"eventRegistrationId",
+					"eventFieldId",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"EventResponseDto": {
 				"properties": {
 					"id": {
@@ -196,50 +292,6 @@
 					"startDate",
 					"endDate",
 					"status"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"FieldErrors": {
-				"properties": {},
-				"type": "object",
-				"additionalProperties": {
-					"properties": {
-						"value": {},
-						"message": {
-							"type": "string"
-						}
-					},
-					"required": [
-						"message"
-					],
-					"type": "object"
-				}
-			},
-			"ValidateError": {
-				"properties": {
-					"name": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"stack": {
-						"type": "string"
-					},
-					"status": {
-						"type": "number",
-						"format": "double"
-					},
-					"fields": {
-						"$ref": "#/components/schemas/FieldErrors"
-					}
-				},
-				"required": [
-					"name",
-					"message",
-					"status",
-					"fields"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -550,6 +602,48 @@
 						}
 					}
 				]
+			}
+		},
+		"/event-field-responses": {
+			"post": {
+				"operationId": "CreateEventFieldResponse",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventFieldResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"EventFieldResponse"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateEventFieldResponseDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/events": {
