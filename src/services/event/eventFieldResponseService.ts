@@ -17,4 +17,8 @@ export class EventFieldResponseService {
     return await this.repository.findAll();
   }
 
+  async update(id: string, data: Partial<CreateEventFieldResponseDto>): Promise<EventFieldResponse> {
+    return await this.repository.update(id, data);
+  }
+
 }

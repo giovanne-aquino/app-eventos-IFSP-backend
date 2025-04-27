@@ -239,6 +239,23 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"Partial_CreateEventFieldResponseDto_": {
+				"properties": {
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
 			"EventResponseDto": {
 				"properties": {
 					"id": {
@@ -704,6 +721,57 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/eventFieldResponses/{id}": {
+			"put": {
+				"operationId": "UpdateEventFieldResponse",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventFieldResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_CreateEventFieldResponseDto_"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/events": {

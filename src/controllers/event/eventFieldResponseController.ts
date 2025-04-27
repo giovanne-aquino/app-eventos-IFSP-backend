@@ -2,6 +2,8 @@ import {
     Body,
     Controller,
     Get,
+    Path,
+    Put,
     Post,
     Route,
     Tags,
@@ -45,6 +47,23 @@ import {
           throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
         }
         throw new ValidateError({ general: { message: 'Unknown error while fetching event field responses' } }, 'Bad Request');
+      }
+    }
+
+    @Put('/:id')
+    @SuccessResponse('200', 'OK')
+    @Response<ValidateError>('400', 'Bad Request')
+    public async updateEventFieldResponse(
+      @Path() id: string,
+      @Body() body: Partial<CreateEventFieldResponseDto>
+    ): Promise<EventFieldResponse> {
+      try {
+        return await this.service.update(id, body);
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
+        }
+        throw new ValidateError({ general: { message: 'Unknown error updating the event field response' } }, 'Bad Request');
       }
     }
   }
