@@ -422,6 +422,36 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsEventFieldResponseController_deleteEventFieldResponse: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+        };
+        app.delete('/eventFieldResponses/:id',
+            ...(fetchMiddlewares<RequestHandler>(EventFieldResponseController)),
+            ...(fetchMiddlewares<RequestHandler>(EventFieldResponseController.prototype.deleteEventFieldResponse)),
+
+            async function EventFieldResponseController_deleteEventFieldResponse(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldResponseController_deleteEventFieldResponse, request, response });
+
+                const controller = new EventFieldResponseController();
+
+              await templateService.apiHandler({
+                methodName: 'deleteEventFieldResponse',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 204,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsEventController_createEvent: Record<string, TsoaRoute.ParameterSchema> = {
                 body: {"in":"body","name":"body","required":true,"ref":"CreateEventDto"},
         };

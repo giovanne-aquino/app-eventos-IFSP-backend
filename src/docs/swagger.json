@@ -772,6 +772,38 @@
 						}
 					}
 				}
+			},
+			"delete": {
+				"operationId": "DeleteEventFieldResponse",
+				"responses": {
+					"204": {
+						"description": "deleted successfully"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/events": {

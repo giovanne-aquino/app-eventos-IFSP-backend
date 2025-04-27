@@ -21,4 +21,7 @@ export class EventFieldResponseService {
     return await this.repository.update(id, data);
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
 }

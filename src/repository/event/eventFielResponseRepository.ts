@@ -25,10 +25,10 @@ export class EventFieldResponseRepository {
             data,
         });
     }
-//
-//    async delete(id: string): Promise<void> {
-//        await prisma.eventFieldResponse.delete({
-//            where: { id: Number(id) },
-//        });
-//    }
+
+    async delete(id: string): Promise<void> {
+        await prisma.eventFieldResponse.delete({
+            where: { id: Number(id) },
+        });
+    }
 }
