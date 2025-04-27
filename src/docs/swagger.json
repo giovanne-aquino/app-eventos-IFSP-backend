@@ -323,6 +323,19 @@
 							"CONFIRMED",
 							"CANCELED"
 						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER",
+							null
+						],
+						"nullable": true
 					}
 				},
 				"required": [
@@ -403,6 +416,19 @@
 							"CONFIRMED",
 							"CANCELED"
 						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER",
+							null
+						],
+						"nullable": true
 					}
 				},
 				"required": [
@@ -482,6 +508,19 @@
 							"CONFIRMED",
 							"CANCELED"
 						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER",
+							null
+						],
+						"nullable": true
 					}
 				},
 				"type": "object",

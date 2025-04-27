@@ -13,4 +13,5 @@ export class EventResponseDto {
     maxCapacity?: number | null;
     complementaryHours?: number | null;
     status!: 'PENDING' | 'CONFIRMED' | 'CANCELED';
+    category?: 'TALK' | 'LECTURE' | 'WORKSHOP' | 'SEMINAR' | 'SHORT_COURSE' | 'OTHER' | null; 
 }

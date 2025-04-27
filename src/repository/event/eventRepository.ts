@@ -21,6 +21,7 @@ export class EventRepository {
                 maxCapacity: data.maxCapacity ?? null,
                 complementaryHours: data.complementaryHours ?? null,
                 status: data.status,
+                category: data.category ?? null,
             },
         });
     }
@@ -38,7 +39,7 @@ export class EventRepository {
     async findByFormat(format: string): Promise<Event[]> {
         return await prisma.event.findMany({
             where: {
-                format: format as Format, // Faz o cast de string para enum Format
+                format: format as Format, 
             },
         });
     }
