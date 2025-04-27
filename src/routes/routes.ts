@@ -6,9 +6,9 @@ import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../controllers/userController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { EventFieldResponseController } from './../controllers/eventFieldResponseController';
+import { EventFieldResponseController } from './../controllers/event/eventFieldResponseController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { EventController } from './../controllers/eventController';
+import { EventController } from './../controllers/event/eventController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -81,6 +81,17 @@ const models: TsoaRoute.Models = {
     "CreateEventFieldResponseDto": {
         "dataType": "refObject",
         "properties": {
+            "eventRegistrationId": {"dataType":"double","required":true},
+            "eventFieldId": {"dataType":"double","required":true},
+            "value": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "EventFieldResponse2Dto": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
             "eventRegistrationId": {"dataType":"double","required":true},
             "eventFieldId": {"dataType":"double","required":true},
             "value": {"dataType":"string","required":true},
@@ -319,7 +330,7 @@ export function RegisterRoutes(app: Router) {
         const argsEventFieldResponseController_createEventFieldResponse: Record<string, TsoaRoute.ParameterSchema> = {
                 body: {"in":"body","name":"body","required":true,"ref":"CreateEventFieldResponseDto"},
         };
-        app.post('/event-field-responses',
+        app.post('/eventFieldResponses',
             ...(fetchMiddlewares<RequestHandler>(EventFieldResponseController)),
             ...(fetchMiddlewares<RequestHandler>(EventFieldResponseController.prototype.createEventFieldResponse)),
 
@@ -340,6 +351,35 @@ export function RegisterRoutes(app: Router) {
                 next,
                 validatedArgs,
                 successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsEventFieldResponseController_getAllEventFieldResponses: Record<string, TsoaRoute.ParameterSchema> = {
+        };
+        app.get('/eventFieldResponses',
+            ...(fetchMiddlewares<RequestHandler>(EventFieldResponseController)),
+            ...(fetchMiddlewares<RequestHandler>(EventFieldResponseController.prototype.getAllEventFieldResponses)),
+
+            async function EventFieldResponseController_getAllEventFieldResponses(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldResponseController_getAllEventFieldResponses, request, response });
+
+                const controller = new EventFieldResponseController();
+
+              await templateService.apiHandler({
+                methodName: 'getAllEventFieldResponses',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
               });
             } catch (err) {
                 return next(err);

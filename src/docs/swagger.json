@@ -212,6 +212,33 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"EventFieldResponse2Dto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"eventRegistrationId",
+					"eventFieldId",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"EventResponseDto": {
 				"properties": {
 					"id": {
@@ -604,7 +631,7 @@
 				]
 			}
 		},
-		"/event-field-responses": {
+		"/eventFieldResponses": {
 			"post": {
 				"operationId": "CreateEventFieldResponse",
 				"responses": {
@@ -630,7 +657,7 @@
 					}
 				},
 				"tags": [
-					"EventFieldResponse"
+					"Event Field Response"
 				],
 				"security": [],
 				"parameters": [],
@@ -644,6 +671,39 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetAllEventFieldResponses",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventFieldResponse2Dto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/events": {

@@ -1,6 +1,6 @@
 import { EventFieldResponse } from "@prisma/client";
-import { CreateEventFieldResponseDto } from "../dtos/events/CreateEventFieldResponseResquestDTO";
-import { EventFieldResponseRepository } from "../repository/eventFielResponseRepository";
+import { CreateEventFieldResponseDto } from "../../dtos/events/CreateEventFieldResponseResquestDTO";
+import { EventFieldResponseRepository } from "../../repository/event/eventFielResponseRepository";
 
 export class EventFieldResponseService {
   private repository: EventFieldResponseRepository;
@@ -11,6 +11,10 @@ export class EventFieldResponseService {
 
   async create(data: CreateEventFieldResponseDto): Promise<EventFieldResponse> {
     return await this.repository.create(data);
+  }
+
+  async findAll(): Promise<EventFieldResponse[]> {
+    return await this.repository.findAll();
   }
 
 }

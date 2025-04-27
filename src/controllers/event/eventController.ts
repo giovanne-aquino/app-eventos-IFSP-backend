@@ -11,13 +11,13 @@ import {
     Response,
     SuccessResponse,
 } from 'tsoa';
-import { EventService } from '../services/eventService';
-import { CreateEventDto } from "../dtos/events/CreateEventRequestDTO";
-import { EventResponseDto } from "../dtos/events/EventResponseDTO";
-import { UpdateEventDto } from "../dtos/events/UpdateEventDto";
-import { createEventSchema } from '../zod/schemas/event/eventSchema';
+import { EventService } from '../../services/event/eventService';
+import { CreateEventDto } from "../../dtos/events/CreateEventRequestDTO";
+import { EventResponseDto } from "../../dtos/events/EventResponseDTO";
+import { UpdateEventDto } from "../../dtos/events/UpdateEventDto";
+import { createEventSchema } from '../../zod/schemas/event/eventSchema';
 import { ValidateError } from 'tsoa';
-import { zodToTsoaErrors } from '../utilis/zodToTsoaErrors';
+import { zodToTsoaErrors } from '../../utilis/zodToTsoaErrors';
 
 @Route('events')
 @Tags('Events')

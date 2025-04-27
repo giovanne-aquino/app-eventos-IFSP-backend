@@ -1,7 +1,7 @@
-import prisma from "../prisma/client";
+import prisma from "../../prisma/client";
 import { Event, Format, EventType } from "@prisma/client";
-import { CreateEventDto } from "../dtos/events/CreateEventRequestDTO";
-import { UpdateEventDto } from "../dtos/events/UpdateEventDto";
+import { CreateEventDto } from "../../dtos/events/CreateEventRequestDTO";
+import { UpdateEventDto } from "../../dtos/events/UpdateEventDto";
 
 export class EventRepository {
 
