@@ -32,6 +32,7 @@ Table Event {
   maxCapacity Int
   complementaryHours Int
   status RegistrationStatus [not null]
+  category Category
   activities Activity [not null]
   eventRegistrations EventRegistration [not null]
   fields EventField [not null]
@@ -177,6 +178,15 @@ Enum UserRole {
   ADMIN
   ORGANIZER
   PARTICIPANT
+}
+
+Enum Category {
+  TALK
+  LECTURE
+  WORKSHOP
+  SEMINAR
+  SHORT_COURSE
+  OTHER
 }
 
 Ref: Event.organizerId > User.id
