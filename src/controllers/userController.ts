@@ -23,6 +23,8 @@ import {
 import { zodToTsoaErrors } from '../utils/zodToTsoaErrors'
 import { AuthenticatedRequest } from '../auth/middlewares/authMiddleware'
 import { UnauthorizedError } from '../utils/errors/apiErrors'
+
+
   @Route('users')
   @Tags('Users')
   export class UserController extends Controller {
@@ -46,7 +48,6 @@ import { UnauthorizedError } from '../utils/errors/apiErrors'
   
     @Get('{id}')
     public async getUser(@Path() id: string): Promise<UserResponseDto | null> {
-        console.log("chegou aqui");
         const { id: userId } = validateParams(numericIdParamSchema, { id });
         return this.userService.getUser(userId);
     }
@@ -63,7 +64,7 @@ import { UnauthorizedError } from '../utils/errors/apiErrors'
 
       // Verifica se o usuário é admin ou dono da conta
       if (request.user?.role !== 'ADMIN' && request.user?.id !== userId) {
-        throw new UnauthorizedError('Você só pode atualizar sua própria conta ou ser um administrador');
+        throw new UnauthorizedError('Access forbidden');
       }
 
       return this.userService.updateUser(userId, body);
@@ -79,7 +80,7 @@ import { UnauthorizedError } from '../utils/errors/apiErrors'
       
       // Verifica se o usuário é admin ou dono da conta
       if (request.user?.role !== 'ADMIN' && request.user?.id !== userId) {
-        throw new UnauthorizedError('Você só pode deletar sua própria conta ou ser um administrador');
+        throw new UnauthorizedError('Access forbidden');
       }
 
       await this.userService.deleteUser(userId);

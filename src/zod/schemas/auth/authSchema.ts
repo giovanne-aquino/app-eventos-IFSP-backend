@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import {createUserSchema} from "../user/userSchema";
 
 // Schema para login
 export const loginSchema = z.object({
@@ -15,17 +16,9 @@ export const refreshTokenSchema = z.object({
 export const authResponseSchema = z.object({
   token: z.string(),
   refreshToken: z.string(),
-  user: z.object({
-    id: z.number(),
-    name: z.string(),
-    email: z.string(),
-    cpf: z.string().nullable(),
-    cnpj: z.string().nullable(),
-    crm: z.string().nullable(),
-    nationalId: z.string().nullable(),
-    userRole: z.enum(['ADMIN', 'ORGANIZER', 'PARTICIPANT']),
-    refreshToken: z.string().nullable()
-  }).omit({ password: true })
+  user: createUserSchema.omit({
+    password: true,
+  })
 }).strict();
 
 // Schema para validação de token JWT

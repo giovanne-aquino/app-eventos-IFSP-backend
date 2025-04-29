@@ -2,11 +2,12 @@
   "name": "app-eventos-ifsp-backend",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "build": "tsoa routes && tsoa spec && tsc",
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
-  },
+ "scripts": {
+  "tsoa": "tsoa routes && tsoa spec",
+  "build": "npm run tsoa && tsc",
+  "start": "node dist/server.js",
+  "dev": "npm run tsoa && ts-node-dev --respawn --transpile-only src/server.ts"
+},
   "dependencies": {
     "@prisma/client": "^6.6.0",
     "@types/express-rate-limit": "^6.0.2",

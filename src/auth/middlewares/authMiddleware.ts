@@ -21,13 +21,13 @@ export const authenticate = async (
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
-      throw new UnauthorizedError('Token não fornecido');
+      throw new UnauthorizedError('Authentication failed: Authorization header missing.');
     }
 
     const [, token] = authHeader.split(' ');
     const parsedToken = jwtTokenSchema.safeParse(token);
     if (!parsedToken.success) {
-      throw new UnauthorizedError('Token inválido');
+      throw new UnauthorizedError('Authentication failed: Invalid token format.');
     }
 
     const authService = new AuthService();
@@ -48,11 +48,12 @@ export const authenticate = async (
 export const authorize = (...roles: UserRole[]) => {
   return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     if (!req.user) {
-      throw new UnauthorizedError('Usuário não autenticado');
+      throw new UnauthorizedError('Authorization failed: User not authenticated.');
     }
 
     if (!roles.includes(req.user.role)) {
-      throw new UnauthorizedError('Acesso não autorizado');
+      throw new UnauthorizedError(`Authorization failed: Access forbidden for role ${req.user.role}. Required role(s): ${roles.join(', ')}`);
+      
     }
 
     next();
@@ -64,23 +65,29 @@ export function expressAuthentication(
   securityName: string,
   scopes?: string[]
 ): Promise<any> {
+  console.log('Authorization Header:', request.headers.authorization);
   if (securityName === 'jwt') {
     const token = request.headers.authorization?.split(' ')[1];
     
     const parsedToken = jwtTokenSchema.safeParse(token);
     if (!parsedToken.success) {
-      return Promise.reject(new UnauthorizedError('Token inválido'));
+      return Promise.reject(new UnauthorizedError('Authentication failed: Token is missing or improperly formatted.'));
     }
 
     const authService = new AuthService();
+
     return authService.validateToken(parsedToken.data)
       .then(user => {
-        if (scopes && !scopes.includes(user.userRole)) {
-          return Promise.reject(new UnauthorizedError('Acesso não autorizado'));
+        //Corrigido erro de scopes aqui
+        if (scopes && scopes.length > 0 && !scopes.includes(user.userRole)) {
+          return Promise.reject(new UnauthorizedError('Authentication failed: Invalid token format.'));
         }
         return user;
       });
+
+     
+
   }
   
-  return Promise.reject(new UnauthorizedError('Método de autenticação não suportado'));
+  return Promise.reject(new UnauthorizedError('Authorization failed: Invalid security scheme or missing token.'));
 } 

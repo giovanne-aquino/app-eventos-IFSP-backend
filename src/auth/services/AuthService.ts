@@ -1,10 +1,20 @@
 import { PrismaClient, User } from '@prisma/client';
-import { IAuthService, LoginDto, AuthResponseDto } from '../interfaces/IAuthService';
+import { IAuthService} from '../interfaces/IAuthService';
+import {AuthResponseDto} from "../dtos/AuthResponseDto"
+import { LoginDto } from "../dtos/LoginDto";
 import { CreateUserDto } from '../../dtos/users/CreateUserRequestDTO';
 import bcrypt from 'bcryptjs';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { createUserSchema } from '../../zod/schemas/user/userSchema';
 import { UnauthorizedError } from '../../utils/errors/apiErrors';
+import { UserResponseDto } from '../../dtos/users/UserResponseDTO';
+
+/*
+  Seria bom refatorar esse service...talvez jogar um pouco pro Repository para encapsular a 
+  lógica de dados somente lá e regra de negócio aqui. Instânciar o Prisma diretamente e poder
+  manipular todas as db pode ser bem entendível, mas viola o SOLID.
+
+*/
 
 export class AuthService implements IAuthService {
   private prisma: PrismaClient;
@@ -21,6 +31,7 @@ export class AuthService implements IAuthService {
     this.REFRESH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60; // 7 dias em segundos
   }
 
+// #region: GenerateTokens
   private generateTokens(user: User): { token: string; refreshToken: string } {
     const payload = {
       id: user.id,
@@ -33,19 +44,22 @@ export class AuthService implements IAuthService {
 
     return { token, refreshToken };
   }
+// #endregion
 
+
+// #region: Login
   async login(loginDto: LoginDto): Promise<AuthResponseDto> {
     const user = await this.prisma.user.findUnique({
       where: { email: loginDto.email }
     });
 
     if (!user) {
-      throw new UnauthorizedError('Credenciais inválidas');
+      throw new UnauthorizedError('Bad credentials.');
     }
 
     const isPasswordValid = await bcrypt.compare(loginDto.password, user.password);
     if (!isPasswordValid) {
-      throw new UnauthorizedError('Credenciais inválidas');
+      throw new UnauthorizedError('Bad credentials.');
     }
 
     const { token, refreshToken } = this.generateTokens(user);
@@ -56,10 +70,20 @@ export class AuthService implements IAuthService {
       data: { refreshToken }
     });
 
-    const { password, ...userWithoutPassword } = user;
-    return { token, refreshToken, user: userWithoutPassword };
+     /*
+      Alteranativa ao pick, achei mais intuitivo e menos estranho apenas fazer um método estático.
+      Antes estava retornando dois refresh tokens diferentes, e agora não é necessário fazer a desturutração 
+      já que o tipo é UserResponseDTO. Melhora a legibilidade do código, a semântica e reuzabilidade.
+   */
+   const userResponseDTO = UserResponseDto.fromEntity(user);
+  
+    return { token, refreshToken, user:userResponseDTO  };
   }
 
+// #endregion
+
+
+// #region: Register
   async register(userData: CreateUserDto): Promise<AuthResponseDto> {
     // Valida os dados do usuário
     const validatedData = createUserSchema.parse(userData);
@@ -67,10 +91,21 @@ export class AuthService implements IAuthService {
     // Hash da senha
     const hashedPassword = await bcrypt.hash(validatedData.password, 10);
 
+
+    /*
+      Se um usuário se registar, ele automaticamente será participant.
+      A escolha da role deve ser feita apenas pelo ADMIN(rota users pura, será reformulada)
+      No caso, no front nem vai ter a opção de setar role, mas, se vier, será sobrescrita.
+      O próprio prisma já seta PARTICIPANT como default, mas é bom ter certeza em uma possível 
+      tentativa de injection.
+    */
+
+    //Adicionando a senha criptografada ao banco e a role default.
     const user = await this.prisma.user.create({
       data: {
         ...validatedData,
-        password: hashedPassword
+        password: hashedPassword,
+        userRole: 'PARTICIPANT',
       }
     });
 
@@ -82,10 +117,14 @@ export class AuthService implements IAuthService {
       data: { refreshToken }
     });
 
-    const { password, ...userWithoutPassword } = user;
-    return { token, refreshToken, user: userWithoutPassword };
+    const userResponse = UserResponseDto.fromEntity(user);
+    return { token, refreshToken, user: userResponse };
   }
 
+// #endregion
+
+
+// #region: RefreshToken
   async refreshToken(token: string): Promise<AuthResponseDto> {
     try {
       const user = await this.prisma.user.findFirst({
@@ -93,7 +132,7 @@ export class AuthService implements IAuthService {
       });
 
       if (!user) {
-        throw new UnauthorizedError('Refresh token inválido');
+        throw new UnauthorizedError('Refresh token invalid.');
       }
 
       const { token: newToken, refreshToken: newRefreshToken } = this.generateTokens(user);
@@ -107,31 +146,38 @@ export class AuthService implements IAuthService {
       const { password, ...userWithoutPassword } = user;
       return { token: newToken, refreshToken: newRefreshToken, user: userWithoutPassword };
     } catch (error) {
-      throw new UnauthorizedError('Refresh token inválido');
+      throw new UnauthorizedError('Refresh token invalid.');
     }
   }
+// #endregion
 
-  async logout(userId: number): Promise<void> {
-    await this.prisma.user.update({
-      where: { id: userId },
-      data: { refreshToken: null }
-    });
-  }
 
-  async validateToken(token: string): Promise<User> {
-    try {
-      const decoded = jwt.verify(token, this.JWT_SECRET) as { id: number };
-      const user = await this.prisma.user.findUnique({
-        where: { id: decoded.id }
+  // #region: Logout
+    async logout(userId: number): Promise<void> {
+      await this.prisma.user.update({
+        where: { id: userId },
+        data: { refreshToken: null }
       });
-
-      if (!user) {
-        throw new UnauthorizedError('Usuário não encontrado');
-      }
-
-      return user;
-    } catch (error) {
-      throw new UnauthorizedError('Token inválido');
     }
-  }
+  // #endregion
+
+
+  // #region: ValidateToken
+    async validateToken(token: string): Promise<User> {
+      try {
+        const decoded = jwt.verify(token, this.JWT_SECRET) as { id: number };
+        const user = await this.prisma.user.findUnique({
+          where: { id: decoded.id }
+        });
+
+        if (!user) {
+          throw new UnauthorizedError('User not found.');
+        }
+
+        return user;
+      } catch (error) {
+        throw new UnauthorizedError('Invalid Token.');
+      }
+    }
+  // #endregion
 } 

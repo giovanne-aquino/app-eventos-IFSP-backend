@@ -1,13 +1,16 @@
-import { Body, Controller, Get, Post, Route, Security, Request, ValidateError } from 'tsoa';
+import { Body, Controller, Get, Post, Route, Security, Request, ValidateError, Tags } from 'tsoa';
 import { AuthService } from '../services/AuthService';
-import { LoginDto, AuthResponseDto } from '../interfaces/IAuthService';
+import { LoginDto } from "../dtos/LoginDto";
+import {AuthResponseDto} from "../dtos/AuthResponseDto"
 import { CreateUserDto } from '../../dtos/users/CreateUserRequestDTO';
 import { AuthenticatedRequest } from '../middlewares/authMiddleware';
 import { User } from '@prisma/client';
 import { loginSchema, refreshTokenSchema } from '../../zod/schemas/auth/authSchema';
 import { zodToTsoaErrors } from '../../utils/zodToTsoaErrors';
+import { UserResponseDto } from '../../dtos/users/UserResponseDTO';
 
 @Route('auth')
+@Tags('Auth') 
 export class AuthController extends Controller {
   private authService: AuthService;
 
@@ -19,6 +22,13 @@ export class AuthController extends Controller {
   /**
    * Login de usuário
    */
+
+  /**
+    Podemos usar essa abordagem de não usar scopes aqui porque o login, register e logout
+    vão ser comuns a todas as entidades. Aí, só é necessário proteger o dashboard de cada um.
+
+  */
+
   @Post('/login')
   public async login(@Body() loginDto: LoginDto): Promise<AuthResponseDto> {
     const parsed = loginSchema.safeParse(loginDto);
@@ -33,6 +43,8 @@ export class AuthController extends Controller {
    */
   @Post('/register')
   public async register(@Body() userData: CreateUserDto): Promise<AuthResponseDto> {
+    
+  
     return this.authService.register(userData);
   }
 
@@ -68,7 +80,7 @@ export class AuthController extends Controller {
    */
   @Get('/me')
   @Security('jwt')
-  public async getCurrentUser(@Request() req: AuthenticatedRequest): Promise<Omit<User, 'password' | 'refreshToken'>> {
+  public async getCurrentUser(@Request() req: AuthenticatedRequest): Promise<UserResponseDto> {
     if (!req.user?.id) {
       this.setStatus(401);
       return {} as Omit<User, 'password' | 'refreshToken'>;
@@ -76,7 +88,7 @@ export class AuthController extends Controller {
 
     // O token já foi validado pelo middleware
     const user = await this.authService.validateToken(req.headers.authorization?.split(' ')[1] || '');
-    const { password, refreshToken, ...userWithoutSensitiveData } = user;
-    return userWithoutSensitiveData;
+    const userResponse = UserResponseDto.fromEntity(user);
+    return userResponse;
   }
 } 
