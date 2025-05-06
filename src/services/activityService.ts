@@ -6,7 +6,7 @@ export class ActivityService {
     return activityRepository.create(data);
   }
 
-  async getActivity() {
+  async getAllActivities() {
     return activityRepository.findAll();
   }
 

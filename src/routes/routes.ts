@@ -303,6 +303,65 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsActivityController_getActivitiesByEventId: Record<string, TsoaRoute.ParameterSchema> = {
+                eventId: {"in":"path","name":"eventId","required":true,"dataType":"double"},
+        };
+        app.get('/activities/event/:eventId',
+            ...(fetchMiddlewares<RequestHandler>(ActivityController)),
+            ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.getActivitiesByEventId)),
+
+            async function ActivityController_getActivitiesByEventId(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_getActivitiesByEventId, request, response });
+
+                const controller = new ActivityController();
+
+              await templateService.apiHandler({
+                methodName: 'getActivitiesByEventId',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsActivityController_getAllActivities: Record<string, TsoaRoute.ParameterSchema> = {
+        };
+        app.get('/activities',
+            ...(fetchMiddlewares<RequestHandler>(ActivityController)),
+            ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.getAllActivities)),
+
+            async function ActivityController_getAllActivities(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_getAllActivities, request, response });
+
+                const controller = new ActivityController();
+
+              await templateService.apiHandler({
+                methodName: 'getAllActivities',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsActivityController_updateActivity: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
                 body: {"in":"body","name":"body","required":true,"ref":"CreateActivityDto"},

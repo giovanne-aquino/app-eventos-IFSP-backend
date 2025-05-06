@@ -7,8 +7,8 @@ export const createActivitySchema = z.object({
   location: z.string().optional(),
   userDocument: z.boolean(),
   banner: z.string().optional(),
-  startDate: z.date(), // Valida como uma instância de Date
-  startTime: z.string(), // 'HH:mm:ss', você pode adicionar uma regex aqui se quiser validar o formato
+  startDate: z.date(), 
+  startTime: z.string(),
   activityType: z.enum(['LECTURE', 'SHORT_COURSE', 'WORKSHOP', 'SEMINAR']),
   maxCapacity: z.number(),
   complementaryHours: z.number(),

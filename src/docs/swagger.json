@@ -454,6 +454,90 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetAllActivities",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"properties": {
+											"eventId": {
+												"type": "number",
+												"format": "double"
+											},
+											"complementaryHours": {
+												"type": "number",
+												"format": "double"
+											},
+											"maxCapacity": {
+												"type": "number",
+												"format": "double"
+											},
+											"activityType": {
+												"$ref": "#/components/schemas/_36_Enums.ActivityType"
+											},
+											"startTime": {
+												"type": "string"
+											},
+											"startDate": {
+												"type": "string",
+												"format": "date-time"
+											},
+											"banner": {
+												"type": "string"
+											},
+											"userDocument": {
+												"type": "boolean"
+											},
+											"location": {
+												"type": "string"
+											},
+											"format": {
+												"$ref": "#/components/schemas/_36_Enums.Format"
+											},
+											"description": {
+												"type": "string"
+											},
+											"id": {
+												"type": "number",
+												"format": "double"
+											},
+											"name": {
+												"type": "string"
+											}
+										},
+										"required": [
+											"eventId",
+											"complementaryHours",
+											"maxCapacity",
+											"activityType",
+											"startTime",
+											"startDate",
+											"banner",
+											"userDocument",
+											"location",
+											"format",
+											"description",
+											"id",
+											"name"
+										],
+										"type": "object"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/activities/{id}": {
@@ -732,6 +816,102 @@
 					{
 						"in": "path",
 						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/activities/event/{eventId}": {
+			"get": {
+				"operationId": "GetActivitiesByEventId",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"properties": {
+											"eventId": {
+												"type": "number",
+												"format": "double"
+											},
+											"complementaryHours": {
+												"type": "number",
+												"format": "double"
+											},
+											"maxCapacity": {
+												"type": "number",
+												"format": "double"
+											},
+											"activityType": {
+												"$ref": "#/components/schemas/_36_Enums.ActivityType"
+											},
+											"startTime": {
+												"type": "string"
+											},
+											"startDate": {
+												"type": "string",
+												"format": "date-time"
+											},
+											"banner": {
+												"type": "string"
+											},
+											"userDocument": {
+												"type": "boolean"
+											},
+											"location": {
+												"type": "string"
+											},
+											"format": {
+												"$ref": "#/components/schemas/_36_Enums.Format"
+											},
+											"description": {
+												"type": "string"
+											},
+											"id": {
+												"type": "number",
+												"format": "double"
+											},
+											"name": {
+												"type": "string"
+											}
+										},
+										"required": [
+											"eventId",
+											"complementaryHours",
+											"maxCapacity",
+											"activityType",
+											"startTime",
+											"startDate",
+											"banner",
+											"userDocument",
+											"location",
+											"format",
+											"description",
+											"id",
+											"name"
+										],
+										"type": "object"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
 						"required": true,
 						"schema": {
 							"format": "double",
