@@ -12,7 +12,9 @@ import {
 } from 'tsoa';
   
 import { CreateActivityDto } from '../dtos/activities/CreateActivityRequestDTO';
+import { UpdateActivityDTO } from '../dtos/activities/UpdateActivityDTO';
 import { createActivitySchema } from '../zod/schemas/activity/activitySchema';
+import { updateActivitySchema } from '../zod/schemas/activity/activitySchema';
 import { ActivityService } from '../services/activityService';
 import { zodToTsoaErrors } from '../utilis/zodToTsoaErrors';
 import { numericIdParamSchema } from '../zod/schemas/common/validateParmsId';
@@ -57,10 +59,9 @@ export class ActivityController extends Controller {
 
   // Atualizar uma atividade por ID
   @Put('{id}')
-  public async updateActivity(@Path() id: string, @Body() body: Partial<CreateActivityDto>): Promise<ActivityResponseDTO> {
-    const parsed = createActivitySchema.safeParse(body);
-    if (!parsed.success) 
-      throw new ValidateError(zodToTsoaErrors(parsed.error.issues), 'Validation failed');
+  public async updateActivity(@Path() id: string, @Body() body: Partial<UpdateActivityDTO>): Promise<ActivityResponseDTO> {
+    console.log('entrou aqui no updateActivity');
+    updateActivitySchema.parse(body);
     
     const { id: activityId } = validateParams(numericIdParamSchema, { id });
     return this.activityService.updateActivity(activityId, body);
@@ -72,4 +73,3 @@ export class ActivityController extends Controller {
     return this.activityService.deleteActivity(id);
   }
 }
-  

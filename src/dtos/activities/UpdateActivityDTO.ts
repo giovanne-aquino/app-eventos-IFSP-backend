@@ -1,5 +1,5 @@
-export class ActivityResponseDTO {
-    id!: number;
+export class UpdateActivityDTO {
+    name!: string;
     description!: string;
     format!: 'PRESENTIAL' | 'ONLINE' | 'HYBRID';
     location?: string | null;
@@ -11,4 +11,4 @@ export class ActivityResponseDTO {
     maxCapacity!: number;
     complementaryHours!: number;
   }
-  
+    

@@ -63,9 +63,9 @@ const models: TsoaRoute.Models = {
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "format": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PRESENTIAL"]},{"dataType":"enum","enums":["ONLINE"]},{"dataType":"enum","enums":["HYBRID"]}],"required":true},
-            "location": {"dataType":"string"},
+            "location": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
             "userDocument": {"dataType":"boolean","required":true},
-            "banner": {"dataType":"string"},
+            "banner": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
             "startDate": {"dataType":"datetime","required":true},
             "startTime": {"dataType":"string","required":true},
             "activityType": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["SHORT_COURSE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]}],"required":true},
@@ -74,6 +74,29 @@ const models: TsoaRoute.Models = {
             "eventId": {"dataType":"double","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActivityResponseDTO": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "description": {"dataType":"string","required":true},
+            "format": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PRESENTIAL"]},{"dataType":"enum","enums":["ONLINE"]},{"dataType":"enum","enums":["HYBRID"]}],"required":true},
+            "location": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
+            "userDocument": {"dataType":"boolean","required":true},
+            "banner": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
+            "startDate": {"dataType":"datetime","required":true},
+            "startTime": {"dataType":"string","required":true},
+            "activityType": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["SHORT_COURSE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]}],"required":true},
+            "maxCapacity": {"dataType":"double","required":true},
+            "complementaryHours": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Partial_UpdateActivityDTO_": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"description":{"dataType":"string"},"format":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PRESENTIAL"]},{"dataType":"enum","enums":["ONLINE"]},{"dataType":"enum","enums":["HYBRID"]}]},"location":{"dataType":"string"},"userDocument":{"dataType":"boolean"},"banner":{"dataType":"string"},"startDate":{"dataType":"datetime"},"startTime":{"dataType":"string"},"activityType":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["SHORT_COURSE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]}]},"maxCapacity":{"dataType":"double"},"complementaryHours":{"dataType":"double"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -363,8 +386,8 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsActivityController_updateActivity: Record<string, TsoaRoute.ParameterSchema> = {
-                id: {"in":"path","name":"id","required":true,"dataType":"double"},
-                body: {"in":"body","name":"body","required":true,"ref":"CreateActivityDto"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                body: {"in":"body","name":"body","required":true,"ref":"Partial_UpdateActivityDTO_"},
         };
         app.put('/activities/:id',
             ...(fetchMiddlewares<RequestHandler>(ActivityController)),
