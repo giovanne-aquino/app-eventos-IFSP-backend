@@ -48,7 +48,7 @@ export class ActivityController extends Controller {
   @Get('event/{eventId}')
   public async getActivitiesByEventId(@Path() eventId: number) {
     const { id: activityId } = validateParams(numericIdParamSchema, { id: eventId })
-    return this.activityService.getActivitiesByEventId(activityId);
+    return this.activityService.getActivitiesByEventId(activityId); 
   }
 
   //Obter todas as atividades
