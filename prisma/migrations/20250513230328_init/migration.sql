@@ -1,26 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the column `nome` on the `Tag` table. All the data in the column will be lost.
-  - You are about to drop the column `CPFCNPJ` on the `User` table. All the data in the column will be lost.
-  - You are about to drop the column `CRM` on the `User` table. All the data in the column will be lost.
-  - You are about to drop the column `nationalID` on the `User` table. All the data in the column will be lost.
-  - You are about to drop the `Atividade` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Evento` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `EventoCampo` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `EventoTag` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `InscricaoAtividade` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `InscricaoEvento` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `RespostaEventoCampo` table. If the table is not empty, all the data it contains will be lost.
-  - A unique constraint covering the columns `[name]` on the table `Tag` will be added. If there are existing duplicate values, this will fail.
-  - A unique constraint covering the columns `[cpf]` on the table `User` will be added. If there are existing duplicate values, this will fail.
-  - A unique constraint covering the columns `[cnpj]` on the table `User` will be added. If there are existing duplicate values, this will fail.
-  - A unique constraint covering the columns `[crm]` on the table `User` will be added. If there are existing duplicate values, this will fail.
-  - A unique constraint covering the columns `[nationalId]` on the table `User` will be added. If there are existing duplicate values, this will fail.
-  - Added the required column `name` to the `Tag` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `userRole` to the `User` table without a default value. This is not possible if the table is not empty.
-
-*/
 -- CreateEnum
 CREATE TYPE "Format" AS ENUM ('PRESENTIAL', 'ONLINE', 'HYBRID');
 
@@ -42,88 +19,23 @@ CREATE TYPE "RegistrationState" AS ENUM ('ACTIVE', 'CLOSED', 'CANCELED', 'DRAFT'
 -- CreateEnum
 CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'ORGANIZER', 'PARTICIPANT');
 
--- DropForeignKey
-ALTER TABLE "Atividade" DROP CONSTRAINT "Atividade_eventoId_fkey";
+-- CreateEnum
+CREATE TYPE "Category" AS ENUM ('TALK', 'LECTURE', 'WORKSHOP', 'SEMINAR', 'SHORT_COURSE', 'OTHER');
 
--- DropForeignKey
-ALTER TABLE "EventoCampo" DROP CONSTRAINT "EventoCampo_eventoId_fkey";
+-- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "cpf" TEXT,
+    "cnpj" TEXT,
+    "crm" TEXT,
+    "nationalId" TEXT,
+    "userRole" "UserRole" NOT NULL DEFAULT 'PARTICIPANT',
 
--- DropForeignKey
-ALTER TABLE "EventoTag" DROP CONSTRAINT "EventoTag_eventoId_fkey";
-
--- DropForeignKey
-ALTER TABLE "EventoTag" DROP CONSTRAINT "EventoTag_tagId_fkey";
-
--- DropForeignKey
-ALTER TABLE "InscricaoAtividade" DROP CONSTRAINT "InscricaoAtividade_atividadeId_fkey";
-
--- DropForeignKey
-ALTER TABLE "InscricaoAtividade" DROP CONSTRAINT "InscricaoAtividade_userId_fkey";
-
--- DropForeignKey
-ALTER TABLE "InscricaoEvento" DROP CONSTRAINT "InscricaoEvento_eventoId_fkey";
-
--- DropForeignKey
-ALTER TABLE "InscricaoEvento" DROP CONSTRAINT "InscricaoEvento_userId_fkey";
-
--- DropForeignKey
-ALTER TABLE "RespostaEventoCampo" DROP CONSTRAINT "RespostaEventoCampo_eventoCampoId_fkey";
-
--- DropForeignKey
-ALTER TABLE "RespostaEventoCampo" DROP CONSTRAINT "RespostaEventoCampo_inscricaoEventoId_fkey";
-
--- DropIndex
-DROP INDEX "Tag_nome_key";
-
--- AlterTable
-ALTER TABLE "Tag" DROP COLUMN "nome",
-ADD COLUMN     "name" TEXT NOT NULL;
-
--- AlterTable
-ALTER TABLE "User" DROP COLUMN "CPFCNPJ",
-DROP COLUMN "CRM",
-DROP COLUMN "nationalID",
-ADD COLUMN     "cnpj" TEXT,
-ADD COLUMN     "cpf" TEXT,
-ADD COLUMN     "crm" TEXT,
-ADD COLUMN     "nationalId" TEXT,
-ADD COLUMN     "userRole" "UserRole" NOT NULL;
-
--- DropTable
-DROP TABLE "Atividade";
-
--- DropTable
-DROP TABLE "Evento";
-
--- DropTable
-DROP TABLE "EventoCampo";
-
--- DropTable
-DROP TABLE "EventoTag";
-
--- DropTable
-DROP TABLE "InscricaoAtividade";
-
--- DropTable
-DROP TABLE "InscricaoEvento";
-
--- DropTable
-DROP TABLE "RespostaEventoCampo";
-
--- DropEnum
-DROP TYPE "CampoTipo";
-
--- DropEnum
-DROP TYPE "Formato";
-
--- DropEnum
-DROP TYPE "StatusInscricao";
-
--- DropEnum
-DROP TYPE "TipoAtividade";
-
--- DropEnum
-DROP TYPE "TipoEvento";
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Event" (
@@ -141,6 +53,7 @@ CREATE TABLE "Event" (
     "maxCapacity" INTEGER,
     "complementaryHours" INTEGER,
     "status" "RegistrationStatus" NOT NULL,
+    "category" "Category",
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );
@@ -229,6 +142,14 @@ CREATE TABLE "ActivityFieldResponse" (
 );
 
 -- CreateTable
+CREATE TABLE "Tag" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "Tag_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "EventTag" (
     "eventId" INTEGER NOT NULL,
     "tagId" INTEGER NOT NULL,
@@ -237,7 +158,7 @@ CREATE TABLE "EventTag" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Tag_name_key" ON "Tag"("name");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_cpf_key" ON "User"("cpf");
@@ -250,6 +171,9 @@ CREATE UNIQUE INDEX "User_crm_key" ON "User"("crm");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_nationalId_key" ON "User"("nationalId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Tag_name_key" ON "Tag"("name");
 
 -- AddForeignKey
 ALTER TABLE "Event" ADD CONSTRAINT "Event_organizerId_fkey" FOREIGN KEY ("organizerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

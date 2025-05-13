@@ -1,57 +1,75 @@
-import { z } from 'zod';
+import { z } from "zod";
 import prisma from "./../../../prisma/client";
 
-export const createEventSchema = z.object({
+export const createEventSchema = z
+  .object({
     name: z.string().min(1, "Event name is required"),
     description: z.string().min(1, "Event description is required"),
-    format: z.enum(['PRESENTIAL', 'ONLINE', 'HYBRID'], {
-      required_error: "Event format is mandatory"
+    format: z.enum(["PRESENTIAL", "ONLINE", "HYBRID"], {
+      required_error: "Event format is mandatory",
     }),
     location: z.string().optional().nullable(),
     userDocument: z.boolean(),
     banner: z.string().optional(),
-    eventType: z.enum(['SIMPLE', 'LARGE'], {
-      required_error: "Event type is mandatory"
+    eventType: z.enum(["SIMPLE", "LARGE"], {
+      required_error: "Event type is mandatory",
     }),
     startDate: z.date({
-      required_error: "Start date is required"
+      required_error: "Start date is required",
     }),
     endDate: z.date({
-      required_error: "End date is required"
+      required_error: "End date is required",
     }),
-    maxCapacity: z.number().int().positive("Max capacity must be a positive integer").optional(),
-    complementaryHours: z.number().int().positive("Complementary hours must be a positive integer").optional(),
-    status: z.enum(['PENDING', 'CONFIRMED', 'CANCELED'], {
-      required_error: "Status is required"
+    maxCapacity: z
+      .number()
+      .int()
+      .positive("Max capacity must be a positive integer")
+      .optional(),
+    complementaryHours: z
+      .number()
+      .int()
+      .positive("Complementary hours must be a positive integer")
+      .optional(),
+    status: z.enum(["PENDING", "CONFIRMED", "CANCELED"], {
+      required_error: "Status is required",
     }),
-    organizerId: z.number().int().positive("Organizer ID must be a positive integer")
-  }).superRefine(async (data, ctx) => {
-
+    organizerId: z
+      .number()
+      .int()
+      .positive("Organizer ID must be a positive integer"),
+    category: z.enum(
+      ["TALK", "LECTURE", "WORKSHOP", "SEMINAR", "SHORT_COURSE", "OTHER"],
+      {
+        required_error: "Category is required",
+      }
+    ),
+  })
+  .superRefine(async (data, ctx) => {
     const organizerExists = await prisma.user.findUnique({
       where: { id: data.organizerId },
     });
-  
+
     if (!organizerExists) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: `Organizer with ID ${data.organizerId} not found.`,
-        path: ["organizerId"]
+        path: ["organizerId"],
       });
     }
-  
+
     if (data.startDate <= new Date()) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Start date must be in the future",
-        path: ["startDate"]
+        path: ["startDate"],
       });
     }
-  
+
     if (data.endDate <= data.startDate) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "End date must be after start date",
-        path: ["endDate"]
+        path: ["endDate"],
       });
     }
   });
