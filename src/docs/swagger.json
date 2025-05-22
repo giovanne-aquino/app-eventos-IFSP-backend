@@ -115,6 +115,416 @@
 				},
 				"type": "object",
 				"description": "Make all properties in T optional"
+			},
+			"DefaultSelection_Prisma._36_EventFieldResponsePayload_": {
+				"properties": {
+					"value": {
+						"type": "string"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"value",
+					"eventFieldId",
+					"eventRegistrationId",
+					"id"
+				],
+				"type": "object"
+			},
+			"EventFieldResponse": {
+				"$ref": "#/components/schemas/DefaultSelection_Prisma._36_EventFieldResponsePayload_",
+				"description": "Model EventFieldResponse"
+			},
+			"FieldErrors": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": {
+					"properties": {
+						"value": {},
+						"message": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"message"
+					],
+					"type": "object"
+				}
+			},
+			"ValidateError": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"stack": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"fields": {
+						"$ref": "#/components/schemas/FieldErrors"
+					}
+				},
+				"required": [
+					"name",
+					"message",
+					"status",
+					"fields"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateEventFieldResponseDto": {
+				"properties": {
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"eventRegistrationId",
+					"eventFieldId",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"EventFieldResponse2Dto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"eventRegistrationId",
+					"eventFieldId",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_CreateEventFieldResponseDto_": {
+				"properties": {
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"EventResponseDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER",
+							null
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"description",
+					"organizerId",
+					"format",
+					"userDocument",
+					"eventType",
+					"startDate",
+					"endDate",
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateEventDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER",
+							null
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"organizerId",
+					"format",
+					"userDocument",
+					"eventType",
+					"startDate",
+					"endDate",
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateEventDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER",
+							null
+						],
+						"nullable": true
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -269,6 +679,464 @@
 					{
 						"in": "path",
 						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/eventFieldResponses": {
+			"post": {
+				"operationId": "CreateEventFieldResponse",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventFieldResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateEventFieldResponseDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllEventFieldResponses",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventFieldResponse2Dto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/eventFieldResponses/{id}": {
+			"put": {
+				"operationId": "UpdateEventFieldResponse",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventFieldResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_CreateEventFieldResponseDto_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteEventFieldResponse",
+				"responses": {
+					"204": {
+						"description": "deleted successfully"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events": {
+			"post": {
+				"operationId": "CreateEvent",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateEventDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllEvents",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventResponseDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/events/{id}": {
+			"get": {
+				"operationId": "GetEventById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdateEvent",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateEventDto"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteEvent",
+				"responses": {
+					"200": {
+						"description": "Event deleted successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events/format/{format}": {
+			"get": {
+				"operationId": "GetEventsByFormat",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventResponseDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "format",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events/type/{eventType}": {
+			"get": {
+				"operationId": "GetEventsByType",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventResponseDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventType",
 						"required": true,
 						"schema": {
 							"type": "string"

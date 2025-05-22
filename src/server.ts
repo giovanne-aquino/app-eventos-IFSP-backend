@@ -13,7 +13,7 @@ const debug = debugLib('app-eventos-ifsp-backend:server')
 /**
  * Pega a porta do ambiente (se existir) ou usa a 3000 como padrão
  */
-const port = normalizePort(process.env.PORT || '3000')
+const port = normalizePort(process.env.PORT || '3001')
 
 // Configura a porta no app Express, útil para logs ou view engines
 app.set('port', port)
