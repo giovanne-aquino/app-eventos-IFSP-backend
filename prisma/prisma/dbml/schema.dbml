@@ -32,11 +32,7 @@ Table Event {
   maxCapacity Int
   complementaryHours Int
   status RegistrationStatus [not null]
-<<<<<<< HEAD
-  category Category
-=======
   category Category [not null]
->>>>>>> fd08254a5fc629330535aacd75b24d25b3ec309b
   activities Activity [not null]
   eventRegistrations EventRegistration [not null]
   fields EventField [not null]
