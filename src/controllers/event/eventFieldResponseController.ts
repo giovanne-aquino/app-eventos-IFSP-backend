@@ -13,8 +13,7 @@ import {
 } from 'tsoa';
 
 import { EventFieldResponse } from '@prisma/client';
-import { CreateEventFieldResponseDto } from '../../dtos/events/CreateEventFieldResponseResquestDTO';
-import { EventFieldResponse2Dto } from "../../dtos/events/EventFieldResponse2DTO";
+import { CreateEventFieldResponseDto, EventFieldResponse2Dto} from '../../dtos/events/EventFieldResponse.DTO';
 import { EventFieldResponseService } from '../../services/event/eventFieldResponseService';
 import { ValidateError } from 'tsoa';
 import { createEventFieldResponseSchema } from '../../zod/schemas/event/eventFieldResponseSchema';

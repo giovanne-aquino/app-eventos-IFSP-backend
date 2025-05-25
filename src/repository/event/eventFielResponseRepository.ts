@@ -1,7 +1,6 @@
 import prisma from "../../prisma/client";
 import { EventFieldResponse } from "@prisma/client";
-import { CreateEventFieldResponseDto } from "../../dtos/events/CreateEventFieldResponseResquestDTO";
-import { UpdateEventFieldResponseDto } from "../../dtos/events/UpdateEventFieldResponseDto";
+import { CreateEventFieldResponseDto, UpdateEventFieldResponseDto } from "../../dtos/events/EventFieldResponse.DTO";
 
 export class EventFieldResponseRepository {
 

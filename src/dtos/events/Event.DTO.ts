@@ -1,5 +1,4 @@
-export class EventResponseDto {
-    id!: number;
+export class CreateEventDto {
     name!: string;
     description!: string;
     organizerId!: number;
@@ -14,4 +13,10 @@ export class EventResponseDto {
     complementaryHours?: number | null;
     status!: 'PENDING' | 'CONFIRMED' | 'CANCELED';
     category?: 'TALK' | 'LECTURE' | 'WORKSHOP' | 'SEMINAR' | 'SHORT_COURSE' | 'OTHER' | null; 
+}
+
+export type UpdateEventDto = Partial<CreateEventDto>;
+
+export class EventResponseDto extends CreateEventDto {
+    id!: number; 
 }

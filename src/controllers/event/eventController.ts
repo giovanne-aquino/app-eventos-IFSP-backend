@@ -12,9 +12,7 @@ import {
   SuccessResponse,
 } from 'tsoa';
 import { EventService } from '../../services/event/eventService';
-import { CreateEventDto } from "../../dtos/events/CreateEventRequestDTO";
-import { EventResponseDto } from "../../dtos/events/EventResponseDTO";
-import { UpdateEventDto } from "../../dtos/events/UpdateEventDto";
+import { CreateEventDto, UpdateEventDto, EventResponseDto } from "../../dtos/events/Event.DTO";
 import { createEventSchema } from '../../zod/schemas/event/eventSchema';
 import { ValidateError } from 'tsoa';
 import { zodToTsoaErrors } from '../../utilis/zodToTsoaErrors';

@@ -93,10 +93,10 @@ const models: TsoaRoute.Models = {
     "EventFieldResponse2Dto": {
         "dataType": "refObject",
         "properties": {
-            "id": {"dataType":"double","required":true},
             "eventRegistrationId": {"dataType":"double","required":true},
             "eventFieldId": {"dataType":"double","required":true},
             "value": {"dataType":"string","required":true},
+            "id": {"dataType":"double","required":true},
         },
         "additionalProperties": false,
     },
@@ -149,13 +149,12 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Partial_UpdateEventFieldRequestDTO_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"type":{"ref":"_36_Enums.FieldType"},"required":{"dataType":"boolean"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"eventId":{"dataType":"double"},"name":{"dataType":"string"},"type":{"ref":"_36_Enums.FieldType"},"required":{"dataType":"boolean"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "EventResponseDto": {
         "dataType": "refObject",
         "properties": {
-            "id": {"dataType":"double","required":true},
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "organizerId": {"dataType":"double","required":true},
@@ -170,6 +169,7 @@ const models: TsoaRoute.Models = {
             "complementaryHours": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"enum","enums":[null]}]},
             "status": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PENDING"]},{"dataType":"enum","enums":["CONFIRMED"]},{"dataType":"enum","enums":["CANCELED"]}],"required":true},
             "category": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["TALK"]},{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]},{"dataType":"enum","enums":["SHORT_COURSE"]},{"dataType":"enum","enums":["OTHER"]},{"dataType":"enum","enums":[null]}]},
+            "id": {"dataType":"double","required":true},
         },
         "additionalProperties": false,
     },
@@ -195,25 +195,14 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Partial_CreateEventDto_": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"description":{"dataType":"string"},"organizerId":{"dataType":"double"},"format":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PRESENTIAL"]},{"dataType":"enum","enums":["ONLINE"]},{"dataType":"enum","enums":["HYBRID"]}]},"location":{"dataType":"string"},"userDocument":{"dataType":"boolean"},"banner":{"dataType":"string"},"eventType":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["SIMPLE"]},{"dataType":"enum","enums":["LARGE"]}]},"startDate":{"dataType":"datetime"},"endDate":{"dataType":"datetime"},"maxCapacity":{"dataType":"double"},"complementaryHours":{"dataType":"double"},"status":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PENDING"]},{"dataType":"enum","enums":["CONFIRMED"]},{"dataType":"enum","enums":["CANCELED"]}]},"category":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["TALK"]},{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]},{"dataType":"enum","enums":["SHORT_COURSE"]},{"dataType":"enum","enums":["OTHER"]}]}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UpdateEventDto": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string"},
-            "description": {"dataType":"string"},
-            "organizerId": {"dataType":"double"},
-            "format": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PRESENTIAL"]},{"dataType":"enum","enums":["ONLINE"]},{"dataType":"enum","enums":["HYBRID"]}]},
-            "location": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
-            "userDocument": {"dataType":"boolean"},
-            "banner": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}]},
-            "eventType": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["SIMPLE"]},{"dataType":"enum","enums":["LARGE"]}]},
-            "startDate": {"dataType":"datetime"},
-            "endDate": {"dataType":"datetime"},
-            "maxCapacity": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"enum","enums":[null]}]},
-            "complementaryHours": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"enum","enums":[null]}]},
-            "status": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PENDING"]},{"dataType":"enum","enums":["CONFIRMED"]},{"dataType":"enum","enums":["CANCELED"]}]},
-            "category": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["TALK"]},{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]},{"dataType":"enum","enums":["SHORT_COURSE"]},{"dataType":"enum","enums":["OTHER"]},{"dataType":"enum","enums":[null]}]},
-        },
-        "additionalProperties": false,
+        "dataType": "refAlias",
+        "type": {"ref":"Partial_CreateEventDto_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };

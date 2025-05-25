@@ -1,5 +1,5 @@
 import { EventField } from '@prisma/client';
-import { CreateEventFieldRequestDTO } from '../../dtos/events/CreateEventFieldRequestDTO';
+import { CreateEventFieldRequestDTO } from '../../dtos/events/EventField.DTO';
 import { UpdateEventFieldRequestDTO } from '../../dtos/events/UpdateEventFieldRequestDTO';
 import { EventFieldRepository } from '../../repository/event/eventFieldRepository';
 

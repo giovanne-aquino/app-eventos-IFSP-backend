@@ -214,10 +214,6 @@
 			},
 			"EventFieldResponse2Dto": {
 				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
 					"eventRegistrationId": {
 						"type": "number",
 						"format": "double"
@@ -228,13 +224,17 @@
 					},
 					"value": {
 						"type": "string"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
-					"id",
 					"eventRegistrationId",
 					"eventFieldId",
-					"value"
+					"value",
+					"id"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -346,6 +346,10 @@
 			},
 			"Partial_UpdateEventFieldRequestDTO_": {
 				"properties": {
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -361,10 +365,6 @@
 			},
 			"EventResponseDto": {
 				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
@@ -439,10 +439,13 @@
 							null
 						],
 						"nullable": true
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
-					"id",
 					"name",
 					"description",
 					"organizerId",
@@ -451,7 +454,8 @@
 					"eventType",
 					"startDate",
 					"endDate",
-					"status"
+					"status",
+					"id"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -548,7 +552,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"UpdateEventDto": {
+			"Partial_CreateEventDto_": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -569,15 +573,13 @@
 						]
 					},
 					"location": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"userDocument": {
 						"type": "boolean"
 					},
 					"banner": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"eventType": {
 						"type": "string",
@@ -596,13 +598,11 @@
 					},
 					"maxCapacity": {
 						"type": "number",
-						"format": "double",
-						"nullable": true
+						"format": "double"
 					},
 					"complementaryHours": {
 						"type": "number",
-						"format": "double",
-						"nullable": true
+						"format": "double"
 					},
 					"status": {
 						"type": "string",
@@ -620,14 +620,15 @@
 							"WORKSHOP",
 							"SEMINAR",
 							"SHORT_COURSE",
-							"OTHER",
-							null
-						],
-						"nullable": true
+							"OTHER"
+						]
 					}
 				},
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
+			},
+			"UpdateEventDto": {
+				"$ref": "#/components/schemas/Partial_CreateEventDto_"
 			}
 		},
 		"securitySchemes": {}
