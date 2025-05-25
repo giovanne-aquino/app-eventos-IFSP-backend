@@ -846,16 +846,6 @@
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
-								}
-							}
-						}
 					}
 				},
 				"tags": [
@@ -875,16 +865,6 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/EventFieldResponse"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
 								}
 							}
 						}
@@ -920,16 +900,6 @@
 				"responses": {
 					"204": {
 						"description": "deleted successfully"
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
-								}
-							}
-						}
 					}
 				},
 				"tags": [
@@ -1001,16 +971,6 @@
 										"$ref": "#/components/schemas/EventField"
 									},
 									"type": "array"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
 								}
 							}
 						}
@@ -1184,16 +1144,6 @@
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
-								}
-							}
-						}
 					}
 				},
 				"tags": [
@@ -1213,16 +1163,6 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/EventResponseDto"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
 								}
 							}
 						}
@@ -1252,16 +1192,6 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/EventResponseDto"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
 								}
 							}
 						}
@@ -1312,16 +1242,6 @@
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
-								}
-							}
-						}
 					}
 				},
 				"tags": [
@@ -1356,16 +1276,6 @@
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
-								}
-							}
-						}
 					}
 				},
 				"tags": [
@@ -1397,16 +1307,6 @@
 										"$ref": "#/components/schemas/EventResponseDto"
 									},
 									"type": "array"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad Request",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ValidateError"
 								}
 							}
 						}

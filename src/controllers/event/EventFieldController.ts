@@ -32,13 +32,15 @@ export class EventFieldController extends Controller {
   public async createEventField(
     @Body() body: CreateEventFieldRequestDTO
   ): Promise<EventField> {
-    const parsed = await createEventFieldSchema.parseAsync(body); 
+    const parsed = await createEventFieldSchema.parseAsync(body)
+      .catch((error) => { 
+        throw new ValidateError(zodToTsoaErrors(error.issues), 'Validation failed');
+      });
     return this.service.create(parsed);
   }
 
   @Get('/')
   @SuccessResponse('200', 'OK')
-  @Response<ValidateError>('400', 'Bad Request')
   public async getAllEventFields(): Promise<EventField[]> {
     return await this.service.findAll();
   }
@@ -57,7 +59,7 @@ export class EventFieldController extends Controller {
   @Delete('{id}')
   @SuccessResponse('204', 'Deleted successfully')
   @Response<ValidateError>('400', 'Bad Request')
-  @Response<Error>('404', 'Not Found')
+  @Response<Error>('404', 'Not Found') 
   public async deleteEventField(@Path() id: number): Promise<void> {
     await this.service.delete(id);
   }

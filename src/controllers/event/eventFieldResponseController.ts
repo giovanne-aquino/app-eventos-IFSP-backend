@@ -40,46 +40,22 @@ export class EventFieldResponseController extends Controller {
 
   @Get('/')
   @SuccessResponse('200', 'OK')
-  @Response<ValidateError>('400', 'Bad Request')
   public async getAllEventFieldResponses(): Promise<EventFieldResponse2Dto[]> {
-    try {
-      return await this.service.findAll();
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
-      }
-      throw new ValidateError({ general: { message: 'Unknown error while fetching event field responses' } }, 'Bad Request');
-    }
+    return await this.service.findAll();
   }
 
   @Put('/:id')
   @SuccessResponse('200', 'OK')
-  @Response<ValidateError>('400', 'Bad Request')
   public async updateEventFieldResponse(
     @Path() id: string,
     @Body() body: Partial<CreateEventFieldResponseDto>
   ): Promise<EventFieldResponse> {
-    try {
-      return await this.service.update(id, body);
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
-      }
-      throw new ValidateError({ general: { message: 'Unknown error updating the event field response' } }, 'Bad Request');
-    }
+    return await this.service.update(id, body);
   }
 
   @Delete('/:id')
   @SuccessResponse('204', 'deleted successfully')
-  @Response<ValidateError>('400', 'Bad Request')
   public async deleteEventFieldResponse(@Path() id: string): Promise<void> {
-    try {
-      await this.service.delete(id);
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new ValidateError({ general: { message: error.message } }, 'Bad Request');
-      }
-      throw new ValidateError({ general: { message: 'Unknown error deleting the event field response' } }, 'Bad Request');
-    }
+    await this.service.delete(id);
   }
 }
