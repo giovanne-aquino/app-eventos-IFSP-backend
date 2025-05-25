@@ -1,5 +1,4 @@
 import { FieldType } from '@prisma/client';
-
 export class CreateEventFieldRequestDTO {
   eventId!: number;
   name!: string;

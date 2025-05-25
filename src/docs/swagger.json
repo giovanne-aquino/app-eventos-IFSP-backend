@@ -256,6 +256,109 @@
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
+			"_36_Enums.FieldType": {
+				"type": "string",
+				"enum": [
+					"STRING",
+					"NUMBER",
+					"DATE",
+					"BOOLEAN"
+				]
+			},
+			"DefaultSelection_Prisma._36_EventFieldPayload_": {
+				"properties": {
+					"required": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/_36_Enums.FieldType"
+					},
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"required",
+					"type",
+					"eventId",
+					"id",
+					"name"
+				],
+				"type": "object"
+			},
+			"EventField": {
+				"$ref": "#/components/schemas/DefaultSelection_Prisma._36_EventFieldPayload_",
+				"description": "Model EventField"
+			},
+			"FieldType": {
+				"$ref": "#/components/schemas/_36_Enums.FieldType"
+			},
+			"CreateEventFieldRequestDTO": {
+				"properties": {
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/FieldType"
+					},
+					"required": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"eventId",
+					"name",
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Error": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"stack": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_UpdateEventFieldRequestDTO_": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/_36_Enums.FieldType"
+					},
+					"required": {
+						"type": "boolean"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
 			"EventResponseDto": {
 				"properties": {
 					"id": {
@@ -840,6 +943,186 @@
 						"required": true,
 						"schema": {
 							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/eventFields": {
+			"post": {
+				"operationId": "CreateEventField",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventField"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateEventFieldRequestDTO"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllEventFields",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventField"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/eventFields/{id}": {
+			"put": {
+				"operationId": "UpdateEventField",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventField"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_UpdateEventFieldRequestDTO_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteEventField",
+				"responses": {
+					"204": {
+						"description": "Deleted successfully"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
 						}
 					}
 				]
