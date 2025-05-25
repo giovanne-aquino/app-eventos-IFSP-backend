@@ -20,6 +20,7 @@ import { ValidateError } from 'tsoa';
 import { createEventFieldSchema } from '../../zod/schemas/event/eventFieldSchema';
 import { zodToTsoaErrors } from '../../utilis/zodToTsoaErrors';
 
+
 @Route('eventFields') 
 @Tags('Event Field') 
 export class EventFieldController extends Controller {
@@ -31,10 +32,8 @@ export class EventFieldController extends Controller {
   public async createEventField(
     @Body() body: CreateEventFieldRequestDTO
   ): Promise<EventField> {
-    const parsed = await createEventFieldSchema.parseAsync(body).catch((error) => {
-      throw new ValidateError(zodToTsoaErrors(error.issues), 'Validation failed');
-    });
-    return this.service.create(parsed)
+    const parsed = await createEventFieldSchema.parseAsync(body); 
+    return this.service.create(parsed);
   }
 
   @Get('/')
