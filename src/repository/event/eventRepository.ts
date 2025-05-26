@@ -29,6 +29,44 @@ export class EventRepository {
         return await prisma.event.findMany();
     }
 
+    async findEvents({
+        page,
+        pageSize,
+        format,
+        eventType,
+        searchTerm,
+    }: {
+        page: number;
+        pageSize: number;
+        format?: string;
+        eventType?: string;
+        searchTerm?: string;
+    }): Promise<{ events: Event[]; total: number }> {
+        const where: any = {};
+
+        if (format && format !== "ALL") {
+            where.format = format as Format;
+        }
+        if (eventType && eventType !== "ALL") {
+            where.eventType = eventType as EventType;
+        }
+
+        if (searchTerm) {
+            where.name = { contains: searchTerm, mode: 'insensitive' };
+        }
+
+        const [events, total] = await prisma.$transaction([
+            prisma.event.findMany({
+                where,
+                skip: (page - 1) * pageSize,
+                take: pageSize
+            }),
+            prisma.event.count({ where }),
+        ]);
+
+        return { events, total };
+    }
+
     async findById(id: string): Promise<Event | null> {
         return await prisma.event.findUnique({
             where: { id: Number(id) },

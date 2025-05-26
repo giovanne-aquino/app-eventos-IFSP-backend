@@ -54,6 +54,22 @@ export class EventService {
         return events as EventResponseDto[];
     }
 
+    async getEvents({
+        page,
+        pageSize,
+        format,
+        eventType,
+        searchTerm,
+    }: {
+        page: number;
+        pageSize: number;
+        format?: string;
+        eventType?: string;
+        searchTerm?: string;
+    }): Promise<{ events: Event[]; total: number }> {
+        return await this.eventRepository.findEvents({ page, pageSize, format, eventType, searchTerm });
+    }
+
     async getEventById(id: string): Promise<EventResponseDto> {
         const event = await this.eventRepository.findById(id);
         if (!event) {

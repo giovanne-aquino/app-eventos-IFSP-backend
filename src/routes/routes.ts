@@ -8,9 +8,9 @@ import { UserController } from './../controllers/userController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EventFieldResponseController } from './../controllers/event/eventFieldResponseController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { EventFieldController } from './../controllers/event/EventFieldController';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EventController } from './../controllers/event/eventController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { EventFieldController } from './../controllers/event/EventFieldController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -106,52 +106,6 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"eventRegistrationId":{"dataType":"double"},"eventFieldId":{"dataType":"double"},"value":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "_36_Enums.FieldType": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["STRING"]},{"dataType":"enum","enums":["NUMBER"]},{"dataType":"enum","enums":["DATE"]},{"dataType":"enum","enums":["BOOLEAN"]}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "DefaultSelection_Prisma._36_EventFieldPayload_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"required":{"dataType":"boolean","required":true},"type":{"ref":"_36_Enums.FieldType","required":true},"eventId":{"dataType":"double","required":true},"id":{"dataType":"double","required":true},"name":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "EventField": {
-        "dataType": "refAlias",
-        "type": {"ref":"DefaultSelection_Prisma._36_EventFieldPayload_","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "FieldType": {
-        "dataType": "refAlias",
-        "type": {"ref":"_36_Enums.FieldType","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CreateEventFieldRequestDTO": {
-        "dataType": "refObject",
-        "properties": {
-            "eventId": {"dataType":"double","required":true},
-            "name": {"dataType":"string","required":true},
-            "type": {"ref":"FieldType","required":true},
-            "required": {"dataType":"boolean"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Error": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "stack": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Partial_UpdateEventFieldRequestDTO_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"eventId":{"dataType":"double"},"name":{"dataType":"string"},"type":{"ref":"_36_Enums.FieldType"},"required":{"dataType":"boolean"}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "EventResponseDto": {
         "dataType": "refObject",
         "properties": {
@@ -203,6 +157,52 @@ const models: TsoaRoute.Models = {
     "UpdateEventDto": {
         "dataType": "refAlias",
         "type": {"ref":"Partial_CreateEventDto_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "_36_Enums.FieldType": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["STRING"]},{"dataType":"enum","enums":["NUMBER"]},{"dataType":"enum","enums":["DATE"]},{"dataType":"enum","enums":["BOOLEAN"]}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "DefaultSelection_Prisma._36_EventFieldPayload_": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"required":{"dataType":"boolean","required":true},"type":{"ref":"_36_Enums.FieldType","required":true},"eventId":{"dataType":"double","required":true},"id":{"dataType":"double","required":true},"name":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "EventField": {
+        "dataType": "refAlias",
+        "type": {"ref":"DefaultSelection_Prisma._36_EventFieldPayload_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "FieldType": {
+        "dataType": "refAlias",
+        "type": {"ref":"_36_Enums.FieldType","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateEventFieldRequestDTO": {
+        "dataType": "refObject",
+        "properties": {
+            "eventId": {"dataType":"double","required":true},
+            "name": {"dataType":"string","required":true},
+            "type": {"ref":"FieldType","required":true},
+            "required": {"dataType":"boolean"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Error": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "stack": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Partial_UpdateEventFieldRequestDTO_": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"eventId":{"dataType":"double"},"name":{"dataType":"string"},"type":{"ref":"_36_Enums.FieldType"},"required":{"dataType":"boolean"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -492,126 +492,6 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsEventFieldController_createEventField: Record<string, TsoaRoute.ParameterSchema> = {
-                body: {"in":"body","name":"body","required":true,"ref":"CreateEventFieldRequestDTO"},
-        };
-        app.post('/eventFields',
-            ...(fetchMiddlewares<RequestHandler>(EventFieldController)),
-            ...(fetchMiddlewares<RequestHandler>(EventFieldController.prototype.createEventField)),
-
-            async function EventFieldController_createEventField(request: ExRequest, response: ExResponse, next: any) {
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldController_createEventField, request, response });
-
-                const controller = new EventFieldController();
-
-              await templateService.apiHandler({
-                methodName: 'createEventField',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 201,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsEventFieldController_getAllEventFields: Record<string, TsoaRoute.ParameterSchema> = {
-        };
-        app.get('/eventFields',
-            ...(fetchMiddlewares<RequestHandler>(EventFieldController)),
-            ...(fetchMiddlewares<RequestHandler>(EventFieldController.prototype.getAllEventFields)),
-
-            async function EventFieldController_getAllEventFields(request: ExRequest, response: ExResponse, next: any) {
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldController_getAllEventFields, request, response });
-
-                const controller = new EventFieldController();
-
-              await templateService.apiHandler({
-                methodName: 'getAllEventFields',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 200,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsEventFieldController_updateEventField: Record<string, TsoaRoute.ParameterSchema> = {
-                id: {"in":"path","name":"id","required":true,"dataType":"double"},
-                body: {"in":"body","name":"body","required":true,"ref":"Partial_UpdateEventFieldRequestDTO_"},
-        };
-        app.put('/eventFields/:id',
-            ...(fetchMiddlewares<RequestHandler>(EventFieldController)),
-            ...(fetchMiddlewares<RequestHandler>(EventFieldController.prototype.updateEventField)),
-
-            async function EventFieldController_updateEventField(request: ExRequest, response: ExResponse, next: any) {
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldController_updateEventField, request, response });
-
-                const controller = new EventFieldController();
-
-              await templateService.apiHandler({
-                methodName: 'updateEventField',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 200,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsEventFieldController_deleteEventField: Record<string, TsoaRoute.ParameterSchema> = {
-                id: {"in":"path","name":"id","required":true,"dataType":"double"},
-        };
-        app.delete('/eventFields/:id',
-            ...(fetchMiddlewares<RequestHandler>(EventFieldController)),
-            ...(fetchMiddlewares<RequestHandler>(EventFieldController.prototype.deleteEventField)),
-
-            async function EventFieldController_deleteEventField(request: ExRequest, response: ExResponse, next: any) {
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldController_deleteEventField, request, response });
-
-                const controller = new EventFieldController();
-
-              await templateService.apiHandler({
-                methodName: 'deleteEventField',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 204,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsEventController_createEvent: Record<string, TsoaRoute.ParameterSchema> = {
                 body: {"in":"body","name":"body","required":true,"ref":"CreateEventDto"},
         };
@@ -642,24 +522,29 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsEventController_getAllEvents: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsEventController_getEvents: Record<string, TsoaRoute.ParameterSchema> = {
+                page: {"default":1,"in":"query","name":"page","dataType":"double"},
+                pageSize: {"default":12,"in":"query","name":"pageSize","dataType":"double"},
+                format: {"in":"query","name":"format","dataType":"string"},
+                eventType: {"in":"query","name":"eventType","dataType":"string"},
+                searchTerm: {"in":"query","name":"searchTerm","dataType":"string"},
         };
         app.get('/events',
             ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getAllEvents)),
+            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getEvents)),
 
-            async function EventController_getAllEvents(request: ExRequest, response: ExResponse, next: any) {
+            async function EventController_getEvents(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsEventController_getAllEvents, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsEventController_getEvents, request, response });
 
                 const controller = new EventController();
 
               await templateService.apiHandler({
-                methodName: 'getAllEvents',
+                methodName: 'getEvents',
                 controller,
                 response,
                 next,
@@ -816,6 +701,126 @@ export function RegisterRoutes(app: Router) {
                 next,
                 validatedArgs,
                 successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsEventFieldController_createEventField: Record<string, TsoaRoute.ParameterSchema> = {
+                body: {"in":"body","name":"body","required":true,"ref":"CreateEventFieldRequestDTO"},
+        };
+        app.post('/eventFields',
+            ...(fetchMiddlewares<RequestHandler>(EventFieldController)),
+            ...(fetchMiddlewares<RequestHandler>(EventFieldController.prototype.createEventField)),
+
+            async function EventFieldController_createEventField(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldController_createEventField, request, response });
+
+                const controller = new EventFieldController();
+
+              await templateService.apiHandler({
+                methodName: 'createEventField',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsEventFieldController_getAllEventFields: Record<string, TsoaRoute.ParameterSchema> = {
+        };
+        app.get('/eventFields',
+            ...(fetchMiddlewares<RequestHandler>(EventFieldController)),
+            ...(fetchMiddlewares<RequestHandler>(EventFieldController.prototype.getAllEventFields)),
+
+            async function EventFieldController_getAllEventFields(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldController_getAllEventFields, request, response });
+
+                const controller = new EventFieldController();
+
+              await templateService.apiHandler({
+                methodName: 'getAllEventFields',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsEventFieldController_updateEventField: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"double"},
+                body: {"in":"body","name":"body","required":true,"ref":"Partial_UpdateEventFieldRequestDTO_"},
+        };
+        app.put('/eventFields/:id',
+            ...(fetchMiddlewares<RequestHandler>(EventFieldController)),
+            ...(fetchMiddlewares<RequestHandler>(EventFieldController.prototype.updateEventField)),
+
+            async function EventFieldController_updateEventField(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldController_updateEventField, request, response });
+
+                const controller = new EventFieldController();
+
+              await templateService.apiHandler({
+                methodName: 'updateEventField',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsEventFieldController_deleteEventField: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"double"},
+        };
+        app.delete('/eventFields/:id',
+            ...(fetchMiddlewares<RequestHandler>(EventFieldController)),
+            ...(fetchMiddlewares<RequestHandler>(EventFieldController.prototype.deleteEventField)),
+
+            async function EventFieldController_deleteEventField(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldController_deleteEventField, request, response });
+
+                const controller = new EventFieldController();
+
+              await templateService.apiHandler({
+                methodName: 'deleteEventField',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 204,
               });
             } catch (err) {
                 return next(err);
