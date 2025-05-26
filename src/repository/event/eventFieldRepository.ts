@@ -1,7 +1,6 @@
 import prisma from '../../prisma/client'; 
 import { EventField } from '@prisma/client';
-import {CreateEventFieldRequestDTO } from '../../dtos/events/EventField.DTO'; 
-import { UpdateEventFieldRequestDTO } from '../../dtos/events/UpdateEventFieldRequestDTO';
+import {CreateEventFieldRequestDTO, UpdateEventFieldRequestDTO } from '../../dtos/events/EventField.DTO'; 
 
 export class EventFieldRepository {
   async create(data: CreateEventFieldRequestDTO): Promise<EventField> {
@@ -19,6 +18,11 @@ export class EventFieldRepository {
     return await prisma.eventField.findMany();
   }
 
+  async findById(id: number): Promise<EventField | null> {
+        return await prisma.eventField.findUnique({
+            where: { id: id },
+        });
+    }
   async update(id: number, data: Partial<UpdateEventFieldRequestDTO>): Promise<EventField> {
     return await prisma.eventField.update({
       where: { id },

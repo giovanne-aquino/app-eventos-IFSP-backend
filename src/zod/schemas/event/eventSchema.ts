@@ -1,5 +1,4 @@
 import { z } from "zod";
-import prisma from "./../../../prisma/client";
 
 export const createEventSchema = z
   .object({
@@ -44,32 +43,3 @@ export const createEventSchema = z
       }
     ),
   })
-  .superRefine(async (data, ctx) => {
-    const organizerExists = await prisma.user.findUnique({
-      where: { id: data.organizerId },
-    });
-
-    if (!organizerExists) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `Organizer with ID ${data.organizerId} not found.`,
-        path: ["organizerId"],
-      });
-    }
-
-    if (data.startDate <= new Date()) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Start date must be in the future",
-        path: ["startDate"],
-      });
-    }
-
-    if (data.endDate <= data.startDate) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "End date must be after start date",
-        path: ["endDate"],
-      });
-    }
-  });

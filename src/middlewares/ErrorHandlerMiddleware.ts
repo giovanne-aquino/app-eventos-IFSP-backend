@@ -87,6 +87,7 @@ export class ErrorHandlerMiddleware {
       }
       return; 
     }
+    
     //Tratamento de Erros Genéricos (qualquer 'Error' lançado)
     if (err instanceof Error) {
       console.error('Application error caught:', err); // **Log do erro completo para depuração no servidor**

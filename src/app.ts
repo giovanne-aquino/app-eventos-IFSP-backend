@@ -32,7 +32,6 @@ import { ErrorRequestHandler } from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../src/docs/swagger.json";
 
-import cors from 'cors';
 
 // Cria a instância da aplicação Express
 const app = express();
