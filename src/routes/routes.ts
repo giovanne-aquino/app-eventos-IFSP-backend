@@ -557,6 +557,7 @@ export function RegisterRoutes(app: Router) {
                 format: {"in":"query","name":"format","dataType":"string"},
                 eventType: {"in":"query","name":"eventType","dataType":"string"},
                 searchTerm: {"in":"query","name":"searchTerm","dataType":"string"},
+                category: {"in":"query","name":"category","dataType":"string"},
         };
         app.get('/events/manage',
             ...(fetchMiddlewares<RequestHandler>(EventController)),

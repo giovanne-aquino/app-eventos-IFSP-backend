@@ -1,5 +1,5 @@
 import prisma from "../../prisma/client";
-import { Event, Format, EventType } from "@prisma/client";
+import { Event, Format, EventType, Category  } from "@prisma/client";
 import { CreateEventDto ,  UpdateEventDto } from "../../dtos/events/Event.DTO";
 
 export class EventRepository {
@@ -35,12 +35,14 @@ export class EventRepository {
         format,
         eventType,
         searchTerm,
+        category
     }: {
         page: number;
         pageSize: number;
         format?: string;
         eventType?: string;
         searchTerm?: string;
+        category?: string;
     }): Promise<{ events: Event[]; total: number }> {
         const where: any = {};
 
@@ -49,6 +51,9 @@ export class EventRepository {
         }
         if (eventType && eventType !== "ALL") {
             where.eventType = eventType as EventType;
+        }
+        if (category && category !== "ALL") {
+            where.category = category as Category;
         }
 
         if (searchTerm) {

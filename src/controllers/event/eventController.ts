@@ -49,9 +49,10 @@ export class EventController extends Controller {
       @Query() format?: string,
       @Query() eventType?: string,
       @Query() searchTerm?: string,
+      @Query() category?: string
   ): Promise<{ events: EventResponseDto[]; total: number }> {
       try {
-          const { events, total } = await this.eventService.getEvents({ page, pageSize, format, eventType, searchTerm });
+          const { events, total } = await this.eventService.getEvents({ page, pageSize, format, eventType, searchTerm, category });
           return { events, total };
       } catch (err) {
           if (err instanceof Error) {
