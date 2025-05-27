@@ -961,6 +961,31 @@
 				}
 			},
 			"get": {
+				"operationId": "GetAllEvents",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventResponseDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/events/manage": {
+			"get": {
 				"operationId": "GetEvents",
 				"responses": {
 					"200": {

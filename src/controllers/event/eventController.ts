@@ -34,26 +34,32 @@ export class EventController extends Controller {
     return this.eventService.createEvent(parsed);
   }
 
-    @Get('/')
-    @SuccessResponse('200', 'OK')
-    @Response<ValidateError>('400', 'Bad Request')
-    public async getEvents(
-        @Query() page: number = 1,
-        @Query() pageSize: number = 12,
-        @Query() format?: string,
-        @Query() eventType?: string,
-        @Query() searchTerm?: string,
-    ): Promise<{ events: EventResponseDto[]; total: number }> {
-        try {
-            const { events, total } = await this.eventService.getEvents({ page, pageSize, format, eventType, searchTerm });
-            return { events, total };
-        } catch (err) {
-            if (err instanceof Error) {
-                throw new ValidateError({ general: { message: err.message } }, 'Bad Request');
-            }
-            throw new ValidateError({ general: { message: 'Unknown error while fetching events' } }, 'Bad Request');
-        }
-    }
+  @Get('/')
+  @SuccessResponse('200', 'OK')
+  public async getAllEvents(): Promise<EventResponseDto[]> {
+    return await this.eventService.getAllEvents();
+  }
+
+  @Get('/manage')
+  @SuccessResponse('200', 'OK')
+  @Response<ValidateError>('400', 'Bad Request')
+  public async getEvents(
+      @Query() page: number = 1,
+      @Query() pageSize: number = 12,
+      @Query() format?: string,
+      @Query() eventType?: string,
+      @Query() searchTerm?: string,
+  ): Promise<{ events: EventResponseDto[]; total: number }> {
+      try {
+          const { events, total } = await this.eventService.getEvents({ page, pageSize, format, eventType, searchTerm });
+          return { events, total };
+      } catch (err) {
+          if (err instanceof Error) {
+              throw new ValidateError({ general: { message: err.message } }, 'Bad Request');
+          }
+          throw new ValidateError({ general: { message: 'Unknown error while fetching events' } }, 'Bad Request');
+      }
+  }
 
     @Get('/:id')
     @SuccessResponse('200', 'OK')
