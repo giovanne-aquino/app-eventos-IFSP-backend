@@ -11,16 +11,15 @@ import {
   ValidateError,
 } from 'tsoa';
   
-import { CreateActivityDto } from '../dtos/activities/CreateActivityRequestDTO';
-import { UpdateActivityDTO } from '../dtos/activities/UpdateActivityDTO';
-import { createActivitySchema } from '../zod/schemas/activity/activitySchema';
-import { updateActivitySchema } from '../zod/schemas/activity/activitySchema';
-import { ActivityService } from '../services/activityService';
-import { zodToTsoaErrors } from '../utilis/zodToTsoaErrors';
-import { numericIdParamSchema } from '../zod/schemas/common/validateParmsId';
-import { validateParams } from '../utilis/validateIdParams';
-import { get } from 'http';
-import { ActivityResponseDTO } from '../dtos/activities/ActivityResponseDTO';
+import { CreateActivityDto } from '../../dtos/activities/CreateActivityRequestDTO';
+import { UpdateActivityDTO } from '../../dtos/activities/UpdateActivityDTO';
+import { createActivitySchema } from '../../zod/schemas/activity/activitySchema';
+import { updateActivitySchema } from '../../zod/schemas/activity/activitySchema';
+import { ActivityService } from '../../services/activityService';
+import { zodToTsoaErrors } from '../../utilis/zodToTsoaErrors';
+import { numericIdParamSchema } from '../../zod/schemas/common/validateParmsId';
+import { validateParams } from '../../utilis/validateIdParams';
+import { ActivityResponseDTO } from '../../dtos/activities/ActivityResponseDTO';
 
 @Route('activities')
 @Tags('Activities')
