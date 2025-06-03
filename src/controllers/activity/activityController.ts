@@ -9,6 +9,7 @@ import {
   Put,
   Delete,
   ValidateError,
+  Query,
 } from 'tsoa';
   
 import { CreateActivityDto } from '../../dtos/activities/CreateActivityRequestDTO';
@@ -45,9 +46,20 @@ export class ActivityController extends Controller {
   
   //Obter todas as atividades de um evento
   @Get('event/{eventId}')
-  public async getActivitiesByEventId(@Path() eventId: number) {
+  public async getActivitiesByEventId(
+    @Path() eventId: number,
+    @Query() page?: number,
+    @Query() pageSize?: number
+  ) {
     const { id: activityId } = validateParams(numericIdParamSchema, { id: eventId })
-    return this.activityService.getActivitiesByEventId(activityId); 
+
+    const currentPage = (page && Number(page) > 0) ? Number(page) : 1;
+    const intemsPerPage = (pageSize && Number(pageSize) > 0) ? Number(pageSize) : 10;
+
+    const skip = (currentPage - 1) * intemsPerPage;
+    const take = intemsPerPage;
+
+    return this.activityService.getActivitiesByEventId(activityId, skip, take); 
   }
 
   //Obter todas as atividades

@@ -2067,71 +2067,23 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"items": {
-										"properties": {
-											"activityType": {
-												"$ref": "#/components/schemas/_36_Enums.ActivityType"
-											},
-											"startTime": {
-												"type": "string"
-											},
-											"eventId": {
-												"type": "number",
-												"format": "double"
-											},
-											"complementaryHours": {
-												"type": "number",
-												"format": "double"
-											},
-											"maxCapacity": {
-												"type": "number",
-												"format": "double"
-											},
-											"startDate": {
-												"type": "string",
-												"format": "date-time"
-											},
-											"banner": {
-												"type": "string"
-											},
-											"userDocument": {
-												"type": "boolean"
-											},
-											"location": {
-												"type": "string"
-											},
-											"format": {
-												"$ref": "#/components/schemas/_36_Enums.Format"
-											},
-											"description": {
-												"type": "string"
-											},
-											"id": {
-												"type": "number",
-												"format": "double"
-											},
-											"name": {
-												"type": "string"
-											}
+									"properties": {
+										"total": {
+											"type": "number",
+											"format": "double"
 										},
-										"required": [
-											"activityType",
-											"startTime",
-											"eventId",
-											"complementaryHours",
-											"maxCapacity",
-											"startDate",
-											"banner",
-											"userDocument",
-											"location",
-											"format",
-											"description",
-											"id",
-											"name"
-										],
-										"type": "object"
+										"activities": {
+											"items": {
+												"$ref": "#/components/schemas/CreateActivityDto"
+											},
+											"type": "array"
+										}
 									},
-									"type": "array"
+									"required": [
+										"total",
+										"activities"
+									],
+									"type": "object"
 								}
 							}
 						}
@@ -2146,6 +2098,24 @@
 						"in": "path",
 						"name": "eventId",
 						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "pageSize",
+						"required": false,
 						"schema": {
 							"format": "double",
 							"type": "number"

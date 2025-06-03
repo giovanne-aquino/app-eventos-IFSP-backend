@@ -8,10 +8,25 @@ export const activityRepository = {
     prisma.activity.findUnique({
       where: { id },
     }),
-  findByEventId: (eventId: number) =>
-    prisma.activity.findMany({
-      where: { eventId },
-    }),
+  findByEventId: async(
+    eventId: number,
+    skip: number,
+    take: number
+  ) => {
+    const [activities, total] = await prisma.$transaction([
+      prisma.activity.findMany({
+        where: { eventId },
+        skip,
+        take,
+        orderBy: { startDate: 'asc' },
+      }),
+      prisma.activity.count({
+        where: { eventId },
+      }),
+    ]);
+
+    return { activities: activities as CreateActivityDto[], total };
+  },
   update: (id: number, data: Partial<CreateActivityDto>) =>
     prisma.activity.update({
       where: { id },
