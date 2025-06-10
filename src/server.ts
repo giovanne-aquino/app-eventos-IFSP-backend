@@ -13,7 +13,7 @@ const debug = debugLib('app-eventos-ifsp-backend:server')
 /**
  * Pega a porta do ambiente (se existir) ou usa a 3000 como padrão
  */
-const port = normalizePort(process.env.PORT || '3000')
+const port = normalizePort(process.env.PORT || '3001')
 
 // Configura a porta no app Express, útil para logs ou view engines
 app.set('port', port)
@@ -26,9 +26,12 @@ const server = http.createServer(app)
 /**
  * Faz o servidor "ouvir" na porta definida e adiciona os event listeners
  */
-server.listen(port) // inicia o servidor na porta
+server.listen(port, () => {
+  console.log(`\n  ============================ \n SERVER STARTED ON PORT:  ${port} \n  ============================ 
+ If you are executing on local, you should put on browser something like: \n http://localhost:${port}/ (CTRL + click to open)\n `)  
+})
 server.on('error', onError) // trata erros que podem ocorrer ao subir
-server.on('listening', onListening) // executa quando o servidor está de pé
+
 
 /**
  * Função para normalizar a porta: converte string para número se possível
@@ -74,13 +77,4 @@ function onError(error: NodeJS.ErrnoException): void {
   }
 }
 
-/**
- * Função chamada quando o servidor começa a rodar com sucesso
- */
-function onListening(): void {
-  const addr = server.address() // pega endereço do servidor (porta ou named pipe)
-  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr?.port}`
 
-  // Exibe no console (usando debug) em qual porta o servidor está ouvindo
-  debug(`Listening on ${bind}`)
-}

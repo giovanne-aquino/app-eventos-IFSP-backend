@@ -116,6 +116,7 @@
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
+<<<<<<< HEAD
 			"AuthResponseDto": {
 				"properties": {
 					"token": {
@@ -161,10 +162,60 @@
 				]
 			},
 			"Pick_User.Exclude_keyofUser.password-or-refreshToken__": {
+=======
+			"DefaultSelection_Prisma._36_EventFieldResponsePayload_": {
+				"properties": {
+					"value": {
+						"type": "string"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"value",
+					"eventFieldId",
+					"eventRegistrationId",
+					"id"
+				],
+				"type": "object"
+			},
+			"EventFieldResponse": {
+				"$ref": "#/components/schemas/DefaultSelection_Prisma._36_EventFieldResponsePayload_",
+				"description": "Model EventFieldResponse"
+			},
+			"FieldErrors": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": {
+					"properties": {
+						"value": {},
+						"message": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"message"
+					],
+					"type": "object"
+				}
+			},
+			"ValidateError": {
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 				"properties": {
 					"name": {
 						"type": "string"
 					},
+<<<<<<< HEAD
 					"email": {
 						"type": "string"
 					},
@@ -182,6 +233,173 @@
 					},
 					"userRole": {
 						"$ref": "#/components/schemas/_36_Enums.UserRole"
+=======
+					"message": {
+						"type": "string"
+					},
+					"stack": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"fields": {
+						"$ref": "#/components/schemas/FieldErrors"
+					}
+				},
+				"required": [
+					"name",
+					"message",
+					"status",
+					"fields"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateEventFieldResponseDto": {
+				"properties": {
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"eventRegistrationId",
+					"eventFieldId",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"EventFieldResponse2Dto": {
+				"properties": {
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"eventRegistrationId",
+					"eventFieldId",
+					"value",
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_CreateEventFieldResponseDto_": {
+				"properties": {
+					"eventRegistrationId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventFieldId": {
+						"type": "number",
+						"format": "double"
+					},
+					"value": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"EventResponseDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER",
+							null
+						],
+						"nullable": true
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 					},
 					"id": {
 						"type": "number",
@@ -190,6 +408,7 @@
 				},
 				"required": [
 					"name",
+<<<<<<< HEAD
 					"email",
 					"cpf",
 					"cnpj",
@@ -204,6 +423,505 @@
 			"Omit_User.password-or-refreshToken_": {
 				"$ref": "#/components/schemas/Pick_User.Exclude_keyofUser.password-or-refreshToken__",
 				"description": "Construct a type with the properties of T except for those in type K."
+=======
+					"description",
+					"organizerId",
+					"format",
+					"userDocument",
+					"eventType",
+					"startDate",
+					"endDate",
+					"status",
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateEventDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER",
+							null
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"organizerId",
+					"format",
+					"userDocument",
+					"eventType",
+					"startDate",
+					"endDate",
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_CreateEventDto_": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string"
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string"
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"SIMPLE",
+							"LARGE"
+						]
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double"
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"PENDING",
+							"CONFIRMED",
+							"CANCELED"
+						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"TALK",
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE",
+							"OTHER"
+						]
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"UpdateEventDto": {
+				"$ref": "#/components/schemas/Partial_CreateEventDto_"
+			},
+			"_36_Enums.FieldType": {
+				"type": "string",
+				"enum": [
+					"STRING",
+					"NUMBER",
+					"DATE",
+					"BOOLEAN"
+				]
+			},
+			"DefaultSelection_Prisma._36_EventFieldPayload_": {
+				"properties": {
+					"required": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/_36_Enums.FieldType"
+					},
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"required",
+					"type",
+					"eventId",
+					"id",
+					"name"
+				],
+				"type": "object"
+			},
+			"EventField": {
+				"$ref": "#/components/schemas/DefaultSelection_Prisma._36_EventFieldPayload_",
+				"description": "Model EventField"
+			},
+			"FieldType": {
+				"$ref": "#/components/schemas/_36_Enums.FieldType"
+			},
+			"CreateEventFieldRequestDTO": {
+				"properties": {
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/FieldType"
+					},
+					"required": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"eventId",
+					"name",
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Error": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"stack": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_UpdateEventFieldRequestDTO_": {
+				"properties": {
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/_36_Enums.FieldType"
+					},
+					"required": {
+						"type": "boolean"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"_36_Enums.Format": {
+				"type": "string",
+				"enum": [
+					"PRESENTIAL",
+					"ONLINE",
+					"HYBRID"
+				]
+			},
+			"_36_Enums.ActivityType": {
+				"type": "string",
+				"enum": [
+					"LECTURE",
+					"WORKSHOP",
+					"SEMINAR",
+					"SHORT_COURSE"
+				]
+			},
+			"CreateActivityDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"activityType": {
+						"type": "string",
+						"enum": [
+							"LECTURE",
+							"SHORT_COURSE",
+							"WORKSHOP",
+							"SEMINAR"
+						]
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double"
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"format",
+					"userDocument",
+					"startDate",
+					"startTime",
+					"activityType",
+					"maxCapacity",
+					"complementaryHours",
+					"eventId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ActivityResponseDTO": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"description": {
+						"type": "string"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string",
+						"nullable": true
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"activityType": {
+						"type": "string",
+						"enum": [
+							"LECTURE",
+							"SHORT_COURSE",
+							"WORKSHOP",
+							"SEMINAR"
+						]
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double"
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"description",
+					"format",
+					"userDocument",
+					"startDate",
+					"startTime",
+					"activityType",
+					"maxCapacity",
+					"complementaryHours"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_UpdateActivityDTO_": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"PRESENTIAL",
+							"ONLINE",
+							"HYBRID"
+						]
+					},
+					"location": {
+						"type": "string"
+					},
+					"userDocument": {
+						"type": "boolean"
+					},
+					"banner": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"activityType": {
+						"type": "string",
+						"enum": [
+							"LECTURE",
+							"WORKSHOP",
+							"SEMINAR",
+							"SHORT_COURSE"
+						]
+					},
+					"maxCapacity": {
+						"type": "number",
+						"format": "double"
+					},
+					"complementaryHours": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 			}
 		},
 		"securitySchemes": {
@@ -388,6 +1106,7 @@
 				]
 			}
 		},
+<<<<<<< HEAD
 		"/auth/login": {
 			"post": {
 				"operationId": "Login",
@@ -398,14 +1117,41 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/AuthResponseDto"
+=======
+		"/eventFieldResponses": {
+			"post": {
+				"operationId": "CreateEventFieldResponse",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventFieldResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 								}
 							}
 						}
 					}
 				},
+<<<<<<< HEAD
 				"description": "Login de usuário",
 				"tags": [
 					"Auth"
+=======
+				"tags": [
+					"Event Field Response"
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 				],
 				"security": [],
 				"parameters": [],
@@ -414,11 +1160,16 @@
 					"content": {
 						"application/json": {
 							"schema": {
+<<<<<<< HEAD
 								"$ref": "#/components/schemas/LoginDto"
+=======
+								"$ref": "#/components/schemas/CreateEventFieldResponseDto"
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 							}
 						}
 					}
 				}
+<<<<<<< HEAD
 			}
 		},
 		"/auth/register": {
@@ -431,11 +1182,27 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/AuthResponseDto"
+=======
+			},
+			"get": {
+				"operationId": "GetAllEventFieldResponses",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventFieldResponse2Dto"
+									},
+									"type": "array"
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 								}
 							}
 						}
 					}
 				},
+<<<<<<< HEAD
 				"description": "Registro de novo usuário",
 				"tags": [
 					"Auth"
@@ -464,22 +1231,59 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/AuthResponseDto"
+=======
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/eventFieldResponses/{id}": {
+			"put": {
+				"operationId": "UpdateEventFieldResponse",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventFieldResponse"
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 								}
 							}
 						}
 					}
 				},
+<<<<<<< HEAD
 				"description": "Renovação de token",
 				"tags": [
 					"Auth"
 				],
 				"security": [],
 				"parameters": [],
+=======
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 				"requestBody": {
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
+<<<<<<< HEAD
 								"properties": {
 									"refreshToken": {
 										"type": "string"
@@ -489,10 +1293,14 @@
 									"refreshToken"
 								],
 								"type": "object"
+=======
+								"$ref": "#/components/schemas/Partial_CreateEventFieldResponseDto_"
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 							}
 						}
 					}
 				}
+<<<<<<< HEAD
 			}
 		},
 		"/auth/logout": {
@@ -518,18 +1326,644 @@
 		"/auth/me": {
 			"get": {
 				"operationId": "GetCurrentUser",
+=======
+			},
+			"delete": {
+				"operationId": "DeleteEventFieldResponse",
+				"responses": {
+					"204": {
+						"description": "deleted successfully"
+					}
+				},
+				"tags": [
+					"Event Field Response"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events": {
+			"post": {
+				"operationId": "CreateEvent",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateEventDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllEvents",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventResponseDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/events/manage": {
+			"get": {
+				"operationId": "GetEvents",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"total": {
+											"type": "number",
+											"format": "double"
+										},
+										"events": {
+											"items": {
+												"$ref": "#/components/schemas/EventResponseDto"
+											},
+											"type": "array"
+										}
+									},
+									"required": [
+										"total",
+										"events"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "pageSize",
+						"required": false,
+						"schema": {
+							"default": 12,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "format",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "eventType",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "searchTerm",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "category",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events/{id}": {
+			"get": {
+				"operationId": "GetEventById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdateEvent",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateEventDto"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteEvent",
+				"responses": {
+					"200": {
+						"description": "Event deleted successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events/format/{format}": {
+			"get": {
+				"operationId": "GetEventsByFormat",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventResponseDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "format",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events/type/{eventType}": {
+			"get": {
+				"operationId": "GetEventsByType",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventResponseDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Events"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventType",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/eventFields": {
+			"post": {
+				"operationId": "CreateEventField",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventField"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateEventFieldRequestDTO"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllEventFields",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EventField"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/eventFields/{id}": {
+			"put": {
+				"operationId": "UpdateEventField",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EventField"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_UpdateEventFieldRequestDTO_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteEventField",
+				"responses": {
+					"204": {
+						"description": "Deleted successfully"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateError"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event Field"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/activities": {
+			"post": {
+				"operationId": "CreateActivity",
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
+<<<<<<< HEAD
 									"$ref": "#/components/schemas/Omit_User.password-or-refreshToken_"
+=======
+									"properties": {
+										"activityType": {
+											"$ref": "#/components/schemas/_36_Enums.ActivityType"
+										},
+										"startTime": {
+											"type": "string"
+										},
+										"eventId": {
+											"type": "number",
+											"format": "double"
+										},
+										"complementaryHours": {
+											"type": "number",
+											"format": "double"
+										},
+										"maxCapacity": {
+											"type": "number",
+											"format": "double"
+										},
+										"startDate": {
+											"type": "string",
+											"format": "date-time"
+										},
+										"banner": {
+											"type": "string"
+										},
+										"userDocument": {
+											"type": "boolean"
+										},
+										"location": {
+											"type": "string"
+										},
+										"format": {
+											"$ref": "#/components/schemas/_36_Enums.Format"
+										},
+										"description": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"activityType",
+										"startTime",
+										"eventId",
+										"complementaryHours",
+										"maxCapacity",
+										"startDate",
+										"banner",
+										"userDocument",
+										"location",
+										"format",
+										"description",
+										"id",
+										"name"
+									],
+									"type": "object"
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 								}
 							}
 						}
 					}
 				},
+<<<<<<< HEAD
 				"description": "Obter dados do usuário atual",
 				"tags": [
 					"Auth"
@@ -541,6 +1975,397 @@
 				],
 				"parameters": []
 			}
+=======
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateActivityDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllActivities",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"properties": {
+											"activityType": {
+												"$ref": "#/components/schemas/_36_Enums.ActivityType"
+											},
+											"startTime": {
+												"type": "string"
+											},
+											"eventId": {
+												"type": "number",
+												"format": "double"
+											},
+											"complementaryHours": {
+												"type": "number",
+												"format": "double"
+											},
+											"maxCapacity": {
+												"type": "number",
+												"format": "double"
+											},
+											"startDate": {
+												"type": "string",
+												"format": "date-time"
+											},
+											"banner": {
+												"type": "string"
+											},
+											"userDocument": {
+												"type": "boolean"
+											},
+											"location": {
+												"type": "string"
+											},
+											"format": {
+												"$ref": "#/components/schemas/_36_Enums.Format"
+											},
+											"description": {
+												"type": "string"
+											},
+											"id": {
+												"type": "number",
+												"format": "double"
+											},
+											"name": {
+												"type": "string"
+											}
+										},
+										"required": [
+											"activityType",
+											"startTime",
+											"eventId",
+											"complementaryHours",
+											"maxCapacity",
+											"startDate",
+											"banner",
+											"userDocument",
+											"location",
+											"format",
+											"description",
+											"id",
+											"name"
+										],
+										"type": "object"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/activities/{id}": {
+			"get": {
+				"operationId": "GetActivity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"activityType": {
+											"$ref": "#/components/schemas/_36_Enums.ActivityType"
+										},
+										"startTime": {
+											"type": "string"
+										},
+										"eventId": {
+											"type": "number",
+											"format": "double"
+										},
+										"complementaryHours": {
+											"type": "number",
+											"format": "double"
+										},
+										"maxCapacity": {
+											"type": "number",
+											"format": "double"
+										},
+										"startDate": {
+											"type": "string",
+											"format": "date-time"
+										},
+										"banner": {
+											"type": "string"
+										},
+										"userDocument": {
+											"type": "boolean"
+										},
+										"location": {
+											"type": "string"
+										},
+										"format": {
+											"$ref": "#/components/schemas/_36_Enums.Format"
+										},
+										"description": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"activityType",
+										"startTime",
+										"eventId",
+										"complementaryHours",
+										"maxCapacity",
+										"startDate",
+										"banner",
+										"userDocument",
+										"location",
+										"format",
+										"description",
+										"id",
+										"name"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdateActivity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ActivityResponseDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_UpdateActivityDTO_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteActivity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"activityType": {
+											"$ref": "#/components/schemas/_36_Enums.ActivityType"
+										},
+										"startTime": {
+											"type": "string"
+										},
+										"eventId": {
+											"type": "number",
+											"format": "double"
+										},
+										"complementaryHours": {
+											"type": "number",
+											"format": "double"
+										},
+										"maxCapacity": {
+											"type": "number",
+											"format": "double"
+										},
+										"startDate": {
+											"type": "string",
+											"format": "date-time"
+										},
+										"banner": {
+											"type": "string"
+										},
+										"userDocument": {
+											"type": "boolean"
+										},
+										"location": {
+											"type": "string"
+										},
+										"format": {
+											"$ref": "#/components/schemas/_36_Enums.Format"
+										},
+										"description": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"activityType",
+										"startTime",
+										"eventId",
+										"complementaryHours",
+										"maxCapacity",
+										"startDate",
+										"banner",
+										"userDocument",
+										"location",
+										"format",
+										"description",
+										"id",
+										"name"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/activities/event/{eventId}": {
+			"get": {
+				"operationId": "GetActivitiesByEventId",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"total": {
+											"type": "number",
+											"format": "double"
+										},
+										"activities": {
+											"items": {
+												"$ref": "#/components/schemas/CreateActivityDto"
+											},
+											"type": "array"
+										}
+									},
+									"required": [
+										"total",
+										"activities"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Activities"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "pageSize",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 		}
 	},
 	"servers": [

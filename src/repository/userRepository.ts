@@ -1,6 +1,6 @@
 import  prisma from "../prisma/client";
 import { CreateUserDto } from '../dtos/users/CreateUserRequestDTO';
- //toDoRefactor types
+
 export const userRepository = {
   findAll: () => prisma.user.findMany(),
   findById: (id: number) => prisma.user.findUnique({ where: { id } }),

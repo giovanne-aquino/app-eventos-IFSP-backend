@@ -12,7 +12,10 @@ Table User {
   crm String [unique]
   nationalId String [unique]
   userRole UserRole [not null, default: 'PARTICIPANT']
+<<<<<<< HEAD
   refreshToken String
+=======
+>>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
   eventRegistrations EventRegistration [not null]
   activityRegistrations ActivityRegistration [not null]
   eventsOrganized Event [not null]
@@ -33,6 +36,7 @@ Table Event {
   maxCapacity Int
   complementaryHours Int
   status RegistrationStatus [not null]
+  category Category
   activities Activity [not null]
   eventRegistrations EventRegistration [not null]
   fields EventField [not null]
@@ -178,6 +182,15 @@ Enum UserRole {
   ADMIN
   ORGANIZER
   PARTICIPANT
+}
+
+Enum Category {
+  TALK
+  LECTURE
+  WORKSHOP
+  SEMINAR
+  SHORT_COURSE
+  OTHER
 }
 
 Ref: Event.organizerId > User.id
