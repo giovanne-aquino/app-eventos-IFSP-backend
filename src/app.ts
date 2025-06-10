@@ -29,8 +29,18 @@ import { ErrorRequestHandler } from 'express';
 import swaggerUi from 'swagger-ui-express'
 import swaggerDocument from '../src/docs/swagger.json';
 
-// Cria a instância da aplicação Express
+// Importa o CORS
+
+import cors from 'cors'
+
 const app = express()
+
+// Libera tudo no CORS
+app.use(cors())
+
+app.use(express.json())
+
+
 
 // -------- CONFIGURAÇÕES DO SERVIDOR --------
 
