@@ -28,17 +28,12 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cookie-parser": "^1.4.8",
-    "@types/cors": "^2.8.19",
-=======
+
     "@types/assert": "^1.5.11",
     "@types/body-parser": "^1.19.5",
     "@types/connect": "^3.4.38",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
     "@types/express": "^5.0.1",
     "@types/express-serve-static-core": "^5.0.6",
     "@types/geojson": "^7946.0.16",
