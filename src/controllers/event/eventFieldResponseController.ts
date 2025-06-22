@@ -17,7 +17,7 @@ import { CreateEventFieldResponseDto, EventFieldResponse2Dto} from '../../dtos/e
 import { EventFieldResponseService } from '../../services/event/eventFieldResponseService';
 import { ValidateError } from 'tsoa';
 import { createEventFieldResponseSchema } from '../../zod/schemas/event/eventFieldResponseSchema';
-import { zodToTsoaErrors } from '../../utilis/zodToTsoaErrors';
+import { zodToTsoaErrors } from '../../utils/zodToTsoaErrors';
 
 @Route('eventFieldResponses')
 @Tags('Event Field Response')

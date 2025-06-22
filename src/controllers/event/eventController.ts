@@ -16,7 +16,7 @@ import { EventService } from '../../services/event/eventService';
 import { CreateEventDto, UpdateEventDto, EventResponseDto } from "../../dtos/events/Event.DTO";
 import { createEventSchema } from '../../zod/schemas/event/eventSchema';
 import { ValidateError } from 'tsoa';
-import { zodToTsoaErrors } from '../../utilis/zodToTsoaErrors';
+import { zodToTsoaErrors } from '../../utils/zodToTsoaErrors';
 
 @Route('events')
 @Tags('Events')

@@ -6,11 +6,6 @@ import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../controllers/userController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-import { AuthController } from './../auth/controllers/AuthController';
-import { expressAuthentication } from './../auth/middlewares/authMiddleware';
-// @ts-ignore - no great way to install types from subpackage
-=======
 import { EventFieldResponseController } from './../controllers/event/eventFieldResponseController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EventController } from './../controllers/event/eventController';
@@ -18,7 +13,10 @@ import { EventController } from './../controllers/event/eventController';
 import { EventFieldController } from './../controllers/event/EventFieldController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ActivityController } from './../controllers/activity/activityController';
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { AuthController } from './../auth/controllers/AuthController';
+import { expressAuthentication } from './../auth/middlewares/authMiddleware';
+// @ts-ignore - no great way to install types from subpackage
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 const expressAuthenticationRecasted = expressAuthentication as (req: ExRequest, securityName: string, scopes?: string[], res?: ExResponse) => Promise<any>;
@@ -60,14 +58,6 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"email":{"dataType":"string"},"password":{"dataType":"string"},"cpf":{"dataType":"string"},"cnpj":{"dataType":"string"},"crm":{"dataType":"string"},"nationalId":{"dataType":"string"},"userRole":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["ADMIN"]},{"dataType":"enum","enums":["ORGANIZER"]},{"dataType":"enum","enums":["PARTICIPANT"]}]}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-    "AuthResponseDto": {
-        "dataType": "refObject",
-        "properties": {
-            "token": {"dataType":"string","required":true},
-            "refreshToken": {"dataType":"string","required":true},
-            "user": {"ref":"UserResponseDto","required":true},
-=======
     "DefaultSelection_Prisma._36_EventFieldResponsePayload_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"value":{"dataType":"string","required":true},"eventFieldId":{"dataType":"double","required":true},"eventRegistrationId":{"dataType":"double","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
@@ -93,44 +83,20 @@ const models: TsoaRoute.Models = {
             "stack": {"dataType":"string"},
             "status": {"dataType":"double","required":true},
             "fields": {"ref":"FieldErrors","required":true},
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-    "LoginDto": {
-        "dataType": "refObject",
-        "properties": {
-            "email": {"dataType":"string","required":true},
-            "password": {"dataType":"string","required":true},
-=======
     "CreateEventFieldResponseDto": {
         "dataType": "refObject",
         "properties": {
             "eventRegistrationId": {"dataType":"double","required":true},
             "eventFieldId": {"dataType":"double","required":true},
             "value": {"dataType":"string","required":true},
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-    "_36_Enums.UserRole": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["ADMIN"]},{"dataType":"enum","enums":["ORGANIZER"]},{"dataType":"enum","enums":["PARTICIPANT"]}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Pick_User.Exclude_keyofUser.password-or-refreshToken__": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"email":{"dataType":"string","required":true},"cpf":{"dataType":"string","required":true},"cnpj":{"dataType":"string","required":true},"crm":{"dataType":"string","required":true},"nationalId":{"dataType":"string","required":true},"userRole":{"ref":"_36_Enums.UserRole","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Omit_User.password-or-refreshToken_": {
-        "dataType": "refAlias",
-        "type": {"ref":"Pick_User.Exclude_keyofUser.password-or-refreshToken__","validators":{}},
-=======
     "EventFieldResponse2Dto": {
         "dataType": "refObject",
         "properties": {
@@ -296,7 +262,25 @@ const models: TsoaRoute.Models = {
     "Partial_UpdateActivityDTO_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"description":{"dataType":"string"},"format":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["PRESENTIAL"]},{"dataType":"enum","enums":["ONLINE"]},{"dataType":"enum","enums":["HYBRID"]}]},"location":{"dataType":"string"},"userDocument":{"dataType":"boolean"},"banner":{"dataType":"string"},"startDate":{"dataType":"datetime"},"startTime":{"dataType":"string"},"activityType":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["LECTURE"]},{"dataType":"enum","enums":["WORKSHOP"]},{"dataType":"enum","enums":["SEMINAR"]},{"dataType":"enum","enums":["SHORT_COURSE"]}]},"maxCapacity":{"dataType":"double"},"complementaryHours":{"dataType":"double"}},"validators":{}},
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AuthResponseDto": {
+        "dataType": "refObject",
+        "properties": {
+            "token": {"dataType":"string","required":true},
+            "refreshToken": {"dataType":"string","required":true},
+            "user": {"ref":"UserResponseDto","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "LoginDto": {
+        "dataType": "refObject",
+        "properties": {
+            "email": {"dataType":"string","required":true},
+            "password": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -408,10 +392,8 @@ export function RegisterRoutes(app: Router) {
         const argsUserController_updateUser: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
                 body: {"in":"body","name":"body","required":true,"ref":"Partial_CreateUserDto_"},
-                request: {"in":"request","name":"request","required":true,"dataType":"object"},
         };
         app.put('/users/:id',
-            authenticateMiddleware([{"jwt":["ADMIN","PARTICIPANT","ORGANIZER"]}]),
             ...(fetchMiddlewares<RequestHandler>(UserController)),
             ...(fetchMiddlewares<RequestHandler>(UserController.prototype.updateUser)),
 
@@ -440,10 +422,8 @@ export function RegisterRoutes(app: Router) {
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsUserController_deleteUser: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                request: {"in":"request","name":"request","required":true,"dataType":"object"},
         };
         app.delete('/users/:id',
-            authenticateMiddleware([{"jwt":["ADMIN","PARTICIPANT","ORGANIZER"]}]),
             ...(fetchMiddlewares<RequestHandler>(UserController)),
             ...(fetchMiddlewares<RequestHandler>(UserController.prototype.deleteUser)),
 
@@ -470,16 +450,6 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-        const argsAuthController_login: Record<string, TsoaRoute.ParameterSchema> = {
-                loginDto: {"in":"body","name":"loginDto","required":true,"ref":"LoginDto"},
-        };
-        app.post('/auth/login',
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.login)),
-
-            async function AuthController_login(request: ExRequest, response: ExResponse, next: any) {
-=======
         const argsEventFieldResponseController_createEventFieldResponse: Record<string, TsoaRoute.ParameterSchema> = {
                 body: {"in":"body","name":"body","required":true,"ref":"CreateEventFieldResponseDto"},
         };
@@ -488,20 +458,11 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventFieldResponseController.prototype.createEventFieldResponse)),
 
             async function EventFieldResponseController_createEventFieldResponse(request: ExRequest, response: ExResponse, next: any) {
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-<<<<<<< HEAD
-                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_login, request, response });
-
-                const controller = new AuthController();
-
-              await templateService.apiHandler({
-                methodName: 'login',
-=======
                 validatedArgs = templateService.getValidatedArgs({ args: argsEventFieldResponseController_createEventFieldResponse, request, response });
 
                 const controller = new EventFieldResponseController();
@@ -993,7 +954,6 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'createActivity',
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
                 controller,
                 response,
                 next,
@@ -1005,16 +965,6 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-        const argsAuthController_register: Record<string, TsoaRoute.ParameterSchema> = {
-                userData: {"in":"body","name":"userData","required":true,"ref":"CreateUserDto"},
-        };
-        app.post('/auth/register',
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.register)),
-
-            async function AuthController_register(request: ExRequest, response: ExResponse, next: any) {
-=======
         const argsActivityController_getActivity: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"double"},
         };
@@ -1023,27 +973,17 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.getActivity)),
 
             async function ActivityController_getActivity(request: ExRequest, response: ExResponse, next: any) {
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-<<<<<<< HEAD
-                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_register, request, response });
-
-                const controller = new AuthController();
-
-              await templateService.apiHandler({
-                methodName: 'register',
-=======
                 validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_getActivity, request, response });
 
                 const controller = new ActivityController();
 
               await templateService.apiHandler({
                 methodName: 'getActivity',
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
                 controller,
                 response,
                 next,
@@ -1055,16 +995,6 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-        const argsAuthController_refreshToken: Record<string, TsoaRoute.ParameterSchema> = {
-                body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"refreshToken":{"dataType":"string","required":true}}},
-        };
-        app.post('/auth/refresh',
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.refreshToken)),
-
-            async function AuthController_refreshToken(request: ExRequest, response: ExResponse, next: any) {
-=======
         const argsActivityController_getActivitiesByEventId: Record<string, TsoaRoute.ParameterSchema> = {
                 eventId: {"in":"path","name":"eventId","required":true,"dataType":"double"},
                 page: {"in":"query","name":"page","dataType":"double"},
@@ -1075,27 +1005,17 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.getActivitiesByEventId)),
 
             async function ActivityController_getActivitiesByEventId(request: ExRequest, response: ExResponse, next: any) {
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-<<<<<<< HEAD
-                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_refreshToken, request, response });
-
-                const controller = new AuthController();
-
-              await templateService.apiHandler({
-                methodName: 'refreshToken',
-=======
                 validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_getActivitiesByEventId, request, response });
 
                 const controller = new ActivityController();
 
               await templateService.apiHandler({
                 methodName: 'getActivitiesByEventId',
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
                 controller,
                 response,
                 next,
@@ -1107,17 +1027,6 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-        const argsAuthController_logout: Record<string, TsoaRoute.ParameterSchema> = {
-                req: {"in":"request","name":"req","required":true,"dataType":"object"},
-        };
-        app.post('/auth/logout',
-            authenticateMiddleware([{"jwt":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.logout)),
-
-            async function AuthController_logout(request: ExRequest, response: ExResponse, next: any) {
-=======
         const argsActivityController_getAllActivities: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/activities',
@@ -1125,27 +1034,17 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.getAllActivities)),
 
             async function ActivityController_getAllActivities(request: ExRequest, response: ExResponse, next: any) {
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-<<<<<<< HEAD
-                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_logout, request, response });
-
-                const controller = new AuthController();
-
-              await templateService.apiHandler({
-                methodName: 'logout',
-=======
                 validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_getAllActivities, request, response });
 
                 const controller = new ActivityController();
 
               await templateService.apiHandler({
                 methodName: 'getAllActivities',
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
                 controller,
                 response,
                 next,
@@ -1157,17 +1056,6 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-<<<<<<< HEAD
-        const argsAuthController_getCurrentUser: Record<string, TsoaRoute.ParameterSchema> = {
-                req: {"in":"request","name":"req","required":true,"dataType":"object"},
-        };
-        app.get('/auth/me',
-            authenticateMiddleware([{"jwt":[]}]),
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.getCurrentUser)),
-
-            async function AuthController_getCurrentUser(request: ExRequest, response: ExResponse, next: any) {
-=======
         const argsActivityController_updateActivity: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
                 body: {"in":"body","name":"body","required":true,"ref":"Partial_UpdateActivityDTO_"},
@@ -1177,20 +1065,11 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(ActivityController.prototype.updateActivity)),
 
             async function ActivityController_updateActivity(request: ExRequest, response: ExResponse, next: any) {
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-<<<<<<< HEAD
-                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_getCurrentUser, request, response });
-
-                const controller = new AuthController();
-
-              await templateService.apiHandler({
-                methodName: 'getCurrentUser',
-=======
                 validatedArgs = templateService.getValidatedArgs({ args: argsActivityController_updateActivity, request, response });
 
                 const controller = new ActivityController();
@@ -1227,7 +1106,158 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'deleteActivity',
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsAuthController_login: Record<string, TsoaRoute.ParameterSchema> = {
+                loginDto: {"in":"body","name":"loginDto","required":true,"ref":"LoginDto"},
+        };
+        app.post('/auth/login',
+            ...(fetchMiddlewares<RequestHandler>(AuthController)),
+            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.login)),
+
+            async function AuthController_login(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_login, request, response });
+
+                const controller = new AuthController();
+
+              await templateService.apiHandler({
+                methodName: 'login',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsAuthController_register: Record<string, TsoaRoute.ParameterSchema> = {
+                userData: {"in":"body","name":"userData","required":true,"ref":"CreateUserDto"},
+        };
+        app.post('/auth/register',
+            ...(fetchMiddlewares<RequestHandler>(AuthController)),
+            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.register)),
+
+            async function AuthController_register(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_register, request, response });
+
+                const controller = new AuthController();
+
+              await templateService.apiHandler({
+                methodName: 'register',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsAuthController_refreshToken: Record<string, TsoaRoute.ParameterSchema> = {
+                body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"refreshToken":{"dataType":"string","required":true}}},
+        };
+        app.post('/auth/refresh',
+            ...(fetchMiddlewares<RequestHandler>(AuthController)),
+            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.refreshToken)),
+
+            async function AuthController_refreshToken(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_refreshToken, request, response });
+
+                const controller = new AuthController();
+
+              await templateService.apiHandler({
+                methodName: 'refreshToken',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsAuthController_logout: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+        };
+        app.post('/auth/logout',
+            authenticateMiddleware([{"jwt":[]}]),
+            ...(fetchMiddlewares<RequestHandler>(AuthController)),
+            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.logout)),
+
+            async function AuthController_logout(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_logout, request, response });
+
+                const controller = new AuthController();
+
+              await templateService.apiHandler({
+                methodName: 'logout',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsAuthController_getCurrentUser: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+        };
+        app.get('/auth/me',
+            authenticateMiddleware([{"jwt":[]}]),
+            ...(fetchMiddlewares<RequestHandler>(AuthController)),
+            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.getCurrentUser)),
+
+            async function AuthController_getCurrentUser(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_getCurrentUser, request, response });
+
+                const controller = new AuthController();
+
+              await templateService.apiHandler({
+                methodName: 'getCurrentUser',
                 controller,
                 response,
                 next,

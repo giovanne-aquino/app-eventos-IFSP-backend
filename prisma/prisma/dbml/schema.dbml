@@ -12,10 +12,7 @@ Table User {
   crm String [unique]
   nationalId String [unique]
   userRole UserRole [not null, default: 'PARTICIPANT']
-<<<<<<< HEAD
   refreshToken String
-=======
->>>>>>> 06d9847762babb902ecc9d4e8a247e4eab04981a
   eventRegistrations EventRegistration [not null]
   activityRegistrations ActivityRegistration [not null]
   eventsOrganized Event [not null]

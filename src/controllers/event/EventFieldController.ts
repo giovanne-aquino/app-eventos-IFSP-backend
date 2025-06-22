@@ -17,7 +17,7 @@ import { CreateEventFieldRequestDTO , UpdateEventFieldRequestDTO  } from '../../
 import { EventFieldService } from '../../services/event/eventFieldService'; 
 import { ValidateError } from 'tsoa';
 import { createEventFieldSchema } from '../../zod/schemas/event/eventFieldSchema';
-import { zodToTsoaErrors } from '../../utilis/zodToTsoaErrors';
+import { zodToTsoaErrors } from '../../utils/zodToTsoaErrors';
 
 
 @Route('eventFields') 
