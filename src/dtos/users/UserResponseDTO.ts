@@ -4,6 +4,7 @@ export class UserResponseDto {
   id!: number;
   name!: string;
   email!: string;
+  userRole!: string;
   CPFCNPJ?: string | null;
   CRM?: string | null;
   nationalId?: string | null;
@@ -13,6 +14,7 @@ export class UserResponseDto {
     dto.id = user.id;
     dto.name = user.name;
     dto.email = user.email;
+    dto.userRole = user.userRole;
     dto.CPFCNPJ = user.cpf ?? user.cnpj ?? null;
     dto.CRM = user.crm ?? null;
     dto.nationalId = user.nationalId ?? null;

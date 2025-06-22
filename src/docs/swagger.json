@@ -19,6 +19,9 @@
 					"email": {
 						"type": "string"
 					},
+					"userRole": {
+						"type": "string"
+					},
 					"CPFCNPJ": {
 						"type": "string",
 						"nullable": true
@@ -35,7 +38,8 @@
 				"required": [
 					"id",
 					"name",
-					"email"
+					"email",
+					"userRole"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -62,21 +66,12 @@
 					},
 					"nationalId": {
 						"type": "string"
-					},
-					"userRole": {
-						"type": "string",
-						"enum": [
-							"ADMIN",
-							"ORGANIZER",
-							"PARTICIPANT"
-						]
 					}
 				},
 				"required": [
 					"name",
 					"email",
-					"password",
-					"userRole"
+					"password"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -103,14 +98,6 @@
 					},
 					"nationalId": {
 						"type": "string"
-					},
-					"userRole": {
-						"type": "string",
-						"enum": [
-							"ADMIN",
-							"ORGANIZER",
-							"PARTICIPANT"
-						]
 					}
 				},
 				"type": "object",

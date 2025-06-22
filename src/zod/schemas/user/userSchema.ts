@@ -8,11 +8,6 @@ export const createUserSchema = z.object({
   crm: z.string().nullable().optional(),
   cnpj: z.string().nullable().optional(),
   nationalId: z.string().nullable().optional(),
-
-  userRole: z.enum(['ADMIN', 'ORGANIZER', 'PARTICIPANT'], {
-    required_error: 'The user role is mandatory.',
-    invalid_type_error: 'Invalid user role.',
-  })
 }).strict();
 
 export const updateUserSchema = z.object({

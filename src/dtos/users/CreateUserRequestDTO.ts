@@ -6,5 +6,4 @@ export class CreateUserDto {
   cnpj?: string;
   crm?: string;
   nationalId?: string;
-  userRole!: 'ADMIN' | 'ORGANIZER' | 'PARTICIPANT'; 
 }
