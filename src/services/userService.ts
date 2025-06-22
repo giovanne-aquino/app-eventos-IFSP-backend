@@ -1,9 +1,15 @@
 import { CreateUserDto } from '../dtos/users/CreateUserRequestDTO';
 import { userRepository } from '../repository/userRepository';
+import bcrypt from 'bcryptjs';
 
 export class UserService {
   async createUser(data: CreateUserDto) {
-    return userRepository.create(data);
+
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+
+    const userWithPasswordEncrypted = {...data, password: hashedPassword}
+
+    return userRepository.create(userWithPasswordEncrypted);
   }
 
   async getUsers() {

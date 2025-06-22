@@ -9,7 +9,7 @@ export const numericIdParamSchema = z.object({
   id: z.preprocess((val) => {
     const num = Number(val);
     return isNaN(num) ? undefined : num;
-  }, z.number().int().positive({ message: 'O id deve ser um número positivo.' }))
+  }, z.number().int().positive({ message: 'The id must be valid.' }))
 });
 
 

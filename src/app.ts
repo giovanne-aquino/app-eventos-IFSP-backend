@@ -33,8 +33,14 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../src/docs/swagger.json";
 
 
-// Cria a instância da aplicação Express
-const app = express();
+const app = express()
+
+// Libera tudo no CORS
+app.use(cors())
+
+app.use(express.json())
+
+
 
 // -------- CONFIGURAÇÕES DO SERVIDOR --------
 
@@ -71,7 +77,22 @@ app.use(cors());
 //Swagger
 
 function setupSwagger(app: express.Application) {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  // Configuração do Swagger UI com opções de segurança
+  const options = {
+    swaggerOptions: {
+      persistAuthorization: true,
+      securityDefinitions: {
+        jwt: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+          in: 'header'
+        }
+      }
+    }
+  };
+  
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 }
 
 setupSwagger(app);

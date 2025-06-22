@@ -16,9 +16,9 @@ import { UserService } from '../services/userService'
 import { UserResponseDto } from '../dtos/users/UserResponseDTO'
 import { updateUserSchema } from '../zod/schemas/user/userSchema'
 import { numericIdParamSchema } from '../zod/schemas/common/validateParmsId';
-import { validateParams } from '../utilis/validateIdParams';
+import { validateParams } from '../utils/validateIdParams';
 import { createUserSchema } from '../zod/schemas/user/userSchema';
-import { zodToTsoaErrors } from '../utilis/zodToTsoaErrors'
+import { zodToTsoaErrors } from '../utils/zodToTsoaErrors'
   
 @Route('users')
 @Tags('Users')
